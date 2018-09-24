@@ -1,0 +1,25 @@
+{
+  "name": "playground",
+  "version": "1.0.0",
+  "description": "Scala-Vue-Playground assets",
+  "main": "src/app.js",
+  "scripts": {
+    "rollup": "rollup -c",
+    "watch": "npm run rollup -- -w",
+    "build": "NODE_ENV=production npm run rollup"
+  },
+  "dependencies": {
+    "vue": "^2.5.17"
+  },
+  "devDependencies": {
+    "postcss": "^7.0.2",
+    "postcss-preset-env": "^6.0.5",
+    "rollup": "^0.66.2",
+    "rollup-plugin-multi-entry": "^2.0.2",
+    "rollup-plugin-conditional": "^2.1.1",
+    "rollup-plugin-css-only": "^0.4.0",
+    "rollup-plugin-terser": "^3.0.0",
+    "rollup-plugin-vue": "^4.3.2",
+    "vue-template-compiler": "^2.5.17"
+  }
+}
