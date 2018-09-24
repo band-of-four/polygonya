@@ -1,3 +1,4 @@
 target/
-client/dist/
+client/dist/*
+!client/dist/tech-chan-sketch.png
 node_modules/

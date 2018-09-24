@@ -52,7 +52,7 @@ body {
   padding: 0 3vw;
   display: flex;
   justify-content: center;
-  background-image: url(../tech-chan-sketch.png);
+  background-image: url(tech-chan-sketch.png);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
