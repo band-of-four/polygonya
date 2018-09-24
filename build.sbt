@@ -4,11 +4,11 @@ enablePlugins(JettyPlugin)
 
 lazy val root = (project in file(".")).
   settings(
-    name := "playground",
+    name := "polygonya",
     inThisBuild(List(
-      organization := "com.example",
+      organization := "b4",
       scalaVersion := "2.12.6",
-      version      := "0.1.0-SNAPSHOT"
+      version      := "1.0.0"
     )),
     javacOptions ++= Seq("-source", "1.8", "-target", "1.8"),
     libraryDependencies += scalaTest % Test,

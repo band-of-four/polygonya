@@ -1,4 +1,4 @@
-package playground
+package b4
 
 import javax.servlet.annotation.WebServlet
 import javax.servlet.http.{
