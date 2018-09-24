@@ -1,11 +1,15 @@
 <template>
 <div>
   <Header/>
-  <aside class="sprite">
-    <!--<img class="sprite-panel__image" src="tech-chan-sketch.png"/>-->
-  </aside>
+  <aside class="sprite"></aside>
   <main class="interaction-container">
-    Interaction
+    <div class="quote"><span class="quote__speaker">Kaiki Ahiru</span>quote</div>
+    <form class="graph-form">
+      <input type="text" name="r" class="graph-form__input">
+      <input type="text" name="x" class="graph-form__input">
+      <input type="text" name="y" class="graph-form__input">
+      <input type="submit" name="submit" value="Помоги, пожалуйста" class="graph-form__submit">
+    </form>
   </main>
 </div>
 </template>
@@ -46,10 +50,8 @@ body {
   width: var(--character-width);
   min-width: 400px;
   padding: 0 3vw;
-
   display: flex;
   justify-content: center;
-
   background-image: url(../tech-chan-sketch.png);
   background-size: contain;
   background-repeat: no-repeat;
@@ -62,5 +64,24 @@ body {
   margin-left: calc(var(--character-width) + 3vw);
   padding: 3vw 0;
   overflow-y: auto;
+}
+.quote {
+  border-style: solid;
+  border-radius: 10px;
+  width: 100%
+}
+.quote__speaker {
+  display: block
+}
+.graph-form {
+  margin-top: 6vw;
+}
+.graph-form__input {
+  margin-top: 1vw;
+  width: 70px;
+  display: block;
+}
+.graph-form__submit {
+
 }
 </style>
