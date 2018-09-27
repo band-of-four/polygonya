@@ -4,21 +4,17 @@
   <aside class="sprite"></aside>
   <main class="interaction-container">
     <div class="quote"><span class="quote__speaker">Kaiki Ahiru</span>quote</div>
-    <form class="graph-form">
-      <label class="graph-form__label">R<input type="text" name="r" class="graph-form__input"></label>
-      <label class="graph-form__label">X<input type="text" name="x" class="graph-form__input"></label>
-      <label class="graph-form__label">Y<input type="text" name="y" class="graph-form__input"></label>
-      <input type="submit" name="submit" value="Помоги, пожалуйста" class="graph-form__submit">
-    </form>
+    <GraphForm/>
   </main>
 </div>
 </template>
 
 <script>
 import Header from './Header.vue';
+import GraphForm from './GraphForm.vue';
 export default {
   name: 'App',
-  components: { Header }
+  components: { Header, GraphForm }
 }
 </script>
 
@@ -73,31 +69,5 @@ body {
 }
 .quote__speaker {
   display: block
-}
-.graph-form {
-  margin-top: 6vw;
-}
-.graph-form__input {
-  width: 100px;
-  display: inline-block;
-  border: 0px;
-  text-align: right;
-}
-.graph-form__submit {
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-  background: white;
-  border: 1px solid black;
-  border-radius: 10px;
-  padding: 6px 12px;
-}
-.graph-form__label {
-  display: block;
-  border: 1px solid #000;
-  border-radius: 10px;
-  width: 155px;
-  margin-top: 2vw;
-  padding: 6px 12px;
 }
 </style>
