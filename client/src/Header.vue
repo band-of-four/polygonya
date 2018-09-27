@@ -14,10 +14,6 @@ export default {
 
 <style>
 .header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
   height: var(--header-height);
   margin: 0 6vw;
   display: flex;

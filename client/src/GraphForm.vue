@@ -1,12 +1,13 @@
 <template>
 <form class="graph-form">
+  <slot></slot>
   <section class="graph-form__columns">
     <div class="graph-form__input-column">
       <label class="graph-form__label">R<input type="text" name="r" class="graph-form__input"></label>
       <label class="graph-form__label">X<input type="text" name="x" class="graph-form__input"></label>
       <label class="graph-form__label">Y<input type="text" name="y" class="graph-form__input"></label>
     </div>
-    <Graph class="graph-form__graph"/>
+    <Graph class="graph-form__graph-column"/>
   </section>
   <input type="submit" name="submit" value="Помоги, пожалуйста" class="graph-form__submit">
 </form>
@@ -22,11 +23,19 @@ export default {
 
 <style>
 .graph-form {
-  margin-top: 6vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+  padding: 48px 0;
+  overflow-y: auto;
 }
 
 .graph-form__columns {
   display: flex;
+  justify-content: center;
+  max-width: 680px;
 }
 
 .graph-form__input-column {
@@ -34,6 +43,11 @@ export default {
   flex-direction: column;
   justify-content: center;
   margin-right: 16px;
+}
+
+.graph-form__graph-column {
+  height: 100%;
+  width: 100%;
 }
 
 .graph-form__input {
