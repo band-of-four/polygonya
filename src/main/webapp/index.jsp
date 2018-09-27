@@ -4,11 +4,11 @@
     <meta charset="utf-8">
     <title>h</title>
     <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Merriweather:400,700&amp;subset=cyrillic" rel="stylesheet">
-    <link href="dist/app.css" rel="stylesheet">
-    <script src="dist/vendor.js"></script>
+    <link href="static/app.css" rel="stylesheet">
+    <script src="static/vendor.js"></script>
   </head>
   <body>
     <div id="app"></div>
-    <script src="dist/app.js"></script>
+    <script src="static/app.js"></script>
   </body>
 </html>
