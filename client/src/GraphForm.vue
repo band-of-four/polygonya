@@ -3,9 +3,18 @@
   <slot></slot>
   <section class="graph-form__columns">
     <div class="graph-form__input-column">
-      <label class="graph-form__label">R<input type="text" name="r" class="graph-form__input"></label>
-      <label class="graph-form__label">X<input type="text" name="x" class="graph-form__input"></label>
-      <label class="graph-form__label">Y<input type="text" name="y" class="graph-form__input"></label>
+      <div class="graph-form__field">
+        <label class="graph-form__label">R</label>
+        <input type="number" step="0.1" name="r" class="graph-form__input" autofocus>
+      </div>
+      <div class="graph-form__field">
+        <label class="graph-form__label">X</label>
+        <input type="number" step="0.1" name="X" class="graph-form__input">
+      </div>
+      <div class="graph-form__field">
+        <label class="graph-form__label">Y</label>
+        <input type="number" step="0.1" name="y" class="graph-form__input">
+      </div>
     </div>
     <Graph class="graph-form__graph-column"/>
   </section>
@@ -50,32 +59,43 @@ export default {
   flex: 1 1;
 }
 
+.graph-form__field {
+  position: relative;
+}
+
+.graph-form__field:not(:last-child) {
+  margin-bottom: 12px;
+}
+
+.graph-form__label {
+  position: absolute;
+  line-height: 33px;
+  left: 12px;
+}
+
 .graph-form__input {
-  width: 100px;
+  width: 120px;
   display: inline-block;
-  border: 0px;
+  padding: 8px 8px 8px 30px;
+
+  border: 1px solid black;
+  border-radius: 8px;
+
+  font-family: var(--body-sans-font);
   text-align: right;
 }
 
 .graph-form__submit {
-  margin-left: auto;
-  margin-right: auto;
   display: block;
   background: white;
   border: 1px solid black;
-  border-radius: 10px;
-  padding: 6px 12px;
-}
+  border-radius: 8px;
+  padding: 8px 16px;
 
-.graph-form__label {
-  display: block;
-  border: 1px solid #000;
-  border-radius: 10px;
-  width: 155px;
-  padding: 6px 12px;
-}
+  font-family: var(--body-font);
 
-.graph-form__label:not(:last-child) {
-  margin-bottom: 6px;
+  &:hover {
+    cursor: pointer;
+  }
 }
 </style>

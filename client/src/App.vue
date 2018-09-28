@@ -20,6 +20,7 @@ export default {
 <style>
 :root {
   --body-font: 'Merriweather', serif;
+  --body-sans-font: 'Merriweather Sans', sans-serif;
   --header-font: 'Gloria Hallelujah', serif;
 
   --header-height: 64px;
