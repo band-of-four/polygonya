@@ -1,7 +1,7 @@
 <template>
 <div class="graph-container">
-  <svg class="graph" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
-    <g id="graph-coordinate-plane">
+  <svg class="graph" @click="placePoint" ref="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+    <g id="graph__coordinate-plane">
       <!-- horizontal and vertical axes -->
       <path fill="none" stroke="#000" stroke-width="1px" d="M0 199h400"/>
       <path fill="none" stroke="#000" stroke-width="1px" d="M199 0v400"/>
@@ -27,6 +27,10 @@
     <text x="360" y="190" font-weight="400">
       <tspan x="360" y="190" font-size="16px">R</tspan>
     </text>
+    <g id="graph__points">
+      <circle v-for="pt in graphPoints" :cx="pt[0]" :cy="pt[1]"
+              stroke-width="0" fill="black" r="3"></circle>
+    </g>
   </svg>
 </div>
 </template>
@@ -34,7 +38,24 @@
 <script>
 export default {
   name: 'Graph',
-  components: {}
+  components: {},
+  data() {
+    return {
+      graphPoints: []
+    }
+  },
+  methods: {
+    placePoint(e) {
+      const referencePt = this.$refs.svg.createSVGPoint();
+      referencePt.x = e.clientX;
+      referencePt.y = e.clientY;
+
+      const translatedPt = referencePt.matrixTransform(
+        this.$refs.svg.getScreenCTM().inverse());
+
+      this.graphPoints.push([translatedPt.x, translatedPt.y]);
+    }
+  }
 }
 </script>
 
