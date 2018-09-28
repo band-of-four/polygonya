@@ -1,12 +1,10 @@
 <template>
-<div class="page">
-  <Header/>
-  <div class="container">
-    <aside class="sprite"></aside>
-    <GraphForm>
-      <div class="quote"><span class="quote__speaker">Kaiki Ahiru</span>quote</div>
-    </GraphForm>
-  </div>
+<div class="grid">
+  <Header class="grid__header"/>
+  <aside class="grid__sprite"></aside>
+  <GraphForm class="grid__form">
+    <div class="quote"><span class="quote__speaker">Kaiki Ahiru</span>quote</div>
+  </GraphForm>
 </div>
 </template>
 
@@ -38,26 +36,41 @@ body {
   font-family: var(--body-font);
 }
 
-.page {
-  display: flex;
-  flex-direction: column;
+.grid {
   height: 100vh;
+  padding: 0 24px;
+
+  display: grid;
+  grid:
+    [row1-start] "header header" var(--header-height) [row2-end]
+    [row2-start] "sprite form" auto [row2-end]
+    / 20fr 30fr;
+  grid-column-gap: 4vw;
 }
 
-.container {
-  display: flex;
-  justify-content: center;
-  height: 100%;
+.grid__header {
+  grid-area: header;
 }
 
-.sprite {
+.grid__sprite {
+  grid-area: sprite;
+  justify-self: end;
+
   display: flex;
-  justify-content: center;
-  min-width: 400px;
+  flex: 1 0 auto;
+  width: 100%;
+  max-width: calc(100vh * 14/29); 
   background-image: url(tech-chan-sketch.png);
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
-  background-position: center center;
+  background-position: center top;
+}
+
+.grid__form {
+  grid-area: form;
+  justify-self: start;
+
+  width: 100%;
 }
 
 .quote {

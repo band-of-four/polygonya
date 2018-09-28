@@ -14,8 +14,6 @@ export default {
 
 <style>
 .header {
-  height: var(--header-height);
-  margin: 0 6vw;
   display: flex;
   justify-content: space-between;
 }

@@ -24,6 +24,7 @@ export default {
 <style>
 .graph-form {
   display: flex;
+  flex: 1 1;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
@@ -35,7 +36,7 @@ export default {
 .graph-form__columns {
   display: flex;
   justify-content: center;
-  max-width: 680px;
+  width: 80%;
 }
 
 .graph-form__input-column {
