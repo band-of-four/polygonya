@@ -46,6 +46,10 @@ body {
     [row2-start] "sprite form" auto [row2-end]
     / 20fr 30fr;
   grid-column-gap: 4vw;
+
+  /* Min-height is chosen such that no elements overlap
+   * and scrolling is forced when the viewport is too short */
+  min-height: 500px;
 }
 
 .grid__header {
@@ -59,7 +63,16 @@ body {
   display: flex;
   flex: 1 0 auto;
   width: 100%;
+
+  /* Max-width forces the sprite to have at least 14/29 of the height
+   * visible regardless of viewport size. On narrower screens,
+   * a little bit more is revealed ;) */
   max-width: calc(100vh * 14/29); 
+  /* Min-width prevents the image from squashing when the viewport is
+   * too short. The value is set to the computed sprite width @ 500px
+   * viewport height (see the min-height property of .grid) */
+  min-width: 240px;
+
   background-image: url(tech-chan-sketch.png);
   background-size: cover;
   background-repeat: no-repeat;
@@ -71,6 +84,7 @@ body {
   justify-self: start;
 
   width: 100%;
+  height: calc(100vh - var(--header-height));
 }
 
 .quote {

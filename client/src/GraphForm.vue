@@ -26,29 +26,28 @@ export default {
   display: flex;
   flex: 1 1;
   flex-direction: column;
-  justify-content: space-around;
   align-items: center;
 
-  padding: 48px 0;
-  overflow-y: auto;
+  padding: 6vh 0;
+  max-height: 100%;
 }
 
 .graph-form__columns {
   display: flex;
   justify-content: center;
   width: 80%;
+  margin: 24px 0;
 }
 
 .graph-form__input-column {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-right: 16px;
+  margin-right: 24px;
 }
 
 .graph-form__graph-column {
-  height: 100%;
-  width: 100%;
+  flex: 1 1;
 }
 
 .graph-form__input {
