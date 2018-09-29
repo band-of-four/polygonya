@@ -1,4 +1,5 @@
 target/
+.idea/
 client/dist/*
 !client/dist/tech-chan-sketch.png
 node_modules/
