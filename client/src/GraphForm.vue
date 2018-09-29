@@ -1,19 +1,19 @@
 <template>
-<form class="graph-form">
+<form class="graph-form" @submit.prevent="processGraphForm" novalidate="true">
   <slot></slot>
   <section class="graph-form__columns">
     <div class="graph-form__input-column">
       <div class="graph-form__field">
         <label class="graph-form__label">R</label>
-        <input type="number" step="0.1" name="r" class="graph-form__input" autofocus>
+        <input type="number" step="0.1" v-model="r" name="r" class="graph-form__input" autofocus="true">
       </div>
       <div class="graph-form__field">
         <label class="graph-form__label">X</label>
-        <input type="number" step="0.1" name="X" class="graph-form__input">
+        <input type="number" step="0.1" v-model="x" name="x" class="graph-form__input">
       </div>
       <div class="graph-form__field">
         <label class="graph-form__label">Y</label>
-        <input type="number" step="0.1" name="y" class="graph-form__input">
+        <input type="number" step="0.1" v-model="y" name="y" class="graph-form__input">
       </div>
     </div>
     <Graph class="graph-form__graph-column"/>
@@ -24,9 +24,37 @@
 
 <script>
 import Graph from './Graph.vue';
+
+const fieldConstraints = [
+  { field: 'r', min: 1.0, max: 5.0 },
+  { field: 'x', min: -3.0, max: 5.0 },
+  { field: 'y', min: -5.0, max: 5.0 }
+];
+
 export default {
   name: 'GraphForm',
-  components: { Graph }
+  components: { Graph },
+  data: {
+    r: '',
+    x: '',
+    y: ''
+  },
+  methods: {
+    ...Vuex.mapMutations(['errorMissingField', 'errorOutOfRange']),
+    processGraphForm() {
+      for (const field of ['r', 'x', 'y']) {
+        if (!this[field]) return this.errorMissingField({ field });
+      }
+
+      for (const constraint of fieldConstraints) {
+        const { field, min, max } = constraint;
+        const val = parseFloat(this[field]);
+        if (val < min || val > max) return this.errorOutOfRange(constraint);
+      }
+
+      console.log({ r: this.r, x: this.x, y: this.y });
+    }
+  }
 }
 </script>
 

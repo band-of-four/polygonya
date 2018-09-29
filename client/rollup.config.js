@@ -37,7 +37,8 @@ const appBundle = {
 
 const vendorBundle = {
   input: [
-    './node_modules/vue/dist/vue.runtime.min.js'
+    './node_modules/vue/dist/vue.runtime.min.js',
+    './node_modules/vuex/dist/vuex.min.js'
   ],
   output: {
     file: './dist/vendor.js',

@@ -9,7 +9,8 @@
     "build": "NODE_ENV=production npm run rollup"
   },
   "dependencies": {
-    "vue": "^2.5.17"
+    "vue": "^2.5.17",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "postcss": "^7.0.2",
