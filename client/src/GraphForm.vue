@@ -66,6 +66,7 @@ export default {
   align-items: center;
 
   padding: 6vh 0;
+  min-height: var(--min-layout-height);
   max-height: 100%;
 }
 
@@ -74,6 +75,7 @@ export default {
   justify-content: center;
   width: 80%;
   margin: 24px 0;
+  min-height: 0;
 }
 
 .graph-form__input-column {

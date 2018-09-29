@@ -27,6 +27,7 @@ export default {
   --header-font: 'Gloria Hallelujah', serif;
 
   --header-height: 64px;
+  --min-layout-height: 500px;
 
   --text-color: #000;
 }
@@ -53,7 +54,7 @@ body {
 
   /* Min-height is chosen such that no elements overlap
    * and scrolling is forced when the viewport is too short */
-  min-height: 500px;
+  min-height: var(--min-layout-height);
 }
 
 .grid__header {
