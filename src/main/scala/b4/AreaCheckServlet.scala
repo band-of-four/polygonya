@@ -2,22 +2,36 @@ package b4
 
 import scala.math.{pow, sqrt}
 import scala.util.Try
+import scala.collection.JavaConverters._
+import java.util.{ArrayList, Map => JavaMap}
 import javax.servlet.http.{
   HttpServlet,
   HttpServletRequest => HttpReq,
-  HttpServletResponse => HttpResp}
+  HttpServletResponse => HttpResp,
+	HttpSession}
 
 class AreaCheckServlet extends HttpServlet {
 	override def doGet(req: HttpReq, resp: HttpResp) = {
-		val status = for {
+		val result = for {
 			r <- parseDouble(Option(req.getParameter("r")), 1.0, 5.0)
 			x <- parseDouble(Option(req.getParameter("x")), -3.0, 5.0)
 			y <- parseDouble(Option(req.getParameter("y")), -5.0, 5.0)
-		} yield pointCheck(r, x, y)
+		} yield (r, x, y, pointCheck(r, x, y))
 
-		status match {
-			case Some(result) => resp.getWriter.print(result)
-			case _ => resp.sendError(400)
+		result match {
+			case Some((r, x, y, status)) => {
+				val session = req.getSession(true)
+				val map = Map("r" -> r, "x" -> x, "y" -> y, "status" -> status).asJava
+				session.getAttribute("list") match {
+					case null =>
+						session.setAttribute("list", new ArrayList[JavaMap[String, AnyVal]](List(map).asJava))
+					case list: ArrayList[JavaMap[String, AnyVal]] =>
+						list.add(map)
+				}
+				resp.getWriter.print(status)
+			}
+			case _ =>
+				resp.sendError(400)
 		}
 	}
 
@@ -33,4 +47,5 @@ class AreaCheckServlet extends HttpServlet {
 	    else if (x <= 0 && y <= 0)  sqrt(pow(x, 2) + pow(y, 2)) <= r/2
 	    else if (x > 0 && y <= 0)   x < r && y < (r/2)
 	    else                        false
+
 }

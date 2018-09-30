@@ -10,7 +10,7 @@ import javax.servlet.http.{
 
 @WebServlet(Array("/"))
 class ControllerServlet extends HttpServlet {
-  override def doGet(req: HttpReq, resp: HttpResp): Unit =
+  override def doGet(req: HttpReq, resp: HttpResp): Unit = {
     req.getRequestURI match {
       case "/" | null =>
         req.getRequestDispatcher("index.jsp").forward(req, resp)
@@ -21,7 +21,7 @@ class ControllerServlet extends HttpServlet {
       case _ =>
         resp.sendError(404)
     }
-
+  }
   def handleStatic(path: String, resp: HttpResp): Unit = {
     val file = new File("client/dist", path)
 

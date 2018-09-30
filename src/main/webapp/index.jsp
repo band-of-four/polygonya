@@ -1,3 +1,5 @@
+<%@ page import="com.google.gson.Gson" %>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -8,7 +10,7 @@
     <script src="static/vendor.js"></script>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app" data-history="<%= new Gson().toJson(session.getAttribute("list")).replace("\"", "&quot;") %>"></div>
     <script src="static/app.js"></script>
   </body>
 </html>
