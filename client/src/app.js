@@ -2,8 +2,14 @@ import App from './App.vue';
 import states from './states.js';
 
 const store = new Vuex.Store({
-  state: states.idle(),
+  state: {
+    ...states.idle(),
+    historyItems: []
+  },
   mutations: {
+    storeResult(state, result) {
+      state.historyItems.push(result);
+    },
     errorMissingField(state, payload) {
       state = Object.assign(state, states.errorMissingField(payload));
     },
@@ -42,6 +48,8 @@ const store = new Vuex.Store({
         .then((delayedResult) => {
           if (delayedResult === 'true') commit('resultInside')
           else commit('resultOutside')
+
+          commit('storeResult', { r, x, y, result: delayedResult });
         });
     }
   }

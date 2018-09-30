@@ -2,9 +2,15 @@
 <div class="grid">
   <Header class="grid__header"/>
   <Sprite class="grid__sprite"/>
-  <GraphForm class="grid__form">
-    <Quote/>
-  </GraphForm>
+  <transition name="screen-fade" mode="out-in">
+    <GraphForm v-if="screen === 'graph-form'" class="grid__form">
+      <Quote/>
+      <button @click.prevent="screen = 'history'">History</button>
+    </GraphForm>
+    <History v-if="screen === 'history'">
+      <button @click.prevent="screen = 'graph-form'">Form</button>
+    </History>
+  </transition>
 </div>
 </template>
 
@@ -13,10 +19,14 @@ import Header from './Header.vue';
 import Sprite from './Sprite.vue';
 import Quote from './Quote.vue';
 import GraphForm from './GraphForm.vue';
+import History from './History.vue';
 
 export default {
   name: 'App',
-  components: { Header, Sprite, Quote, GraphForm }
+  components: { Header, Sprite, Quote, GraphForm, History },
+  data() {
+    return { screen: 'graph-form' }
+  }
 }
 </script>
 
@@ -72,5 +82,13 @@ body {
 
   width: 100%;
   height: calc(100vh - var(--header-height));
+}
+
+.screen-fade-enter-active, .screen-fade-leave-active {
+  transition: opacity 0.4s;
+}
+
+.screen-fade-enter, .screen-fade-leave-to {
+  opacity: 0;
 }
 </style>
