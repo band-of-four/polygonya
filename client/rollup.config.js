@@ -23,7 +23,8 @@ const appBundle = {
         postcssPresetEnv({
           features: {
             'custom-properties': { preserve: false },
-            'nesting-rules': true
+            'nesting-rules': true,
+            'custom-media-queries': true
           }
         })
       ])
@@ -38,7 +39,8 @@ const appBundle = {
 const vendorBundle = {
   input: [
     './node_modules/vue/dist/vue.runtime.min.js',
-    './node_modules/vuex/dist/vuex.min.js'
+    './node_modules/vuex/dist/vuex.min.js',
+    './node_modules/vue-mq/dist/vue-mq.min.js'
   ],
   output: {
     file: './dist/vendor.js',

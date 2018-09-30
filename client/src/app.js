@@ -62,6 +62,13 @@ const store = new Vuex.Store({
   }
 });
 
+Vue.use(vueMq, {
+  breakpoints: {
+    mobile: 685,
+    desktop: Infinity
+  }
+});
+
 new Vue({
   el: '#app',
   store,

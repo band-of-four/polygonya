@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>h</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polygonya</title>
     <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Merriweather:400,700&amp;subset=cyrillic|Merriweather+Sans" rel="stylesheet">
     <link href="static/app.css" rel="stylesheet">
     <script src="static/vendor.js"></script>
