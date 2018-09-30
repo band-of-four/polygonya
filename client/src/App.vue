@@ -1,12 +1,13 @@
 <template>
 <div class="grid">
-  <Header class="grid__header"/>
+  <Header class="grid__header" @toggle-about="screen = (screen === 'about' ? 'graph-form' : 'about') "/>
   <Sprite class="grid__sprite"/>
   <transition name="screen-fade" mode="out-in">
     <GraphForm v-if="screen === 'graph-form'" @show-history="screen = 'history'" class="grid__form">
       <Quote/>
     </GraphForm>
     <History v-if="screen === 'history'" @close-history="closeHistory"/>
+    <AboutPage v-if="screen === 'about'"/>
   </transition>
 </div>
 </template>
@@ -17,10 +18,11 @@ import Sprite from './Sprite.vue';
 import Quote from './Quote.vue';
 import GraphForm from './GraphForm.vue';
 import History from './History.vue';
+import AboutPage from './AboutPage.vue';
 
 export default {
   name: 'App',
-  components: { Header, Sprite, Quote, GraphForm, History },
+  components: { Header, Sprite, Quote, GraphForm, History, AboutPage },
   data() {
     return { screen: 'graph-form' }
   },

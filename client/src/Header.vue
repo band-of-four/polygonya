@@ -1,7 +1,7 @@
 <template>
 <header class="header">
   <a class="header__link" href="#">Polygonya</a>
-  <a class="header__link" href="#">?</a>
+  <a class="header__link" href="#" @click.prevent="$emit('toggle-about')">?</a>
 </header>
 </template>
 
