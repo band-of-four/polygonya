@@ -1,7 +1,7 @@
 package b4
 
 import scala.math.{pow, sqrt}
-import scala.util.{Either, Try}
+import scala.util.Try
 import javax.servlet.http.{
   HttpServlet,
   HttpServletRequest => HttpReq,
@@ -15,7 +15,10 @@ class AreaCheckServlet extends HttpServlet {
 			y <- parseDouble(Option(req.getParameter("y")), -5.0, 5.0)
 		} yield pointCheck(r, x, y)
 
-		resp.getWriter().println(status)
+		status match {
+			case Some(result) => resp.getWriter.print(result)
+			case _ => resp.sendError(400)
+		}
 	}
 
 	def parseDouble(s: Option[String], min: Double, max: Double): Option[Double] =

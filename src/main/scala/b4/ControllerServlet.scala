@@ -8,24 +8,26 @@ import javax.servlet.http.{
   HttpServletRequest => HttpReq,
   HttpServletResponse => HttpResp}
 
-@WebServlet(Array("/*"))
+@WebServlet(Array("/"))
 class ControllerServlet extends HttpServlet {
-  override def doGet(req: HttpReq, resp: HttpResp) =
-  	req.getPathInfo() match {
-  		case url if url != null && url.startsWith("/static/") =>
-  			staticHandler(url.substring(8), resp)
-  		case url if url != null && url.startsWith("/areaCheck") =>
-  			req.getRequestDispatcher("AreaCheckServlet").forward(req, resp)
-  		case _ =>
-  			req.getRequestDispatcher("index.jsp").forward(req, resp)
-  	}
+  override def doGet(req: HttpReq, resp: HttpResp): Unit =
+    req.getRequestURI match {
+      case "/" | null =>
+        req.getRequestDispatcher("index.jsp").forward(req, resp)
+      case url if url.startsWith("/static/") =>
+        handleStatic(url.substring(8), resp)
+      case url if url.startsWith("/areaCheck") =>
+        req.getServletContext.getNamedDispatcher("b4.AreaCheckServlet").forward(req, resp)
+      case _ =>
+        resp.sendError(404)
+    }
 
-  def staticHandler(path: String, resp: HttpResp) = {
+  def handleStatic(path: String, resp: HttpResp): Unit = {
     val file = new File("client/dist", path)
 
-    resp.setHeader("Content-Type", getServletContext().getMimeType(path))
-    resp.setHeader("Content-Length", file.length().toString())
+    resp.setHeader("Content-Type", getServletContext.getMimeType(path))
+    resp.setHeader("Content-Length", file.length.toString)
 
-    Files.copy(file.toPath(), resp.getOutputStream())
+    Files.copy(file.toPath, resp.getOutputStream)
   }
 }
