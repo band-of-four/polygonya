@@ -7,6 +7,9 @@ const store = new Vuex.Store({
     historyItems: []
   },
   mutations: {
+    loadHistory(state, history) {
+      state.historyItems = history;
+    },
     storeResult(state, result) {
       state.historyItems.push(result);
     },
@@ -39,15 +42,15 @@ const store = new Vuex.Store({
       })
         .then((response) => {
           if (!response.ok) { throw response }
-          return response.text()
+          return response.text();
         })
         .then((result) => {
           const delay = Math.max(0, fetchStartMillis + resultDelayMillis - Date.now());
           return new Promise((resolve) => setTimeout(() => resolve(result), delay));
         })
         .then((delayedResult) => {
-          if (delayedResult === 'true') commit('resultInside')
-          else commit('resultOutside')
+          if (delayedResult === 'true') commit('resultInside');
+          else commit('resultOutside');
 
           commit('storeResult', { r, x, y, result: delayedResult });
         });
@@ -59,5 +62,8 @@ new Vue({
   el: '#app',
   store,
   components: { App },
-  render: (h) => h(App)
+  render: (h) => h(App),
+  beforeMount() {
+    store.commit('loadHistory', JSON.parse(document.getElementById("app").dataset.history));
+  }
 });
