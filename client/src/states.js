@@ -15,6 +15,24 @@ export default {
     return {
       sprite: 'static/tech-chan-sketch.png',
       quote: `Разве я не говорила тебе, что ${field.toUpperCase()} должен быть между ${min} и ${max}?`
-    }
-  }
+    };
+  },
+  waitingForResult() {
+    return {
+      sprite: 'static/tech-chan-sketch.png',
+      quote: 'Хмм, дай подумать...'
+    };
+  },
+  resultInside() {
+    return {
+      sprite: 'static/tech-chan-sketch.png',
+      quote: 'П-похоже, точка внутри >.<'
+    };
+  },
+  resultOutside() {
+    return {
+      sprite: 'static/tech-chan-sketch.png',
+      quote: 'Точка снаружи ^^'
+    };
+  },
 };

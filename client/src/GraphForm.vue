@@ -16,7 +16,7 @@
         <input type="number" step="0.1" v-model="y" name="y" class="graph-form__input">
       </div>
     </div>
-    <Graph class="graph-form__graph-column"/>
+    <Graph class="graph-form__graph-column" @point-placed="pointPlaced"/>
   </section>
   <input type="submit" name="submit" value="Помоги, пожалуйста" class="graph-form__submit">
 </form>
@@ -41,6 +41,11 @@ export default {
   },
   methods: {
     ...Vuex.mapMutations(['errorMissingField', 'errorOutOfRange']),
+    ...Vuex.mapActions(['fetchPointResult']),
+    pointPlaced({ x, y }) {
+      if (!this.r) return this.errorMissingField({ field: 'r' });
+      this.fetchPointResult({ r, x, y });
+    },
     processGraphForm() {
       for (const field of ['r', 'x', 'y']) {
         if (!this[field]) return this.errorMissingField({ field });
@@ -52,7 +57,7 @@ export default {
         if (val < min || val > max) return this.errorOutOfRange(constraint);
       }
 
-      console.log({ r: this.r, x: this.x, y: this.y });
+      this.fetchPointResult({ r: this.r, x: this.x, y: this.y });
     }
   }
 }

@@ -50,10 +50,18 @@ export default {
       referencePt.x = e.clientX;
       referencePt.y = e.clientY;
 
-      const translatedPt = referencePt.matrixTransform(
+      const axisDim = 400;
+      const rDim = 160;
+
+      const { x: graphX, y: graphY } = referencePt.matrixTransform(
         this.$refs.svg.getScreenCTM().inverse());
 
-      this.graphPoints.push([translatedPt.x, translatedPt.y]);
+      const x = (graphX - (axisDim / 2)) / rDim;
+      const y = (graphY - (axisDim / 2)) / rDim;
+
+      this.graphPoints.push([graphX, graphY]);
+
+      this.$emit('point-placed', { x, y });
     }
   }
 }
