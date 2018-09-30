@@ -28,6 +28,9 @@ const store = new Vuex.Store({
     },
     resultOutside(state) {
       state = Object.assign(state, states.resultOutside());
+    },
+    returnFromHistory(state) {
+      state = Object.assign(state, states.returnFromHistory());
     }
   },
   actions: {

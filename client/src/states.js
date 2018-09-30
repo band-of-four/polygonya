@@ -35,4 +35,10 @@ export default {
       quote: 'Хей, сколько можно? Опять мимо!'
     };
   },
+  returnFromHistory() {
+    return {
+      sprite: 'static/kaiki-chan-blushing.png',
+      quote: 'Т-ты вспоминал наши занятия?..'
+    };
+  },
 };
