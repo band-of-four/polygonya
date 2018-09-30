@@ -8,7 +8,8 @@ const store = new Vuex.Store({
   },
   mutations: {
     loadHistory(state, history) {
-      state.historyItems = history;
+      if (history) state.historyItems = history;
+      else state.historyItems = [];
     },
     storeResult(state, result) {
       state.historyItems.push(result);

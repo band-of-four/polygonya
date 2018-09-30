@@ -18,7 +18,10 @@
     </div>
     <Graph class="graph-form__graph-column" @point-placed="pointPlaced"/>
   </section>
-  <input type="submit" name="submit" value="Помоги, пожалуйста" class="graph-form__submit">
+  <div>
+    <input type="submit" name="submit" value="Помоги, пожалуйста" class="graph-form__button">
+    <input type="button" @click.prevent="$emit('show-history')" value="Воспоминания" class="graph-form__button">
+  </div>
 </form>
 </template>
 
@@ -123,12 +126,13 @@ export default {
   text-align: right;
 }
 
-.graph-form__submit {
-  display: block;
+.graph-form__button {
+  display: inline-block;
   background: white;
   border: 1px solid black;
   border-radius: 8px;
   padding: 8px 16px;
+  margin: 0 8px;
 
   font-family: var(--body-font);
 

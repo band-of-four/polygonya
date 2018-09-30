@@ -3,13 +3,10 @@
   <Header class="grid__header"/>
   <Sprite class="grid__sprite"/>
   <transition name="screen-fade" mode="out-in">
-    <GraphForm v-if="screen === 'graph-form'" class="grid__form">
+    <GraphForm v-if="screen === 'graph-form'" @show-history="screen = 'history'" class="grid__form">
       <Quote/>
-      <button @click.prevent="screen = 'history'">History</button>
     </GraphForm>
-    <History v-if="screen === 'history'">
-      <button @click.prevent="screen = 'graph-form'">Form</button>
-    </History>
+    <History v-if="screen === 'history'" @close-history="screen = 'graph-form'"/>
   </transition>
 </div>
 </template>
