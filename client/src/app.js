@@ -24,14 +24,25 @@ const store = new Vuex.Store({
     fetchPointResult({ commit }, { r, x, y }) {
       commit('waitingForResult');
 
-      /* fetch(...).then(json) */
-      const fetchResult = new Promise((resolve) =>
-        setTimeout(() => resolve(true), 1000));
+      const resultDelayMillis = 900;
+      const fetchStartMillis = Date.now();
 
-      fetchResult.then((result) => {
-        if (result) commit('resultInside')
-        else commit('resultOutside')
-      });
+      fetch(`/areaCheck?r=${r}&x=${x}&y=${y}`, {
+        method: 'GET',
+        credentials: 'include'
+      })
+        .then((response) => {
+          if (!response.ok) { throw response }
+          return response.text()
+        })
+        .then((result) => {
+          const delay = Math.max(0, fetchStartMillis + resultDelayMillis - Date.now());
+          return new Promise((resolve) => setTimeout(() => resolve(result), delay));
+        })
+        .then((delayedResult) => {
+          if (delayedResult === 'true') commit('resultInside')
+          else commit('resultOutside')
+        });
     }
   }
 });

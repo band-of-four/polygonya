@@ -34,17 +34,20 @@ const fieldConstraints = [
 export default {
   name: 'GraphForm',
   components: { Graph },
-  data: {
-    r: '',
-    x: '',
-    y: ''
+  data() {
+    return { r: undefined, x: undefined, y: undefined }
   },
   methods: {
     ...Vuex.mapMutations(['errorMissingField', 'errorOutOfRange']),
     ...Vuex.mapActions(['fetchPointResult']),
     pointPlaced({ x, y }) {
-      if (!this.r) return this.errorMissingField({ field: 'r' });
-      this.fetchPointResult({ r, x, y });
+      const r = parseFloat(this.r);
+      if (!r) return this.errorMissingField({ field: 'r' });
+
+      this.x = (x * r).toFixed(1);
+      this.y = (y * r).toFixed(1);
+
+      this.processGraphForm();
     },
     processGraphForm() {
       for (const field of ['r', 'x', 'y']) {
