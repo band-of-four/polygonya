@@ -5,5 +5,5 @@ client/dist/*
 !client/dist/kaiki-chan-idle.png
 !client/dist/kaiki-chan-blushing.png
 !client/dist/kaiki-chan-angry.png
-!client/dist/kaiki-chan-thinkin.png
+!client/dist/kaiki-chan-thinking.png
 node_modules/
