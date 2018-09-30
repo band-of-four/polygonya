@@ -20,10 +20,10 @@ export default {
   flex: 1 0 auto;
   width: 100%;
 
-  /* Max-width forces the sprite to have at least 14/29 of the height
+  /* Max-width forces the sprite to have at least 14/31 of the height
    * visible regardless of viewport size. On narrower screens,
    * a little bit more is revealed ;) */
-  max-width: calc(100vh * 14/29); 
+  max-width: calc(100vh * 14/31); 
   /* Min-width prevents the image from squashing when the viewport is
    * too short. The value is set to the computed sprite width @ 500px
    * viewport height (see the min-height property of .grid) */

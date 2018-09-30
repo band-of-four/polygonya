@@ -54,10 +54,10 @@ body {
 
   display: grid;
   grid:
-    [row1-start] "header header" var(--header-height) [row2-end]
+    [row1-start] "header header" var(--header-height) [row1-end]
     [row2-start] "sprite form" auto [row2-end]
-    / 20fr 30fr;
-  grid-column-gap: 4vw;
+    / 20fr 35fr;
+  grid-column-gap: 8px;
 
   /* Min-height is chosen such that no elements overlap
    * and scrolling is forced when the viewport is too short */

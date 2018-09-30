@@ -2,4 +2,8 @@ target/
 .idea/
 client/dist/*
 !client/dist/tech-chan-sketch.png
+!client/dist/kaiki-chan-idle.png
+!client/dist/kaiki-chan-blushing.png
+!client/dist/kaiki-chan-angry.png
+!client/dist/kaiki-chan-thinkin.png
 node_modules/
