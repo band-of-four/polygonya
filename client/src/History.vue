@@ -1,10 +1,10 @@
 <template>
-<div>
-  <div class="history-controls">
-    <button class="history-button" @click.prevent="$emit('close-history')">Вернуться в реальность</button>
-    <button class="history-button" @click.prevent="$emit('clear-history')">Забыть все</button>
+<div class="history">
+  <div class="history__controls">
+    <button class="history__button" @click.prevent="$emit('close-history')">Вернуться в реальность</button>
+    <button class="history__button" @click.prevent="$emit('clear-history')">Забыть все</button>
   </div>
-  <table class="history-table">
+  <table class="history__table">
     <thead>
       <tr>
         <th>R</th>
@@ -34,12 +34,16 @@ export default {
 </script>
 
 <style>
-.history-controls {
+.history {
+  overflow-y: auto;
+}
+
+.history__controls {
   display: flex;
   justify-content: center;
 }
 
-.history-table {
+.history__table {
   border-collapse: collapse;
   margin: 16px auto;
 
@@ -49,7 +53,7 @@ export default {
   }
 }
 
-.history-button {
+.history__button {
   background: white;
   border: 1px solid black;
   border-radius: 8px;
