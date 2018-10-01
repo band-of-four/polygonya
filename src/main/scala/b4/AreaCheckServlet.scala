@@ -1,6 +1,6 @@
 package b4
 
-import scala.math.{pow, sqrt}
+import scala.math.{pow, sqrt, abs}
 import scala.util.Try
 import scala.collection.JavaConverters._
 import java.util.{ArrayList, Map => JavaMap}
@@ -45,7 +45,7 @@ class AreaCheckServlet extends HttpServlet {
 	def pointCheck(r: Double, x: Double, y: Double): Boolean =
 	    if (x >= 0 && y >= 0)       y < (r - x)
 	    else if (x <= 0 && y <= 0)  sqrt(pow(x, 2) + pow(y, 2)) <= r/2
-	    else if (x > 0 && y <= 0)   x < r && y < (r/2)
+	    else if (x > 0 && y <= 0)   x < r && abs(y) < (r/2)
 	    else                        false
 
 }
