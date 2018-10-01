@@ -19,7 +19,7 @@
     <Graph class="graph-form__graph-column" @point-placed="pointPlaced"/>
   </section>
   <div>
-    <input type="submit" name="submit" value="Помоги, пожалуйста" class="graph-form__button">
+    <input type="submit" name="submit" value="Решение" class="graph-form__button">
     <input type="button" @click.prevent="$emit('show-history')" value="Воспоминания" class="graph-form__button">
   </div>
 </form>

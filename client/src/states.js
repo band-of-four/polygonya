@@ -14,7 +14,7 @@ export default {
   errorOutOfRange({ field, min, max }) {
     return {
       sprite: 'static/kaiki-chan-angry.png',
-      quote: `Разве я не говорила тебе, что ${field.toUpperCase()} должен быть между ${min} и ${max}?`
+      quote: `Ещё раз ${field.toUpperCase()} окажется не между ${min} и ${max} — стукну!`
     };
   },
   waitingForResult() {
