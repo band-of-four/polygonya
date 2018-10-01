@@ -15,7 +15,7 @@
         <th>{{ item.r }}</th>
         <th>{{ item.x }}</th>
         <th>{{ item.y }}</th>
-        <th>{{ item.result ? 'внутри' : 'снаружи' }}</th>
+        <th>{{ item.status ? 'внутри' : 'снаружи' }}</th>
       </tr>
     </tbody>
   </table>

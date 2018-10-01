@@ -40,7 +40,7 @@ const vendorBundle = {
   input: [
     './node_modules/vue/dist/vue.runtime.min.js',
     './node_modules/vuex/dist/vuex.min.js',
-    './node_modules/vue-mq/dist/vue-mq.min.js'
+    //'./node_modules/vue-mq/dist/vue-mq.min.js'
   ],
   output: {
     file: './dist/vendor.js',

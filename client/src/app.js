@@ -56,18 +56,18 @@ const store = new Vuex.Store({
           if (delayedResult === 'true') commit('resultInside');
           else commit('resultOutside');
 
-          commit('storeResult', { r, x, y, result: delayedResult });
+          commit('storeResult', { r, x, y, status: delayedResult === 'true' });
         });
     }
   }
 });
 
-Vue.use(vueMq, {
-  breakpoints: {
-    mobile: 685,
-    desktop: Infinity
-  }
-});
+//Vue.use(vueMq, {
+//  breakpoints: {
+//    mobile: 685,
+//    desktop: Infinity
+//  }
+//});
 
 new Vue({
   el: '#app',

@@ -28,8 +28,8 @@
       <tspan x="360" y="190" font-size="16px">R</tspan>
     </text>
     <g id="graph__points">
-      <circle v-for="pt in graphPoints" :cx="pt[0]" :cy="pt[1]"
-              stroke-width="0" fill="black" r="3"></circle>
+      <circle v-for="pt in historyPoints" :cx="pt[0]" :cy="pt[1]"
+              stroke-width="0" :fill="pt[2] ? 'green' : 'red'" r="3"></circle>
     </g>
   </svg>
 </div>
@@ -39,9 +39,20 @@
 export default {
   name: 'Graph',
   components: {},
-  data() {
-    return {
-      graphPoints: []
+  computed: {
+    historyPoints() {
+      return this.$store.state.historyItems.map(({ r, x, y, status }) => {
+        const axisDim = 400;
+        const rDim = 160;
+
+        const xRel = x / r;
+        const yRel = y / r;
+
+        const xAbs = (xRel * rDim) + (axisDim / 2);
+        const yAbs = (-yRel * rDim) + (axisDim / 2);
+
+        return [xAbs, yAbs, status];
+      });
     }
   },
   methods: {
@@ -57,9 +68,7 @@ export default {
         this.$refs.svg.getScreenCTM().inverse());
 
       const x = (graphX - (axisDim / 2)) / rDim;
-      const y = (graphY - (axisDim / 2)) / rDim;
-
-      this.graphPoints.push([graphX, graphY]);
+      const y = -((graphY - (axisDim / 2)) / rDim);
 
       this.$emit('point-placed', { x, y });
     }
