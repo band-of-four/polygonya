@@ -6,7 +6,7 @@
     <GraphForm v-if="screen === 'graph-form'" @show-history="screen = 'history'" class="grid__form">
       <Quote/>
     </GraphForm>
-    <History v-if="screen === 'history'" @close-history="closeHistory"/>
+    <History v-if="screen === 'history'" @close-history="closeHistory" @clear-history="clearHistory"/>
     <AboutPage v-if="screen === 'about'"/>
   </transition>
 </div>
@@ -30,6 +30,11 @@ export default {
     closeHistory() {
       this.screen = 'graph-form';
       this.$store.commit('returnFromHistory');
+    },
+    clearHistory() {
+      this.screen = 'graph-form';
+      this.$store.commit('clearHistory');
+      this.$store.commit('returnFromHistoryCleared');
     }
   }
 }

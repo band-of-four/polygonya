@@ -41,4 +41,10 @@ export default {
       quote: 'Т-ты вспоминал наши занятия?..'
     };
   },
+  returnFromHistoryCleared() {
+    return {
+      sprite: 'static/kaiki-chan-angry.png',
+      quote: '...'
+    };
+  },
 };

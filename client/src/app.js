@@ -14,6 +14,9 @@ const store = new Vuex.Store({
     storeResult(state, result) {
       state.historyItems.push(result);
     },
+    clearHistory(state) {
+      state.historyItems = [];
+    },
     errorMissingField(state, payload) {
       state = Object.assign(state, states.errorMissingField(payload));
     },
@@ -31,6 +34,9 @@ const store = new Vuex.Store({
     },
     returnFromHistory(state) {
       state = Object.assign(state, states.returnFromHistory());
+    },
+    returnFromHistoryCleared(state) {
+      state = Object.assign(state, states.returnFromHistoryCleared());
     }
   },
   actions: {
