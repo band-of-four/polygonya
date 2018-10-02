@@ -13,8 +13,12 @@ class ControllerServlet extends HttpServlet {
   override def doGet(req: HttpReq, resp: HttpResp): Unit = {
     req.getRequestURI match {
       case "/" | null =>
+        resp.setContentType("text/html;charset=UTF-8")
         req.getRequestDispatcher("index.jsp").forward(req, resp)
       case url if url.startsWith("/static/") =>
+        if (url.endsWith(".png")) {
+          resp.addHeader("Cache-Control", "max-age=86400, public")
+        }
         handleStatic(url.substring(8), resp)
       case url if url.startsWith("/areaCheck") =>
         req.getServletContext.getNamedDispatcher("b4.AreaCheckServlet").forward(req, resp)
