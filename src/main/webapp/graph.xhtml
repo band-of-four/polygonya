@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:p="http://primefaces.org/ui">
+  <head jsf:id="head">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Polygonya</title>
+    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Merriweather:400,700&amp;subset=cyrillic|Merriweather+Sans" rel="stylesheet"/>
+  </head>
+  <body jsf:id="body">
+    <form jsf:id="graphForm">
+      <input type="number" jsf:id="r" name="r" value="#{graphForm.r}" />
+      <p:inputText id="x" value="#{graphForm.x}" />
+      <p:slider for="x" minValue="1" maxValue="7" step="0.1" />
+
+      <input type="submit" value="Submit"/>
+     </form>
+  </body>
+</html>
