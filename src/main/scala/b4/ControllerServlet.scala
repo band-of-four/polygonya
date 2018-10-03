@@ -8,13 +8,13 @@ import javax.servlet.http.{
   HttpServletRequest => HttpReq,
   HttpServletResponse => HttpResp}
 
-@WebServlet(Array("/"))
+//@WebServlet(Array("/"))
 class ControllerServlet extends HttpServlet {
   override def doGet(req: HttpReq, resp: HttpResp): Unit = {
     req.getRequestURI match {
       case "/" | null =>
         resp.setContentType("text/html;charset=UTF-8")
-        req.getRequestDispatcher("index.jsp").forward(req, resp)
+        req.getRequestDispatcher("index.html").forward(req, resp)
       case url if url.startsWith("/static/") =>
         if (url.endsWith(".png")) {
           resp.addHeader("Cache-Control", "max-age=86400, public")

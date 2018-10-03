@@ -16,8 +16,9 @@ lazy val root = (project in file(".")).
       "-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005"
     ),
     libraryDependencies += scalaTest % Test,
-    libraryDependencies += "javax.servlet" % "javax.servlet-api" % "4.0.1" % "provided",
-    libraryDependencies += "org.scala-lang.modules" %% "scala-xml" % "1.1.0",
-    libraryDependencies += "com.google.code.gson" % "gson" % "2.8.5"
+    libraryDependencies += "javax.servlet" % "javax.servlet-api" % "3.1.0" % "provided",
+    libraryDependencies += "com.sun.faces" % "jsf-api" % "2.2.18",
+    libraryDependencies += "com.sun.faces" % "jsf-impl" % "2.2.18",
+    libraryDependencies += "org.primefaces" % "primefaces" % "6.2"
   )
 
