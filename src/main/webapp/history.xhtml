@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+  <head jsf:id="head">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Polygonya</title>
+    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Merriweather:400,700&amp;subset=cyrillic|Merriweather+Sans" rel="stylesheet"/>
+  </head>
+  <body jsf:id="body">
+       <table class="history__table">
+      <thead>
+        <tr>
+          <th>R</th>
+          <th>X</th>
+          <th>Y</th>
+        </tr>
+      </thead>
+      <tbody>
+      <c:forEach var="item" items="#{sessionData.history}">
+        <tr>
+          <!-- TODO: |history -> map or class or bean| |correct history parsing to table|-->
+          <th> #{item} </th>
+        </tr>
+      </c:forEach>
+      </tbody>
+    </table>
+  </body>
+</html>

@@ -2,10 +2,10 @@ package b4
 
 import scala.beans.BeanProperty
 import javax.faces.bean.{ManagedBean, SessionScoped}
-import scala.collection.mutable.LinkedList
+import java.util.ArrayList
 
 @ManagedBean(name = "sessionData")
 @SessionScoped
 class SessionDataBean extends Serializable {
-  @BeanProperty var history = new LinkedList[String]
+  @BeanProperty var history = new ArrayList[String]
 }

@@ -10,6 +10,10 @@ class GraphFormBean extends Serializable {
   @BeanProperty var r: Double = 0.0
   @BeanProperty var x: Double = 0.0
   @BeanProperty var y: Double = 0.0
-  @ManagedProperty(value="#{graphForm}")
-  var sessionData = new SessionDataBean()
+  @ManagedProperty(value="#{sessionData}")
+  @BeanProperty var sessionData = new SessionDataBean()
+
+  def compute() {
+  	sessionData.history add s"$r, $x, $y"
+  }
 }
