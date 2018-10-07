@@ -3,6 +3,7 @@ package b4
 import scala.beans.BeanProperty
 import javax.faces.bean.{ManagedBean, SessionScoped, ManagedProperty}
 import b4.SessionDataBean
+import b4.History
 
 @ManagedBean(name = "graphForm")
 @SessionScoped
@@ -14,6 +15,10 @@ class GraphFormBean extends Serializable {
   @BeanProperty var sessionData = new SessionDataBean()
 
   def compute() {
-  	sessionData.history add s"$r, $x, $y"
+  	val history = new History()
+  	history.r = r
+  	history.x = x
+  	history.y = y
+  	sessionData.history add history
   }
 }

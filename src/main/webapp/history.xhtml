@@ -17,13 +17,16 @@
           <th>R</th>
           <th>X</th>
           <th>Y</th>
+          <th>Result</th>
         </tr>
       </thead>
       <tbody>
       <c:forEach var="item" items="#{sessionData.history}">
         <tr>
-          <!-- TODO: |history -> map or class or bean| |correct history parsing to table|-->
-          <th> #{item} </th>
+          <th> #{item.r} </th>
+          <th> #{item.x} </th>
+          <th> #{item.y} </th>
+          <th> #{item.res} </th>
         </tr>
       </c:forEach>
       </tbody>
