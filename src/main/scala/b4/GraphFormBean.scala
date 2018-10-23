@@ -6,8 +6,7 @@ import javax.faces.application.FacesMessage
 import javax.faces.validator.ValidatorException
 import javax.faces.context.FacesContext
 import javax.faces.component.UIComponent
-import b4.SessionDataBean
-import b4.History
+import javax.servlet.ServletContext
 
 @ManagedBean(name = "graphForm")
 @SessionScoped
@@ -15,6 +14,10 @@ class GraphFormBean extends Serializable {
   @BeanProperty var r: Double = 0.0
   @BeanProperty var x: Double = 0.0
   @BeanProperty var y: Double = 0.0
+
+  @BeanProperty var sprite: String = "kaiki-chan-idle.png"
+  @BeanProperty var quote: String = "Снова ты?! Вот идиот, даже не можешь график прочитать... Ну, раз уж пришел, давай посмотрим вместе."
+
   @BeanProperty var graph: String = """
   <svg class="graph" ref="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
     <g id="graph__coordinate-plane">

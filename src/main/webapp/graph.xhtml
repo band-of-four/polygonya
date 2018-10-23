@@ -7,8 +7,13 @@
       xmlns:f="http://java.sun.com/core">
   <body jsf:id="body">
     <ui:composition template="./_main.xhtml">
-      <ui:define name="graph">
-        <form class="graph-form" jsf:id="graphForm">
+      <ui:define name="content">
+        <form class="grid__form graph-form" jsf:id="graphForm">
+          <div class="quote">
+            <span class="quote__speaker">Kaiki Ahiru</span>
+            #{graphForm.quote}
+          </div>
+
           <section class="graph-form__columns">
             <div class="graph-form__input-column">
               <div class="graph-form__field">
@@ -26,10 +31,8 @@
               </div>
             </div>
 
-            <div class="graph-form__graph-column">
-              <div class="graph-container">
-                <h:outputText value="#{graphForm.graph}" escape="false" /> 
-              </div>
+            <div class="graph-container graph-form__graph-column">
+              <h:outputText value="#{graphForm.graph}" escape="false" />
             </div>
           </section>
 

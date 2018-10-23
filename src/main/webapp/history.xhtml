@@ -1,35 +1,39 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:jsf="http://xmlns.jcp.org/jsf"
-      xmlns:p="http://primefaces.org/ui"
       xmlns:c="http://java.sun.com/jsp/jstl/core">
-  <head jsf:id="head">
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Polygonya</title>
-    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Merriweather:400,700&amp;subset=cyrillic|Merriweather+Sans" rel="stylesheet"/>
-  </head>
   <body jsf:id="body">
-       <table class="history__table">
-      <thead>
-        <tr>
-          <th>R</th>
-          <th>X</th>
-          <th>Y</th>
-          <th>Result</th>
-        </tr>
-      </thead>
-      <tbody>
-      <c:forEach var="item" items="#{sessionData.history}">
-        <tr>
-          <th> #{item.r} </th>
-          <th> #{item.x} </th>
-          <th> #{item.y} </th>
-          <th> #{item.res} </th>
-        </tr>
-      </c:forEach>
-      </tbody>
-    </table>
+    <ui:composition template="./_main.xhtml">
+      <ui:define name="content">
+        <div class="history">
+          <div class="history__controls">
+            <button class="history__button">Вернуться в реальность</button>
+            <button class="history__button">Забыть все</button>
+          </div>
+          <table class="history__table">
+            <thead>
+              <tr>
+                <th>R</th>
+                <th>X</th>
+                <th>Y</th>
+                <th>Result</th>
+              </tr>
+            </thead>
+            <tbody>
+            <c:forEach var="item" items="#{sessionData.history}">
+              <tr>
+                <th>#{item.r}</th>
+                <th>#{item.x}</th>
+                <th>#{item.y}</th>
+                <th>#{item.res}</th>
+              </tr>
+            </c:forEach>
+            </tbody>
+          </table>
+        </div>
+      </ui:define>
+    </ui:composition>
   </body>
 </html>

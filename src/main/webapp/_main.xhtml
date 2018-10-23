@@ -14,16 +14,12 @@
   </head>
   <body jsf:id="body">
     <div class="grid">
-      <section class="grid__header">
-        <header class="header">
-          <a class="header__link" href="#">Polygonya</a>
-          <a class="header__link" href="#">?</a>
-        </header>
-      </section>
-      <section class="grid__sprite">
-        <aside class="sprite"></aside>
-      </section>
-      <ui:insert name="graph"></ui:insert>
+      <header class="header grid__header">
+        <a class="header__link" href="#">Polygonya</a>
+        <a class="header__link" href="#">?</a>
+      </header>
+      <aside class="sprite grid__sprite" style="background-image: url('#{resource[graphForm.sprite]}')"></aside>
+      <ui:insert name="content"></ui:insert>
     </div>
   </body>
 </html>
