@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/core">
+  <head jsf:id="head">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Polygonya</title>
+    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Merriweather:400,700&amp;subset=cyrillic|Merriweather+Sans" rel="stylesheet"/>
+    <h:outputStylesheet name="app.css" />
+  </head>
+  <body jsf:id="body">
+    <div class="grid">
+      <section class="grid__header">
+        <header class="header">
+          <a class="header__link" href="#">Polygonya</a>
+          <a class="header__link" href="#">?</a>
+        </header>
+      </section>
+      <section class="grid__sprite">
+        <aside class="sprite"></aside>
+      </section>
+      <ui:insert name="graph"></ui:insert>
+    </div>
+  </body>
+</html>

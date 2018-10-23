@@ -1,24 +1,45 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:jsf="http://xmlns.jcp.org/jsf"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/core">
-  <head jsf:id="head">
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Polygonya</title>
-    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Merriweather:400,700&amp;subset=cyrillic|Merriweather+Sans" rel="stylesheet"/>
-  </head>
   <body jsf:id="body">
-    <form jsf:id="graphForm">
-      <h:inputText type="number" id="x" name="x" value="#{graphForm.x}" validator="#{graphForm.validateX}" placeholder="X"></h:inputText>
-      <h:inputText type="number" id="y" name="y" value="#{graphForm.y}" validator="#{graphForm.validateY}" placeholder="Y"></h:inputText>
-      <p:inputText id="r" value="#{graphForm.r}" validator="#{graphForm.validateR}" placeholder="R" />
-      <p:slider for="r" minValue="2" maxValue="5" step="0.1" />
-      <h:messages id="msgs" />
-      <h:commandButton value="Submit" />
-      <a jsf:action="#{navigation.history()}">History</a>
-     </form>
+    <ui:composition template="./_main.xhtml">
+      <ui:define name="graph">
+        <form class="graph-form" jsf:id="graphForm">
+          <section class="graph-form__columns">
+            <div class="graph-form__input-column">
+              <div class="graph-form__field">
+                <label class="graph-form__label">R</label>
+                <p:inputText class="graph-form__input" id="r" value="#{graphForm.r}" validator="#{graphForm.validateR}" placeholder="R" type="number" />
+                <p:slider for="r" minValue="2" maxValue="5" step="0.1" />
+              </div>
+              <div class="graph-form__field">
+                <label class="graph-form__label">X</label>
+                <h:inputText class="graph-form__input" id="x" name="x" value="#{graphForm.x}" validator="#{graphForm.validateX}" placeholder="X"></h:inputText>
+              </div>
+              <div class="graph-form__field">
+                <label class="graph-form__label">Y</label>
+                <h:inputText class="graph-form__input" id="y" name="y" value="#{graphForm.y}" validator="#{graphForm.validateY}" placeholder="Y"></h:inputText>
+              </div>
+            </div>
+
+            <div class="graph-form__graph-column">
+              <div class="graph-container">
+                <h:outputText value="#{graphForm.graph}" escape="false" /> 
+              </div>
+            </div>
+          </section>
+
+          <div>
+            <h:messages id="msgs" />
+            <h:commandButton class="graph-form__button" value="Решить" />
+            <a class="graph-form__button" jsf:action="#{navigation.history()}">Воспоминания</a>
+          </div>
+        </form>
+      </ui:define>
+    </ui:composition>
   </body>
 </html>
