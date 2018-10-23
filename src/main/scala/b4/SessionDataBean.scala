@@ -8,6 +8,9 @@ import java.util.ArrayList
 @SessionScoped
 class SessionDataBean extends Serializable {
   @BeanProperty var history = new ArrayList[History]
+  def clearHistory() {
+    history = new ArrayList[History]
+  }
 }
 
 @ManagedBean(name = "history")

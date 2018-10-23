@@ -8,10 +8,10 @@
     <ui:composition template="./_main.xhtml">
       <ui:define name="content">
         <div class="history">
-          <div class="history__controls">
-            <button class="history__button">Вернуться в реальность</button>
-            <button class="history__button">Забыть все</button>
-          </div>
+          <form class="history__controls" jsf:id="history_controls">
+            <a class="history__button" jsf:action="#{navigation.graph()}">Вернуться в реальность</a>
+            <button class="history__button" jsf:action="#{sessionData.clearHistory()}">Забыть все</button>
+          </form>
           <table class="history__table">
             <thead>
               <tr>

@@ -10,6 +10,17 @@
       <description>Navigate to history</description>
       <from-outcome>history</from-outcome>
       <to-view-id>/history.xhtml</to-view-id>
+      <redirect />
+    </navigation-case>
+  </navigation-rule>
+
+  <navigation-rule>
+    <from-view-id>/history.xhtml</from-view-id>
+    <navigation-case>
+      <description>Navigate to graph</description>
+      <from-outcome>graph</from-outcome>
+      <to-view-id>/graph.xhtml</to-view-id>
+      <redirect />
     </navigation-case>
   </navigation-rule>
 </faces-config>

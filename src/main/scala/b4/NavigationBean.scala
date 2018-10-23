@@ -8,4 +8,5 @@ import java.util.ArrayList
 @RequestScoped
 class NavigationBean extends Serializable {
   def history(): String = "history"
+  def graph(): String = "graph"
 }
