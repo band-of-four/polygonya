@@ -7,6 +7,6 @@ import java.util.ArrayList
 @ManagedBean(name = "navigation")
 @RequestScoped
 class NavigationBean extends Serializable {
-  def history(): String = "history"
-  def graph(): String = "graph"
+  def history(): String = "history.xhtml?faces-redirect=true"
+  def graph(): String = "graph.xhtml?faces-redirect=true"
 }
