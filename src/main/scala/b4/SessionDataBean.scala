@@ -7,18 +7,16 @@ import java.util.ArrayList
 @ManagedBean(name = "sessionData")
 @SessionScoped
 class SessionDataBean extends Serializable {
-  @BeanProperty var history = new ArrayList[History]
+  @BeanProperty var history = new ArrayList[HistoryEntry]
+
   def clearHistory() {
-    history = new ArrayList[History]
-    print("okay")
+    history = new ArrayList[HistoryEntry]
   }
 }
 
-@ManagedBean(name = "history")
-@SessionScoped
-class History extends Serializable {
-	@BeanProperty var r: Double = 0.0
-	@BeanProperty var x: Double = 0.0
-	@BeanProperty var y: Double = 0.0
-	@BeanProperty var res: Boolean = true
-}
+class HistoryEntry(
+  @BeanProperty val r: Double = 0.0,
+  @BeanProperty val x: Double = 0.0,
+  @BeanProperty val y: Double = 0.0,
+  @BeanProperty val res: Boolean = true
+)

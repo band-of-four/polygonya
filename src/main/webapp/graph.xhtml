@@ -32,13 +32,13 @@
             </div>
 
             <div class="graph-container graph-form__graph-column">
-              <h:outputText value="#{graphForm.graph}" escape="false" />
+              <h:outputText value="#{graph.render()}" escape="false" />
             </div>
           </section>
 
           <div>
             <h:messages id="msgs" />
-            <h:commandButton class="graph-form__button" value="Решить" />
+            <h:commandButton class="graph-form__button" value="Решить" action="#{graphForm.compute}" />
             <a class="graph-form__button" jsf:action="#{navigation.history()}">Воспоминания</a>
           </div>
         </form>
