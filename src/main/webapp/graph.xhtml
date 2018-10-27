@@ -18,7 +18,7 @@
             <div class="graph-form__input-column">
               <div class="graph-form__field">
                 <label class="graph-form__label">R</label>
-                <p:inputText class="graph-form__input" id="r" value="#{graphForm.r}" validator="#{graphForm.validateR}" placeholder="R" type="number" />
+                <p:inputText class="graph-form__input" id="r" value="#{graphForm.r}" validator="#{graphForm.validateR}" placeholder="R" type="float" />
                 <p:slider for="r" minValue="2" maxValue="5" step="0.1" />
               </div>
               <div class="graph-form__field">
@@ -42,6 +42,17 @@
             <a class="graph-form__button" jsf:action="#{navigation.history()}">Воспоминания</a>
           </div>
         </form>
+        <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          document.querySelector('.graph').addEventListener('click', (e) => {
+            document.querySelector('#graphForm\\:x').value = 1;
+            document.querySelector('#graphForm\\:y').value = 1;
+            document.querySelector('#graphForm\\:r').value = 1;
+            document.querySelector('.graph-form').submit();
+        })
+      })
+    </script>
+
       </ui:define>
     </ui:composition>
   </body>
