@@ -9,6 +9,7 @@
     <ui:composition template="./_main.xhtml">
       <ui:define name="content">
         <form class="grid__form graph-form" jsf:id="graphForm">
+          <div class="clock">Time: </div>
           <div class="quote">
             <span class="quote__speaker">Kaiki Ahiru</span>
             #{graphForm.quote}
@@ -49,6 +50,12 @@
             document.querySelector('#graphForm\\:shouldCompute').value = false;
             document.querySelector('.js-submit').click();
           }
+
+          setInterval(function() {
+            let cur_date = new Date()
+            document.querySelector('.clock').innerHTML = "Time: " + cur_date.getHours() + ":" + cur_date.getMinutes() + 
+            ":" + cur_date.getSeconds();
+          }, 10000);
           document.addEventListener('DOMContentLoaded', () => {
             document.querySelector('.graph').addEventListener('click', (e) => {
               
