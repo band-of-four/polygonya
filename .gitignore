@@ -1,5 +1,7 @@
+lib/
 target/
 .idea/
+
 client/dist/*
 !client/dist/tech-chan-sketch.png
 !client/dist/kaiki-chan-idle.png
