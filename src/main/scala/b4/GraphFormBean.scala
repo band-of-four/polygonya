@@ -1,7 +1,7 @@
 package b4
 
 import scala.beans.BeanProperty
-import javax.faces.bean.{ManagedBean, RequestScoped, ManagedProperty}
+import javax.faces.bean.{ManagedBean, SessionScoped, ManagedProperty}
 import javax.faces.application.FacesMessage
 import javax.faces.validator.ValidatorException
 import javax.faces.context.FacesContext
@@ -10,9 +10,9 @@ import javax.servlet.ServletContext
 import java.util.ArrayList
 
 @ManagedBean(name = "graphForm")
-@RequestScoped
+@SessionScoped
 class GraphFormBean extends Serializable {
-  @BeanProperty var r: Double = 0.0
+  @BeanProperty var r: Double = 2.0
   @BeanProperty var x: Double = 0.0
   @BeanProperty var y: Double = 0.0
 
@@ -21,6 +21,8 @@ class GraphFormBean extends Serializable {
 
   @ManagedProperty(value="#{sessionData.history}")
   @BeanProperty var graphHistory = new ArrayList[HistoryEntry]
+
+  @BeanProperty var shouldCompute = true
 
   def validateX(ctx: FacesContext, component: UIComponent, v: Object) {
     if (v.asInstanceOf[Double] < -5.0 || v.asInstanceOf[Double] > 3.0) {
@@ -41,6 +43,8 @@ class GraphFormBean extends Serializable {
   }
 
   def compute() = {
-    graphHistory add new HistoryEntry(r, x, y, true)
+    if (shouldCompute)
+      graphHistory add new HistoryEntry(r, x, y, true)
+    else shouldCompute = true
   }
 }

@@ -2,14 +2,17 @@ package b4
 
 import scala.beans.BeanProperty
 import scala.collection.JavaConverters._
-import javax.faces.bean.{ManagedBean, SessionScoped, ManagedProperty}
+import javax.faces.bean.{ManagedBean, RequestScoped, ManagedProperty}
 import java.util.ArrayList
 
 @ManagedBean(name = "graph")
-@SessionScoped
+@RequestScoped
 class GraphBean extends Serializable {
   @ManagedProperty(value="#{sessionData.history}")
   @BeanProperty var graphHistory = new ArrayList[HistoryEntry]
+
+  @ManagedProperty(value="#{graphForm.r}")
+  @BeanProperty var graphR: Double = 1.0
 
   def render(): String = """
     <svg class="graph" ref="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
@@ -46,7 +49,19 @@ class GraphBean extends Serializable {
     </svg>
     """
 
-  private def renderPoints(): String =
-    graphHistory.asScala.map((h: HistoryEntry) =>
-      s"""<circle cx="${h.x}" cy="${h.y}" fill="${if (h.res) "green" else "red"}" r="3" stroke-width="0"></circle>""").mkString("")
+  private def renderPoints(): String = {
+    graphHistory.asScala.map { h: HistoryEntry =>
+      val fill = if (h.res) "green" else "red"
+      val axisDim = 400.0
+      val rDim = 160.0
+
+      val xRel = h.x / graphR
+      val yRel = h.y / graphR
+
+      val x = (xRel * rDim) + (axisDim / 2)
+      val y = (-yRel * rDim) + (axisDim / 2)
+
+      s"""<circle cx="$x" cy="$y" fill="$fill" r="3" stroke-width="0"></circle>"""
+    }.mkString("")
+  }
 }

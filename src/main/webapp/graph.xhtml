@@ -18,8 +18,9 @@
             <div class="graph-form__input-column">
               <div class="graph-form__field">
                 <label class="graph-form__label">R</label>
-                <p:inputText class="graph-form__input" id="r" value="#{graphForm.r}" validator="#{graphForm.validateR}" placeholder="R" type="float" />
-                <p:slider for="r" minValue="2" maxValue="5" step="0.1" />
+                <p:slider for="r" minValue="2.0" maxValue="5.0" step="0.1" onSlideEnd="handleSlideEnd(event, ui)">
+                  <p:inputText class="graph-form__input" id="r" value="#{graphForm.r}" validator="#{graphForm.validateR}" placeholder="R" type="float" />
+                </p:slider>
               </div>
               <div class="graph-form__field">
                 <label class="graph-form__label">X</label>
@@ -38,19 +39,40 @@
 
           <div>
             <h:messages id="msgs" />
-            <h:commandButton class="graph-form__button" value="Решить" action="#{graphForm.compute}" />
-            <a class="graph-form__button" jsf:action="#{navigation.history()}">Воспоминания</a>
+            <h:commandButton class="graph-form__button js-submit" value="Решить" action="#{graphForm.compute}" />
+            <a class="graph-form__button" jsf:action="#{navigation.history()}" immediate="true">Воспоминания</a>
           </div>
+          <h:inputHidden name="shouldCompute" value="#{graphForm.shouldCompute}" id="shouldCompute" />
         </form>
         <script>
-        document.addEventListener('DOMContentLoaded', () => {
-          document.querySelector('.graph').addEventListener('click', (e) => {
-            document.querySelector('#graphForm\\:x').value = 1;
-            document.querySelector('#graphForm\\:y').value = 1;
-            document.querySelector('#graphForm\\:r').value = 1;
-            document.querySelector('.graph-form').submit();
+          function handleSlideEnd(event, ui) {
+            document.querySelector('#graphForm\\:shouldCompute').value = false;
+            document.querySelector('.js-submit').click();
+          }
+          document.addEventListener('DOMContentLoaded', () => {
+            document.querySelector('.graph').addEventListener('click', (e) => {
+              
+              const graph = document.querySelector('.graph');
+              const referencePt = graph.createSVGPoint();
+              referencePt.x = e.clientX;
+              referencePt.y = e.clientY;
+
+              const axisDim = 400;
+              const rDim = 160;
+
+              const { x: graphX, y: graphY } = referencePt.matrixTransform(
+                graph.getScreenCTM().inverse());
+
+              const x = (graphX - (axisDim / 2)) / rDim;
+              const y = -((graphY - (axisDim / 2)) / rDim);
+              const r = parseFloat(document.querySelector('#graphForm\\:r').value);
+              document.querySelector('#graphForm\\:x').value = (x * r).toFixed(2);
+              document.querySelector('#graphForm\\:y').value = (y * r).toFixed(2);
+
+              document.querySelector('.js-submit').click();
+          })
         })
-      })
+
     </script>
 
       </ui:define>
