@@ -8,6 +8,7 @@ lazy val root = (project in file(".")).
       version      := "0.1.0-SNAPSHOT"
     )),
     name := "dev-runner",
-    libraryDependencies += scalaTest % Test,
-    libraryDependencies += "org.glassfish.main.extras" % "glassfish-embedded-all" % "4.1.2"
+    resolvers += Resolver.mavenLocal,
+    libraryDependencies += "org.glassfish.main.extras" % "glassfish-embedded-all" % "4.1.2",
+    libraryDependencies += "com.oracle" % "ojdbc6" % "11.2.0.3"
   )

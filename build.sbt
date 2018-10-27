@@ -4,7 +4,9 @@ enablePlugins(ContainerPlugin)
 
 containerLibs in Container := Seq("b4" % "dev-runner" % "0.1.0")
 
-containerLaunchCmd in Container := { (port, path) => Seq("b4.DevRunner", port.toString, path) }
+containerLaunchCmd in Container := { (port, warPath) => 
+  Seq("b4.DevRunner", port.toString, warPath, "src/test/resources/WEB-INF/domain.xml")
+}
 
 lazy val root = (project in file(".")).
   settings(
@@ -23,7 +25,7 @@ lazy val root = (project in file(".")).
     resolvers += Resolver.mavenLocal,
     libraryDependencies += scalaTest % Test,
     libraryDependencies += "javax.servlet" % "javax.servlet-api" % "3.1.0" % "provided",
-    libraryDependencies += "com.oracle" % "ojdbc6" % "11.2.0.3",
+ //   libraryDependencies += "com.oracle" % "ojdbc6" % "11.2.0.3",
     libraryDependencies += "com.sun.faces" % "jsf-api" % "2.2.18",
     libraryDependencies += "com.sun.faces" % "jsf-impl" % "2.2.18",
     libraryDependencies += "org.primefaces" % "primefaces" % "6.2"

@@ -6,12 +6,15 @@ import java.io.File
 object DevRunner {
   def main(args: Array[String]): Unit = {
     val port: Int = args(0).toInt
-    val file = new File(args(1))
+    val warFile = new File(args(1))
+    val configFile = new File(args(2))
 
     val gf = GlassFishRuntime.bootstrap.newGlassFish(new GlassFishProperties {
       setPort("http-listener", port)
+      setConfigFileURI(configFile.toURI.toString)
     })
     gf.start()
-    gf.getService(classOf[Deployer]).deploy(file, "--contextroot=/", "--force=true")
+    gf.getService(classOf[Deployer]).deploy(warFile, "--contextroot=/", "--force=true")
+    //gf.getCommandRunner.run("ping-connection-pool", "ojdbc-pool")
   }
 }
