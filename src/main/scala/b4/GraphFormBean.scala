@@ -16,9 +16,6 @@ class GraphFormBean extends Serializable {
   @BeanProperty var x: Double = 0.0
   @BeanProperty var y: Double = 0.0
 
-  @BeanProperty var sprite: String = "kaiki-chan-idle.png"
-  @BeanProperty var quote: String = "Снова ты?! Вот идиот, даже не можешь график прочитать... Ну, раз уж пришел, давай посмотрим вместе."
-
   @ManagedProperty(value="#{sessionData.history}")
   @BeanProperty var graphHistory = new ArrayList[HistoryEntry]
 

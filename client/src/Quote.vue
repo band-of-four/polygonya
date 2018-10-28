@@ -15,7 +15,8 @@ export default {
 <style>
 .quote {
   max-width: 500px;
-  min-height: 115px;
+  min-height: var(--quote-height);
+  margin: 0 auto;
   border: 1px solid #000;
   border-radius: 10px;
   padding: 12px 18px;

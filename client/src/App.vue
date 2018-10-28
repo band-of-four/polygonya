@@ -3,7 +3,7 @@
   <Header class="grid__header" @toggle-about="screen = (screen === 'about' ? 'graph-form' : 'about') "/>
   <Sprite class="grid__sprite"/>
   <transition name="screen-fade" mode="out-in">
-    <GraphForm v-if="screen === 'graph-form'" @show-history="screen = 'history'" class="grid__form">
+    <GraphForm v-if="screen === 'graph-form'" @show-history="screen = 'history'" class="grid__main">
       <Quote/>
     </GraphForm>
     <History v-if="screen === 'history'" @close-history="closeHistory" @clear-history="clearHistory"/>
@@ -49,6 +49,8 @@ export default {
   --header-height: 64px;
   --min-layout-height: 500px;
 
+  --quote-height: 120px;
+
   --text-color: #000;
 }
 
@@ -68,7 +70,7 @@ body {
   display: grid;
   grid:
     [row1-start] "header header" var(--header-height) [row1-end]
-    [row2-start] "sprite form" auto [row2-end]
+    [row2-start] "sprite main" auto [row2-end]
     / 20fr 35fr;
   grid-column-gap: 8px;
 
@@ -86,8 +88,8 @@ body {
   justify-self: end;
 }
 
-.grid__form {
-  grid-area: form;
+.grid__main {
+  grid-area: main;
   justify-self: start;
 
   width: 100%;

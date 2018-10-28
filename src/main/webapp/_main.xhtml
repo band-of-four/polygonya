@@ -18,8 +18,14 @@
         <a class="header__link" href="#">Polygonya</a>
         <a class="header__link" href="#">?</a>
       </header>
-      <aside class="sprite grid__sprite" style="background-image: url('#{resource[graphForm.sprite]}')"></aside>
-      <ui:insert name="content"></ui:insert>
+      <aside class="sprite grid__sprite" style="background-image: url('#{resource[message.sprite]}')"></aside>
+      <main class="grid__main">
+        <section class="quote">
+          <span class="quote__speaker">Kaiki Ahiru</span>
+          #{message.quote}
+        </section >
+        <ui:insert name="content"></ui:insert>
+      </main>
     </div>
   </body>
 </html>

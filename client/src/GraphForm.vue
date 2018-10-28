@@ -78,7 +78,7 @@ export default {
 
   padding: 6vh 0;
   min-height: var(--min-layout-height);
-  max-height: 100%;
+  max-height: calc(100% - var(--quote-height));
 }
 
 .graph-form__columns {
