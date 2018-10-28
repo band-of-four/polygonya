@@ -1,4 +1,7 @@
+import sbt._
 import Dependencies._
+import java.util.Properties
+import java.io.FileInputStream
 
 enablePlugins(ContainerPlugin)
 
@@ -7,6 +10,17 @@ containerLibs in Container := Seq("b4" % "dev-runner" % "0.1.0")
 containerLaunchCmd in Container := { (port, warPath) => 
   Seq("b4.DevRunner", port.toString, warPath, "src/test/resources/WEB-INF/domain.xml")
 }
+
+containerForkOptions in Container := ForkOptions().withRunJVMOptions({
+  val props = new Properties()
+  props.load(new FileInputStream("project/db.properties"))
+
+  Vector(
+    s"-Db4.db.username=${props.getProperty("username")}",
+    s"-Db4.db.password=${props.getProperty("password")}",
+    s"-Db4.db.url=${props.getProperty("url")}"
+  )
+})
 
 lazy val root = (project in file(".")).
   settings(

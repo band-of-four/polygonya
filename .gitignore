@@ -2,6 +2,8 @@ lib/
 target/
 .idea/
 
+project/db.properties
+
 client/dist/*
 !client/dist/tech-chan-sketch.png
 !client/dist/kaiki-chan-idle.png

@@ -12,9 +12,9 @@
   <resources>
     <jdbc-resource pool-name="ojdbc-pool" jndi-name="jdbc/OJdbcPool" object-type="system-admin"></jdbc-resource>
     <jdbc-connection-pool datasource-classname="oracle.jdbc.pool.OracleDataSource" res-type="javax.sql.DataSource" name="ojdbc-pool">
-      <property name="user" value="someuser"></property>
-      <property name="password" value="somepassword"></property>
-      <property name="url" value="jdbc:oracle:thin:@localhost:port:sid"></property>
+      <property name="user" value="${b4.db.username}"></property>
+      <property name="password" value="${b4.db.password}"></property>
+      <property name="url" value="${b4.db.url}"></property>
     </jdbc-connection-pool>
     <connector-connection-pool max-pool-size="250" resource-adapter-name="jmsra" steady-pool-size="1" name="jms/__defaultConnectionFactory-Connection-Pool" connection-definition-name="javax.jms.ConnectionFactory"></connector-connection-pool>
     <connector-resource pool-name="jms/__defaultConnectionFactory-Connection-Pool" object-type="system-all-req" jndi-name="jms/__defaultConnectionFactory"></connector-resource>
