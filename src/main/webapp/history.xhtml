@@ -1,39 +1,37 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:jsf="http://xmlns.jcp.org/jsf"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
-  <body jsf:id="body">
-    <ui:composition template="./_main.xhtml">
-      <ui:define name="content">
-        <div class="history">
-          <form class="history__controls" jsf:id="history_controls">
-            <a class="history__button" jsf:action="#{navigation.graph()}">Вернуться в реальность</a>
-            <a class="history__button" jsf:action="#{sessionData.clearHistory()}">Забыть все</a>
-          </form>
-          <table class="history__table">
-            <thead>
-              <tr>
-                <th>R</th>
-                <th>X</th>
-                <th>Y</th>
-                <th>Result</th>
-              </tr>
-            </thead>
-            <tbody>
-            <c:forEach var="item" items="#{sessionData.history}">
-              <tr>
-                <th>#{graphForm.r}</th>
-                <th>#{item.x}</th>
-                <th>#{item.y}</th>
-                <th>#{item.compute(graphForm.r)}</th>
-              </tr>
-            </c:forEach>
-            </tbody>
-          </table>
-        </div>
-      </ui:define>
-    </ui:composition>
-  </body>
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+  <ui:decorate template="./_main.xhtml">
+    <ui:define name="content">
+      <div class="history">
+        <form class="history__controls" jsf:id="history_controls">
+          <a class="history__button" jsf:action="#{navigation.graph()}">Вернуться в реальность</a>
+          <a class="history__button" jsf:action="#{sessionData.clearHistory()}">Забыть все</a>
+        </form>
+        <table class="history__table">
+          <thead>
+            <tr>
+              <th>R</th>
+              <th>X</th>
+              <th>Y</th>
+              <th>Result</th>
+            </tr>
+          </thead>
+          <tbody>
+          <c:forEach var="item" items="#{sessionData.history}">
+            <tr>
+              <th>#{graphForm.r}</th>
+              <th>#{item.x}</th>
+              <th>#{item.y}</th>
+              <th>#{item.compute(graphForm.r)}</th>
+            </tr>
+          </c:forEach>
+          </tbody>
+        </table>
+      </div>
+    </ui:define>
+  </ui:decorate>
 </html>

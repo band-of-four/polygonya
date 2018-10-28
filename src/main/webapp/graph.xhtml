@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:jsf="http://xmlns.jcp.org/jsf"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
   <f:metadata>
-    <f:viewAction action="#{message.showGraphIntro}" onPostback="false" />
+    <f:viewAction action="#{message.showGraphIntro}" />
   </f:metadata>
   <ui:decorate template="./_main.xhtml">
     <ui:define name="content">
@@ -37,7 +37,6 @@
         </section>
 
         <div>
-          <h:messages id="msgs" />
           <h:commandButton class="graph-form__button js-submit" value="Решить" action="#{graphForm.compute}" />
           <a class="graph-form__button" jsf:action="#{navigation.history()}" immediate="true">Воспоминания</a>
         </div>
