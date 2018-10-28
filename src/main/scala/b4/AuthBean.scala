@@ -7,8 +7,7 @@ import scala.beans.BeanProperty
 import javax.faces.bean.{ManagedBean, RequestScoped}
 import javax.faces.context.FacesContext
 import javax.faces.application.FacesMessage
-import javax.servlet.http.HttpServletRequest
-
+import javax.servlet.http.{HttpServletRequest, HttpSession}
 import javax.annotation.Resource
 import javax.sql.DataSource
 
@@ -25,6 +24,8 @@ class AuthBean extends Serializable {
     val context = FacesContext.getCurrentInstance.getExternalContext
     val request = context.getRequest.asInstanceOf[HttpServletRequest]
     request.login(username, password)
+    context.getSession(true).asInstanceOf[HttpSession].setAttribute("username", username)
+    "graph?faces-redirect=true"
   }
 
   def signup() = {
@@ -48,6 +49,7 @@ class AuthBean extends Serializable {
       userInsertQuery.executeUpdate
       groupInsertQuery.executeUpdate
       conn.commit
+      login
     } catch {
       case se: SQLIntegrityConstraintViolationException =>
         FacesContext.getCurrentInstance.addMessage("auth", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Username is taken.", ""))

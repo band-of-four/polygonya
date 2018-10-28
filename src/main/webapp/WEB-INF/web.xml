@@ -18,6 +18,36 @@
     <role-name>user</role-name>
   </security-role>
 
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>Unprotected pages</web-resource-name>
+      <url-pattern>/index.xhtml</url-pattern>
+      <url-pattern>/signup.xhtml</url-pattern>
+      <url-pattern>/javax.faces.resource/*</url-pattern>
+    </web-resource-collection>
+  </security-constraint>
+
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>User pages</web-resource-name>
+      <url-pattern>/graph.xhtml</url-pattern>
+      <url-pattern>/history.xhtml</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>user</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+  <filter>
+    <filter-name>AuthRedirectFilter</filter-name>
+    <filter-class>b4.AuthRedirectFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>AuthRedirectFilter</filter-name>
+    <url-pattern>/index.xhtml</url-pattern>
+    <url-pattern>/signup.xhtml</url-pattern>
+  </filter-mapping>
+
   <servlet>
     <servlet-name>Faces Servlet</servlet-name>
     <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
