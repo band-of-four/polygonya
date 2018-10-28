@@ -1,27 +1,22 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:jsf="http://xmlns.jcp.org/jsf">
-  <head jsf:id="head">
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Polygonya</title>
-    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Merriweather:400,700&amp;subset=cyrillic|Merriweather+Sans" rel="stylesheet"/>
-  </head>
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
   <body jsf:id="body">
-    <p>h</p>
-    <h:form>
-      <h:outputLabel for="username" value="Username" />
-      <h:inputText id="username" value="#{auth.username}" required="true" />
-      <h:message for="username" />
-      <br />
-      <h:outputLabel for="password" value="Password" />
-      <h:inputSecret id="password" value="#{auth.password}" required="true" />
-      <h:message for="password" />
-      <br />
-      <h:commandButton value="Login" action="#{auth.login}" />
-      <h:messages globalOnly="true" />
-    </h:form>  
-    <a jsf:outcome="graph">Graph form</a>
+    <ui:composition template="./_main.xhtml">
+      <ui:define name="content">
+        <h:form class="auth-form">
+          <h:inputText class="auth-form__field" a:placeholder="Твое имя" id="username" value="#{auth.username}" required="true" />
+          <h:inputSecret class="auth-form__field" a:placeholder="Пароль" id="password" value="#{auth.password}" required="true" />
+          <h:commandButton class="auth-form__button" value="Представиться" action="#{auth.login}" />
+
+          <p class="auth-form__below">Что-то про первую встречу...</p>
+          <a class="auth-form__button" jsf:outcome="signup">Познакомиться</a>
+        </h:form>  
+      </ui:define>
+    </ui:composition>
   </body>
 </html>

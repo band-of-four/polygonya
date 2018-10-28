@@ -103,4 +103,47 @@ body {
 .screen-fade-enter, .screen-fade-leave-to {
   opacity: 0;
 }
+
+/* JSF-specific styles
+ * TODO: decouple CSS from Vue */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  min-height: var(--min-layout-height);
+  max-height: calc(80% - var(--quote-height));
+}
+
+.auth-form__button {
+  display: block;
+  background: white;
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 8px 16px;
+  margin: 0 8px;
+
+  font-family: var(--body-font);
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.auth-form__field {
+  width: 180px;
+  display: block;
+  padding: 8px;
+  margin-bottom: 16px;
+
+  border: 1px solid black;
+  border-radius: 8px;
+
+  font-family: var(--body-sans-font);
+}
+
+.auth-form__below {
+  margin-top: 48px;
+}
 </style>
