@@ -4,7 +4,7 @@ import java.security.MessageDigest
 import java.sql.SQLIntegrityConstraintViolationException
 
 import scala.beans.BeanProperty
-import javax.faces.bean.{ManagedBean, RequestScoped}
+import javax.faces.bean.{ManagedBean, ManagedProperty, RequestScoped}
 import javax.faces.context.FacesContext
 import javax.faces.application.FacesMessage
 import javax.servlet.http.{HttpServletRequest, HttpSession}
@@ -19,6 +19,9 @@ class AuthBean extends Serializable {
 
   @Resource(lookup = "jdbc/OJdbcPool")
   var dataSource: DataSource = _
+
+  @ManagedProperty(value="#{message}")
+  @BeanProperty var messageBean: MessageBean = _
 
   def isLoggedIn(): Boolean = {
     val session = FacesContext.getCurrentInstance.getExternalContext.getSession(false)
@@ -62,7 +65,7 @@ class AuthBean extends Serializable {
       login
     } catch {
       case se: SQLIntegrityConstraintViolationException =>
-        FacesContext.getCurrentInstance.addMessage("auth", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Username is taken.", ""))
+        messageBean.showSignupNameTaken(username)
         conn.rollback
     }
   }
