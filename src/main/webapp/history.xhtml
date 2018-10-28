@@ -24,10 +24,10 @@
             <tbody>
             <c:forEach var="item" items="#{sessionData.history}">
               <tr>
-                <th>#{item.r}</th>
+                <th>#{graphForm.r}</th>
                 <th>#{item.x}</th>
                 <th>#{item.y}</th>
-                <th>#{item.res}</th>
+                <th>#{item.compute(graphForm.r)}</th>
               </tr>
             </c:forEach>
             </tbody>

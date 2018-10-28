@@ -51,7 +51,7 @@ class GraphBean extends Serializable {
 
   private def renderPoints(): String = {
     graphHistory.asScala.map { h: HistoryEntry =>
-      val fill = if (h.res) "green" else "red"
+      val fill = if (h.compute(graphR)) "green" else "red"
       val axisDim = 400.0
       val rDim = 160.0
 

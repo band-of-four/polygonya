@@ -16,15 +16,12 @@ class SessionDataBean extends Serializable {
 }
 
 class HistoryEntry(
-  @BeanProperty val r: Double = 0.0,
   @BeanProperty val x: Double = 0.0,
   @BeanProperty val y: Double = 0.0,
 ) {
-  def compute(): Boolean =
+  def compute(r: Double): Boolean =
     if (x >= 0 && y >= 0)       sqrt(pow(x, 2) + pow(y, 2)) <= r
     else if (x < 0 && y >= 0)   (-x <= r) && (y <= r/2)
     else if (x <= 0 && y < 0)   -x <= r + y
     else                        false
-  
-  @BeanProperty val res: Boolean = compute()
 }
