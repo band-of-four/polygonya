@@ -48,23 +48,21 @@ url = jdbc:oracle:thin:@localhost:your-db-port:your-db-sid
 
 ```sql
 create table users(
-    id integer not null primary key generated always as identity (start with 1, increment by 1),
-    username varchar(100) not null,
-    password varchar(200) not null,
-    constraint unique_name unique(username)
+  username varchar(100) primary key,
+  password varchar(64) not null
 );
 
 create table groups(
-   name varchar(50) not null,
-   username varchar(100) not null
+  name varchar(50) not null,
+  username varchar(100) not null
 );
 
 create table history_entries(
-    user_id integer not null,
-    x number not null,
-    y number not null,
-    foreign key (user_id) references users(id) on delete cascade,
-    constraint range_x check (x between -5 and 3),
-    constraint range_y check (y between -5 and 3)
+  username varchar(100) not null,
+  x number not null,
+  y number not null,
+  foreign key (username) references users(username) on delete cascade,
+  constraint range_x check (x between -5 and 3),
+  constraint range_y check (y between -5 and 3)
 );
 ```

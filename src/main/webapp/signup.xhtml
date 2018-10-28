@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+  <body jsf:id="body">
+    <ui:composition template="./_main.xhtml">
+      <ui:define name="content">
+        <h:form>
+          <h:outputLabel for="username" value="Username" />
+          <h:inputText id="username" value="#{auth.username}" required="true" />
+          <br />
+          <h:outputLabel for="password" value="Password" />
+          <h:inputSecret id="password" value="#{auth.password}" required="true" />
+          <br />
+          <h:commandButton value="Signup" action="#{auth.signup}" />
+          <h:messages />
+        </h:form>  
+      </ui:define>
+    </ui:composition>
+  </body>
+</html>
