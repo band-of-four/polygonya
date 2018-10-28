@@ -6,7 +6,6 @@ import java.sql.SQLIntegrityConstraintViolationException
 import scala.beans.BeanProperty
 import javax.faces.bean.{ManagedBean, ManagedProperty, RequestScoped}
 import javax.faces.context.FacesContext
-import javax.faces.application.FacesMessage
 import javax.servlet.http.{HttpServletRequest, HttpSession}
 import javax.annotation.Resource
 import javax.sql.DataSource
@@ -67,6 +66,8 @@ class AuthBean extends Serializable {
       case se: SQLIntegrityConstraintViolationException =>
         messageBean.showSignupNameTaken(username)
         conn.rollback
+    } finally {
+      conn.close
     }
   }
 

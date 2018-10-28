@@ -16,39 +16,38 @@ class GraphFormBean extends Serializable {
   @BeanProperty var x: Double = 0.0
   @BeanProperty var y: Double = 0.0
 
-  @ManagedProperty(value="#{sessionData.history}")
-  @BeanProperty var graphHistory = new ArrayList[HistoryEntry]
-
   @BeanProperty var shouldCompute = true
 
-  def messageBean(): MessageBean =
+  def message(): MessageBean =
     FacesContext.getCurrentInstance.getApplication.evaluateExpressionGet(
       FacesContext.getCurrentInstance, "#{message}", classOf[MessageBean])
 
+  def history(): HistoryBean =
+    FacesContext.getCurrentInstance.getApplication.evaluateExpressionGet(
+      FacesContext.getCurrentInstance, "#{history}", classOf[HistoryBean])
+
   def validateX(ctx: FacesContext, component: UIComponent, v: Object) {
     if (v.asInstanceOf[Double] < -5.0 || v.asInstanceOf[Double] > 3.0) {
-      messageBean.showValidationOutOfRange("X", "-5", "3")
+      message.showValidationOutOfRange("X", "-5", "3")
       throw new ValidatorException(new FacesMessage())
     }
   }
 
   def validateY(ctx: FacesContext, component: UIComponent, v: Object) {
     if (v.asInstanceOf[Double] < -5.0 || v.asInstanceOf[Double] > 3.0) {
-      messageBean.showValidationOutOfRange("Y", "-5", "3")
+      message.showValidationOutOfRange("Y", "-5", "3")
       throw new ValidatorException(new FacesMessage())
     }
   }
 
   def validateR(ctx: FacesContext, component: UIComponent, v: Object) {
     if (v.asInstanceOf[Double] < 2.0 || v.asInstanceOf[Double] > 5.0) {
-      messageBean.showValidationOutOfRange("Y", "2", "5")
+      message.showValidationOutOfRange("Y", "2", "5")
       throw new ValidatorException(new FacesMessage())
     }
   }
 
-  def compute() = {
-    if (shouldCompute)
-      graphHistory add new HistoryEntry(x, y)
+  def compute() =
+    if (shouldCompute) history.add(x, y)
     else shouldCompute = true
-  }
 }

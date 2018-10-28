@@ -8,8 +8,8 @@
     <ui:define name="content">
       <div class="history">
         <form class="history__controls" jsf:id="history_controls">
-          <a class="history__button" jsf:action="#{navigation.graph()}">Вернуться в реальность</a>
-          <a class="history__button" jsf:action="#{sessionData.clearHistory()}">Забыть все</a>
+          <a class="history__button" jsf:action="#{navigation.graph}">Вернуться в реальность</a>
+          <a class="history__button" jsf:action="#{history.clear}">Забыть все</a>
         </form>
         <table class="history__table">
           <thead>
@@ -21,7 +21,7 @@
             </tr>
           </thead>
           <tbody>
-          <c:forEach var="item" items="#{sessionData.history}">
+          <c:forEach var="item" items="#{history.list()}">
             <tr>
               <th>#{graphForm.r}</th>
               <th>#{item.x}</th>
