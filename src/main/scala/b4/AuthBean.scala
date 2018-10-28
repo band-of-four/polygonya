@@ -20,12 +20,22 @@ class AuthBean extends Serializable {
   @Resource(lookup = "jdbc/OJdbcPool")
   var dataSource: DataSource = _
 
+  def isLoggedIn(): Boolean = {
+    val session = FacesContext.getCurrentInstance.getExternalContext.getSession(false)
+    session != null && session.asInstanceOf[HttpSession].getAttribute("username") != null
+  }
+
   def login() = {
     val context = FacesContext.getCurrentInstance.getExternalContext
     val request = context.getRequest.asInstanceOf[HttpServletRequest]
     request.login(username, password)
     context.getSession(true).asInstanceOf[HttpSession].setAttribute("username", username)
-    "graph?faces-redirect=true"
+    "/graph.xhtml?faces-redirect=true"
+  }
+
+  def logout() = {
+    FacesContext.getCurrentInstance.getExternalContext.invalidateSession
+    "/index.xhtml?faces-redirect=true"
   }
 
   def signup() = {

@@ -22,5 +22,13 @@ export default {
   color: var(--text-color);
   text-decoration: none;
   font: bold 24px/var(--header-height) var(--header-font);
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.header__link--sub {
+  font-size: 18px;
 }
 </style>

@@ -15,8 +15,10 @@
   <body jsf:id="body">
     <div class="grid">
       <header class="header grid__header">
-        <a class="header__link" href="#">Polygonya</a>
-        <a class="header__link" href="#">?</a>
+        <a class="header__link" jsf:outcome="index">Polygonya</a>
+        <h:form id="logout-form" rendered="#{auth.isLoggedIn()}">
+          <a class="header__link header__link--sub" jsf:action="#{auth.logout}">log out</a>
+        </h:form>
       </header>
       <aside class="sprite grid__sprite" style="background-image: url('#{resource[message.sprite]}')"></aside>
       <main class="grid__main">
