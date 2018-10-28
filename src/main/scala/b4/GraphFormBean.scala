@@ -44,7 +44,7 @@ class GraphFormBean extends Serializable {
 
   def compute() = {
     if (shouldCompute)
-      graphHistory add new HistoryEntry(r, x, y, true)
+      graphHistory add new HistoryEntry(r, x, y)
     else shouldCompute = true
   }
 }
