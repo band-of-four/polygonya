@@ -48,6 +48,15 @@ class GraphFormBean extends Serializable {
   }
 
   def compute() =
-    if (shouldCompute) history.add(x, y)
+    if (shouldCompute) {
+      history.add(x, y)
+      message.thinking()
+      if (new HistoryEntry(x, y).compute(r)) {
+        message.dotInside()
+      }
+      else {
+        message.dotOutside()
+      }
+    }
     else shouldCompute = true
 }
