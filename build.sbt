@@ -42,6 +42,7 @@ lazy val root = (project in file(".")).
  //   libraryDependencies += "com.oracle" % "ojdbc6" % "11.2.0.3",
     libraryDependencies += "com.sun.faces" % "jsf-api" % "2.2.18",
     libraryDependencies += "com.sun.faces" % "jsf-impl" % "2.2.18",
-    libraryDependencies += "org.primefaces" % "primefaces" % "6.2"
+    libraryDependencies += "org.primefaces" % "primefaces" % "6.2",
+    libraryDependencies += "javax.el" % "el-api" % "2.2.1-b04"
   )
 

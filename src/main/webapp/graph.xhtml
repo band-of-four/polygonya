@@ -11,8 +11,6 @@
   <ui:decorate template="./_main.xhtml">
     <ui:define name="content">
       <form class="graph-form" jsf:id="graphForm">
-        <div class="clock">Time: </div>
-
         <section class="graph-form__columns">
           <div class="graph-form__input-column">
             <div class="graph-form__field">
@@ -47,12 +45,6 @@
           document.querySelector('#graphForm\\:shouldCompute').value = false;
           document.querySelector('.js-submit').click();
         }
-
-        setInterval(function() {
-          let cur_date = new Date()
-          document.querySelector('.clock').innerHTML = "Time: " + cur_date.getHours() + ":" + cur_date.getMinutes() + 
-          ":" + cur_date.getSeconds();
-        }, 10000);
         document.addEventListener('DOMContentLoaded', () => {
           document.querySelector('.graph').addEventListener('click', (e) => {
             

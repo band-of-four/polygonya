@@ -16,12 +16,12 @@ class MessageBean extends Serializable {
 
   def showLogin() = {
     sprite = SPRITE_IDLE
-    quote = "..."
+    quote = "Ну, чего молчишь? Я что, должна всех в лицо помнить?"
   }
 
   def showSignup() = {
     sprite = SPRITE_IDLE
-    quote = "... ... ..."
+    quote = "О, а вот и наш новый ученик! Не думай, что ты какой-то особенный."
   }
 
   def showSignupNameTaken(name: String) = {
@@ -31,7 +31,7 @@ class MessageBean extends Serializable {
 
   def showGraphIntro() = {
     sprite = SPRITE_IDLE
-    quote = "Снова ты?! Вот идиот, даже не можешь график прочитать... Ну, раз уж пришел, давай посмотрим вместе."
+    quote = "Ты совсем ничего не запомнил с нашей прошлой встречи? Придётся объяснить ещё раз."
   }
 
   def showValidationOutOfRange(field: String, min: String, max: String) = {
