@@ -11,10 +11,10 @@
   </f:metadata>
   <ui:decorate template="./_main.xhtml">
     <ui:define name="content">
-      <h:form class="auth-form">
-        <h:inputText class="auth-form__field" a:placeholder="Твое имя" id="username" value="#{auth.username}" required="true" />
-        <h:inputSecret class="auth-form__field" a:placeholder="Пароль" id="password" value="#{auth.password}" required="true" />
-        <h:commandButton class="auth-form__button" value="Познакомиться" action="#{auth.signup}" />
+      <h:form class="view">
+        <h:inputText class="view__field" a:placeholder="Твое имя" id="username" value="#{auth.username}" required="true" />
+        <h:inputSecret class="view__field" a:placeholder="Пароль" id="password" value="#{auth.password}" required="true" />
+        <h:commandButton class="view__button" value="Познакомиться" action="#{auth.signup}" />
       </h:form>  
     </ui:define>
   </ui:decorate>

@@ -19,13 +19,13 @@
       </h:form>
     </ui:define>
     <ui:define name="content">
-      <h:form class="auth-form">
-        <h:inputText class="auth-form__field" a:placeholder="Твое имя" id="username" value="#{auth.username}" required="true" />
-        <h:inputSecret class="auth-form__field" a:placeholder="Пароль" id="password" value="#{auth.password}" required="true" />
-        <h:commandButton class="auth-form__button" value="Представиться" action="#{auth.login}" />
+      <h:form class="view">
+        <h:inputText class="view__field" a:placeholder="Твое имя" id="username" value="#{auth.username}" required="true" />
+        <h:inputSecret class="view__field" a:placeholder="Пароль" id="password" value="#{auth.password}" required="true" />
+        <h:commandButton class="view__button" value="Представиться" action="#{auth.login}" />
 
-        <p class="auth-form__below">Или мы ещё не знакомы?..</p>
-        <a class="auth-form__button" jsf:outcome="signup">Познакомиться</a>
+        <p class="view__below">Или мы ещё не знакомы?..</p>
+        <a class="view__button" jsf:outcome="signup">Познакомиться</a>
       </h:form>
     </ui:define>
   </ui:decorate>

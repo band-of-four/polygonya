@@ -106,7 +106,7 @@ body {
 
 /* JSF-specific styles
  * TODO: decouple CSS from Vue */
-.auth-form {
+.view {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -116,7 +116,7 @@ body {
   max-height: calc(80% - var(--quote-height));
 }
 
-.auth-form__button {
+.view__button {
   display: block;
   background: white;
   border: 1px solid black;
@@ -135,7 +135,7 @@ body {
   }
 }
 
-.auth-form__field {
+.view__field {
   width: 180px;
   display: block;
   padding: 8px;
@@ -147,7 +147,7 @@ body {
   font-family: var(--body-sans-font);
 }
 
-.auth-form__below {
+.view__below {
   margin-top: 48px;
 }
 
