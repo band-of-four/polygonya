@@ -54,8 +54,13 @@ class MessageBean extends Serializable {
     quote = "Хмм..."
   }
 
-  def history() = {
+  def historyDisplay() = {
     sprite = SPRITE_BLUSHING
-    quote = "history"
+    quote = "А ведь если подумать, у нас с тобой столько общих воспоминаний..."
+  }
+
+  def historyClear() = {
+    sprite = SPRITE_ANGRY
+    quote = "...было"
   }
 }

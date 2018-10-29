@@ -31,6 +31,10 @@ class HistoryBean extends Serializable {
     conn.close()
   }
 
+    def message(): MessageBean =
+      FacesContext.getCurrentInstance.getApplication.evaluateExpressionGet(
+        FacesContext.getCurrentInstance, "#{message}", classOf[MessageBean])
+    
   def list(): ArrayList[HistoryEntry] = {
     val history = new ArrayList[HistoryEntry]
 
@@ -49,6 +53,7 @@ class HistoryBean extends Serializable {
   }
 
   def clear() = {
+    message.historyClear()
     val conn = dataSource.getConnection
     val query = conn.prepareStatement("delete from history_entries where username = ?")
     query.setString(1, username())
