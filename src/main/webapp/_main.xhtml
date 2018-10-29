@@ -24,7 +24,8 @@
       <main class="grid__main">
         <section class="quote">
           <span class="quote__speaker">Каики Ахиру</span>
-          #{message.quote}
+          <ui:insert name="clock"></ui:insert>
+          <p class="quote__content">#{message.quote}</p>
         </section >
         <ui:insert name="content"></ui:insert>
       </main>

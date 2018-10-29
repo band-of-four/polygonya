@@ -150,4 +150,10 @@ body {
 .auth-form__below {
   margin-top: 48px;
 }
+
+.clock {
+  display: inline-block;
+  font-size: 14px;
+  margin-left: 8px;
+}
 </style>

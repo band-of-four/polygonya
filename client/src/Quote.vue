@@ -24,9 +24,12 @@ export default {
 }
 
 .quote__speaker {
-  display: block;
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 12px;
+}
+
+.quote__content {
+  margin: 12px 0 0;
 }
 </style>

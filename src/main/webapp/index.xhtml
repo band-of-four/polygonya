@@ -5,13 +5,20 @@
       xmlns:jsf="http://xmlns.jcp.org/jsf"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
   <f:metadata>
     <f:viewAction action="#{message.showLogin}" />
+    <f:viewAction action="#{serverClock.update}" />
   </f:metadata>
   <ui:decorate template="./_main.xhtml">
+    <ui:define name="clock">
+      <h:form class="clock">
+        <h:outputText id="clock" value="#{serverClock.timeString}" />
+        <p:poll interval="10" listener="#{serverClock.update}" update="clock" />
+      </h:form>
+    </ui:define>
     <ui:define name="content">
-      <div class="clock" onload="computeTime()"></div>
       <h:form class="auth-form">
         <h:inputText class="auth-form__field" a:placeholder="Твое имя" id="username" value="#{auth.username}" required="true" />
         <h:inputSecret class="auth-form__field" a:placeholder="Пароль" id="password" value="#{auth.password}" required="true" />
@@ -20,30 +27,6 @@
         <p class="auth-form__below">Или мы ещё не знакомы?..</p>
         <a class="auth-form__button" jsf:outcome="signup">Познакомиться</a>
       </h:form>
-      <script type="text/javascript">
-      function check_time(i) {
-        if (i &lt; 10) {
-          i = '0' + i;
-        }
-        return i;
-      }
-      setInterval(function() {
-        let cur_date = new Date();
-        let hours = check_time(cur_date.getHours());
-        let minutes = check_time(cur_date.getMinutes());
-        let seconds = check_time(cur_date.getSeconds());
-        document.querySelector('.clock').innerHTML = "Time: " + hours + ":" + minutes + 
-          ":" + seconds;
-      }, 1000);
-      function computeTime() {
-        let cur_date = new Date();
-        let hours = check_time(cur_date.getHours());
-        let minutes = check_time(cur_date.getMinutes());
-        let seconds = check_time(cur_date.getSeconds());
-        document.querySelector('#clock').innerHTML = "Time: " + hours + ":" + minutes + 
-          ":" + seconds;
-      }
-    </script>
     </ui:define>
   </ui:decorate>
 </html>
