@@ -49,6 +49,14 @@ class MessageBean extends Serializable {
     quote = "Хмм, не припомню такого. Может, ты неправильно написал пароль?"
   }
 
+  def showRChange(r: Double, oldR: Double) = {
+    sprite = SPRITE_THINKING
+    quote = if (oldR > r)
+      "Мне кажется, или твой R уменьшился?"
+    else
+      "Мне кажется, или твой R стал больше?"
+  }
+
   def dotInside() = {
     sprite = SPRITE_BLUSHING
     quote = "Ты оказался прав.... Точка действительно внутри..."

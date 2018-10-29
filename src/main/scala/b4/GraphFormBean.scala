@@ -12,6 +12,7 @@ import java.util.ArrayList
 @ManagedBean(name = "graphForm")
 @SessionScoped
 class GraphFormBean extends Serializable {
+  @BeanProperty var oldR: Double = 2.0
   @BeanProperty var r: Double = 2.0
   @BeanProperty var x: Double = 0.0
   @BeanProperty var y: Double = 0.0
@@ -55,5 +56,10 @@ class GraphFormBean extends Serializable {
       else 
         message.dotOutside()
     }
-    else shouldCompute = true
+    else {
+      /* Radius change */
+      message.showRChange(r, oldR)
+      oldR = r
+      shouldCompute = true
+    }
 }

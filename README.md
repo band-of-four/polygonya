@@ -66,3 +66,25 @@ create table history_entries(
   constraint range_y check (y between -5 and 3)
 );
 ```
+
+### Deployment
+
+Package the application into a _.war_:
+```
+sbt package
+```
+
+Copy it to the target server (assuming `~` is the domaindir):
+```
+scp target/scala-2.12/polygonya_2.12-1.0.0.war destination:~
+```
+
+Start the domain:
+```
+asadmin start-domain --domaindir ~
+```
+
+(Re)deploy the _.war_:
+```
+asadmin deploy --force true --port 5257 polygonya_2.12-1.0.0.war
+```
