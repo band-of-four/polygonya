@@ -21,11 +21,13 @@
             </div>
             <div class="graph-form__field">
               <label class="graph-form__label">X</label>
-              <h:inputText class="graph-form__input" id="x" name="x" value="#{graphForm.x}" validator="#{graphForm.validateX}" placeholder="X"></h:inputText>
+              <h:inputText class="graph-form__input" id="x" name="x" value="#{graphForm.x}"
+                converter="doubleConverter" validator="#{graphForm.validateX}" placeholder="X"></h:inputText>
             </div>
             <div class="graph-form__field">
               <label class="graph-form__label">Y</label>
-              <h:inputText class="graph-form__input" id="y" name="y" value="#{graphForm.y}" validator="#{graphForm.validateY}" placeholder="Y"></h:inputText>
+              <h:inputText class="graph-form__input" id="y" name="y" value="#{graphForm.y}"
+                converter="doubleConverter" validator="#{graphForm.validateY}" placeholder="Y"></h:inputText>
             </div>
           </div>
 

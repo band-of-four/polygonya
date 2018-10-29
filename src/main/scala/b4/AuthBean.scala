@@ -36,7 +36,7 @@ class AuthBean extends Serializable {
       "/graph.xhtml?faces-redirect=true"
     }
     catch {
-      case e: Exception => messageBean.showLoginError()
+      case _: Exception => messageBean.showLoginError()
     }
   }
 

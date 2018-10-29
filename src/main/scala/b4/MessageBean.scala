@@ -39,6 +39,11 @@ class MessageBean extends Serializable {
     quote = s"Я разве не говорила, что $field должен быть между $min и $max?"
   }
 
+  def showValidationNaN(field: String) = {
+    sprite = SPRITE_ANGRY
+    quote = s"Не хочешь ввести число в $field? :/"
+  }
+
   def showLoginError() = {
     sprite = SPRITE_THINKING
     quote = "Хмм, не припомню такого. Может, ты неправильно написал пароль?"
