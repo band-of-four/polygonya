@@ -6,10 +6,10 @@ import javax.faces.bean.{ManagedBean, ViewScoped}
 @ManagedBean(name = "message")
 @ViewScoped
 class MessageBean extends Serializable {
-  private val SPRITE_IDLE = "idle.png"
-  private val SPRITE_ANGRY = "anger.png"
-  private val SPRITE_BLUSHING = "blush.png"
-  private val SPRITE_THINKING = "think.png"
+  private val SPRITE_IDLE = "kaiki-chan-idle.png"
+  private val SPRITE_ANGRY = "kaiki-chan-angry.png"
+  private val SPRITE_BLUSHING = "kaiki-chan-blushing.png"
+  private val SPRITE_THINKING = "kaiki-chan-thinking.png"
 
   @BeanProperty var sprite: String = _
   @BeanProperty var quote: String = _
