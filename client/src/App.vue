@@ -151,6 +151,12 @@ body {
   margin-top: 48px;
 }
 
+.view--overflowing {
+  overflow: auto;
+  margin-top: 48px;
+  justify-content: flex-start;
+}
+
 .clock {
   display: inline-block;
   font-size: 14px;
