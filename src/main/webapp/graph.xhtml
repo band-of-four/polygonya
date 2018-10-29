@@ -50,7 +50,6 @@
         }
         document.addEventListener('DOMContentLoaded', () => {
           document.querySelector('.graph').addEventListener('click', (e) => {
-            
             const graph = document.querySelector('.graph');
             const referencePt = graph.createSVGPoint();
             referencePt.x = e.clientX;
@@ -65,10 +64,12 @@
             const x = (graphX - (axisDim / 2)) / rDim;
             const y = -((graphY - (axisDim / 2)) / rDim);
             const r = parseFloat(document.querySelector('#graphForm\\:r').value);
-            document.querySelector('#graphForm\\:x').value = (x * r).toFixed(2);
-            document.querySelector('#graphForm\\:y').value = (y * r).toFixed(2);
 
-            document.querySelector('.js-submit').click();
+            if (!isNaN(r)) {
+              document.querySelector('#graphForm\\:x').value = (x * r).toFixed(2);
+              document.querySelector('#graphForm\\:y').value = (y * r).toFixed(2);
+              document.querySelector('.js-submit').click();
+            }
           });
         });
       </script>
