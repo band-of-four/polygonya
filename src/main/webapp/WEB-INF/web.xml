@@ -48,6 +48,10 @@
     </auth-constraint>
   </security-constraint>
 
+  <error-page>
+    <error-code>500</error-code>
+    <location>/500.xhtml</location>
+  </error-page>
 
   <servlet>
     <servlet-name>Faces Servlet</servlet-name>

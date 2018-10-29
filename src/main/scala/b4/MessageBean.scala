@@ -39,6 +39,11 @@ class MessageBean extends Serializable {
     quote = s"Я разве не говорила, что $field должен быть между $min и $max?"
   }
 
+  def showLoginError() = {
+    sprite = SPRITE_THINKING
+    quote = "Хмм, не припомню такого. Может, ты неправильно написал пароль?"
+  }
+
   def dotInside() = {
     sprite = SPRITE_BLUSHING
     quote = "Ты оказался прав.... Точка действительно внутри..."

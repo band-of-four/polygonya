@@ -134,6 +134,10 @@ export default {
   padding: 8px 16px;
   margin: 0 8px;
 
+  font-size: 15px;
+  text-decoration: none;
+  color: black;
+
   font-family: var(--body-font);
 
   &:hover {

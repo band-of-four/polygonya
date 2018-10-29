@@ -30,9 +30,14 @@ class AuthBean extends Serializable {
   def login() = {
     val context = FacesContext.getCurrentInstance.getExternalContext
     val request = context.getRequest.asInstanceOf[HttpServletRequest]
-    request.login(username, password)
-    context.getSession(true).asInstanceOf[HttpSession].setAttribute("username", username)
-    "/graph.xhtml?faces-redirect=true"
+    try {
+      request.login(username, password)
+      context.getSession(true).asInstanceOf[HttpSession].setAttribute("username", username)
+      "/graph.xhtml?faces-redirect=true"
+    }
+    catch {
+      case e: Exception => messageBean.showLoginError()
+    }
   }
 
   def logout() = {
