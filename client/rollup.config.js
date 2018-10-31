@@ -1,4 +1,4 @@
-import jsx from 'rollup-plugin-jsx';
+import babel from 'rollup-plugin-babel';
 import replace from 'rollup-plugin-replace';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
@@ -15,8 +15,13 @@ export default {
     sourcemap: development ? 'inline' : false
   },
   plugins: [
-    jsx({
-      factory: 'React.createElement'
+    babel({
+      exclude: 'node_modules/**',
+      presets: ['@babel/react'],
+      plugins: [
+        ['@babel/plugin-proposal-class-properties', { loose: true }],
+        '@babel/plugin-transform-classes'
+      ]
     }),
     resolve({
       jsnext: true,

@@ -1,0 +1,32 @@
+.history {
+  overflow-y: auto;
+}
+
+.history__controls {
+  display: flex;
+  justify-content: center;
+}
+
+.history__table {
+  border-collapse: collapse;
+  margin: 16px auto;
+
+  & th {
+    border: 1px solid #000;
+    padding: 8px 16px;
+  }
+}
+
+.history__button {
+  background: white;
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 8px 16px;
+  margin: 0 8px;
+
+  font-family: var(--body-font);
+
+  &:hover {
+    cursor: pointer;
+  }
+}

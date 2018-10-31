@@ -1,5 +1,6 @@
 @import 'header.css';
-
+@import 'graph.css';
+@import 'history.css';
 
 :root {
   --body-font: 'Merriweather', serif;
