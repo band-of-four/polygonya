@@ -1,46 +1,6 @@
-<template>
-<div class="grid">
-  <Header class="grid__header" @toggle-about="screen = (screen === 'about' ? 'graph-form' : 'about') "/>
-  <Sprite class="grid__sprite"/>
-  <transition name="screen-fade" mode="out-in">
-    <GraphForm v-if="screen === 'graph-form'" @show-history="screen = 'history'" class="grid__main">
-      <Quote/>
-    </GraphForm>
-    <History v-if="screen === 'history'" @close-history="closeHistory" @clear-history="clearHistory"/>
-    <AboutPage v-if="screen === 'about'"/>
-  </transition>
-</div>
-</template>
+@import 'header.css';
 
-<script>
-import Header from './Header.vue';
-import Sprite from './Sprite.vue';
-import Quote from './Quote.vue';
-import GraphForm from './GraphForm.vue';
-import History from './History.vue';
-import AboutPage from './AboutPage.vue';
 
-export default {
-  name: 'App',
-  components: { Header, Sprite, Quote, GraphForm, History, AboutPage },
-  data() {
-    return { screen: 'graph-form' }
-  },
-  methods: {
-    closeHistory() {
-      this.screen = 'graph-form';
-      this.$store.commit('returnFromHistory');
-    },
-    clearHistory() {
-      this.screen = 'graph-form';
-      this.$store.commit('clearHistory');
-      this.$store.commit('returnFromHistoryCleared');
-    }
-  }
-}
-</script>
-
-<style>
 :root {
   --body-font: 'Merriweather', serif;
   --body-sans-font: 'Merriweather Sans', sans-serif;
@@ -157,9 +117,40 @@ body {
   justify-content: flex-start;
 }
 
-.clock {
-  display: inline-block;
-  font-size: 14px;
-  margin-left: 8px;
+.sprite {
+  display: flex;
+  flex: 1 0 auto;
+  width: 100%;
+
+  /* Max-width forces the sprite to have at least 14/31 of the height
+   * visible regardless of viewport size. On narrower screens,
+   * a little bit more is revealed ;) */
+  max-width: calc(100vh * 14/31); 
+  /* Min-width prevents the image from squashing when the viewport is
+   * too short. The value is set to the computed sprite width @ 500px
+   * viewport height (see the min-height property of .grid) */
+  min-width: 240px;
+
+  /* The image is set as an inline attribute */
+  background: no-repeat center top/cover;
 }
-</style>
+
+.quote {
+  max-width: 500px;
+  min-height: var(--quote-height);
+  margin: 0 auto;
+  border: 1px solid #000;
+  border-radius: 10px;
+  padding: 12px 18px;
+  width: 100%
+}
+
+.quote__speaker {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.quote__content {
+  margin: 12px 0 0;
+}

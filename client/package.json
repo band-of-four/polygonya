@@ -1,27 +1,29 @@
 {
-  "name": "playground",
+  "name": "polygonya",
   "version": "1.0.0",
-  "description": "Scala-Vue-Playground assets",
+  "description": "Polygonya assets",
   "main": "src/app.js",
   "scripts": {
     "rollup": "rollup -c",
-    "watch": "npm run rollup -- -w",
-    "build": "NODE_ENV=production npm run rollup"
-  },
-  "dependencies": {
-    "vue": "^2.5.17",
-    "vue-mq": "^0.2.1",
-    "vuex": "^3.0.1"
+    "postcss": "postcss css/app.css -c --verbose -o dist/app.css",
+    "watch": "concurrently --kill-others \"npm run rollup -- -w\" \"npm run postcss -- -w --poll\"",
+    "build": "NODE_ENV=production npm run rollup && NODE_ENV=production npm run postcss"
   },
   "devDependencies": {
-    "postcss": "^7.0.2",
-    "postcss-preset-env": "^6.0.5",
-    "rollup": "^0.66.2",
-    "rollup-plugin-multi-entry": "^2.0.2",
-    "rollup-plugin-conditional": "^2.1.1",
-    "rollup-plugin-css-only": "^0.4.0",
+    "rollup": "^0.66.6",
     "rollup-plugin-terser": "^3.0.0",
-    "rollup-plugin-vue": "^4.3.2",
-    "vue-template-compiler": "^2.5.17"
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-jsx": "^1.0.3",
+    "rollup-plugin-node-resolve": "^3.4.0",
+    "rollup-plugin-replace": "^2.1.0",
+    "concurrently": "^4.0.1",
+    "postcss-cli": "^6.0.1",
+    "postcss-import": "^12.0.1",
+    "postcss-preset-env": "^6.3.0",
+    "cssnano": "^4.1.7"
+  },
+  "dependencies": {
+    "react": "^16.6.0",
+    "react-dom": "^16.6.0"
   }
 }

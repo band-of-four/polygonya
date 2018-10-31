@@ -1,86 +1,22 @@
-import App from './App.vue';
-import states from './states.js';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-const store = new Vuex.Store({
-  state: {
-    ...states.idle(),
-    historyItems: []
-  },
-  mutations: {
-    loadHistory(state, history) {
-      if (history) state.historyItems = history;
-      else state.historyItems = [];
-    },
-    storeResult(state, result) {
-      state.historyItems.push(result);
-    },
-    clearHistory(state) {
-      state.historyItems = [];
-    },
-    errorMissingField(state, payload) {
-      state = Object.assign(state, states.errorMissingField(payload));
-    },
-    errorOutOfRange(state, payload) {
-      state = Object.assign(state, states.errorOutOfRange(payload));
-    },
-    waitingForResult(state) {
-      state = Object.assign(state, states.waitingForResult());
-    },
-    resultInside(state) {
-      state = Object.assign(state, states.resultInside());
-    },
-    resultOutside(state) {
-      state = Object.assign(state, states.resultOutside());
-    },
-    returnFromHistory(state) {
-      state = Object.assign(state, states.returnFromHistory());
-    },
-    returnFromHistoryCleared(state) {
-      state = Object.assign(state, states.returnFromHistoryCleared());
-    }
-  },
-  actions: {
-    fetchPointResult({ commit }, { r, x, y }) {
-      commit('waitingForResult');
+function App(props) {
+  return (
+    <div className="grid">
+      <header key="header" className="grid__header header">
+        <a className="header__link" key="homeLink" href="#">Polygonya</a>
+        <a className="header__link" key="aboutLink" href="#">?</a>
+      </header>
+      <aside key="sprite" className="grid__sprite sprite" style={{backgroundImage: `url('/assets/${props.sprite}')`}} />
+      <main key="main" className="grid__main">
+        <div key="quote" className="quote">
+          <span key="quoteSpeaker" className="quote__speaker">Каики Ахиру</span>
+          <p key="quoteContent" className="quote__content">...</p>
+        </div>
+      </main>
+    </div>
+  );
+}
 
-      const resultDelayMillis = 900;
-      const fetchStartMillis = Date.now();
-
-      fetch(`/areaCheck?r=${r}&x=${x}&y=${y}`, {
-        method: 'GET',
-        credentials: 'include'
-      })
-        .then((response) => {
-          if (!response.ok) { throw response }
-          return response.text();
-        })
-        .then((result) => {
-          const delay = Math.max(0, fetchStartMillis + resultDelayMillis - Date.now());
-          return new Promise((resolve) => setTimeout(() => resolve(result), delay));
-        })
-        .then((delayedResult) => {
-          if (delayedResult === 'true') commit('resultInside');
-          else commit('resultOutside');
-
-          commit('storeResult', { r, x, y, status: delayedResult === 'true' });
-        });
-    }
-  }
-});
-
-//Vue.use(vueMq, {
-//  breakpoints: {
-//    mobile: 685,
-//    desktop: Infinity
-//  }
-//});
-
-new Vue({
-  el: '#app',
-  store,
-  components: { App },
-  render: (h) => h(App),
-  beforeMount() {
-    store.commit('loadHistory', JSON.parse(document.getElementById("app").dataset.history));
-  }
-});
+ReactDOM.render(<App sprite="kaiki-chan-idle.png"/>, document.body);
