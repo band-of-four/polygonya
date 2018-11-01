@@ -1,7 +1,5 @@
 import { combineReducers } from 'redux';
 
-import auth from './auth.js';
+import chan from './chan.js';
 
-export default combineReducers({
-  auth
-})
+export default combineReducers({ chan })

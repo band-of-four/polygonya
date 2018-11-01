@@ -1,17 +1,27 @@
-export const LOGIN_AWAIT = "LOGIN_AWAIT";
-export const LOGIN_ERROR = "LOGIN_ERROR";
+import { CHAN_LOGIN_AWAIT, CHAN_LOGIN_OK, CHAN_LOGIN_ERR } from '../reducers/chan.js';
 
 export const login = (username, password) => async (dispatch) => {
   try {
-    dispatch({ type: LOGIN_AWAIT });
-    let resp = await fetch('/auth/login', {
+    dispatch({ type: CHAN_LOGIN_AWAIT, username });
+
+    const resultDelayMillis = 900;
+    const fetchStartMillis = Date.now();
+
+    let authRequest = await fetch('/auth/login', {
       method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password })
     });
-    let json = await resp.json();
-    console.log(json);
+
+    const delay = fetchStartMillis + resultDelayMillis - Date.now();
+    if (delay > 0) await new Promise((resolve) => setTimeout(() => resolve(), delay));
+
+    if (authRequest.status === 200) {
+      dispatch({ type: CHAN_LOGIN_OK });
+    }
+    else throw '';
   }
   catch (e) {
-    dispatch({ type: LOGIN_ERROR });
+    dispatch({ type: CHAN_LOGIN_ERR });
   }
 }

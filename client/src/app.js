@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import { Provider } from 'react-redux';
+import { Provider, connect } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
 
@@ -11,7 +11,7 @@ import History from './history.js';
 
 const store = createStore(stateRoot, applyMiddleware(ReduxThunk));
 
-class App extends Component {
+class AppView extends Component {
   constructor(props) {
     super(props);
     this.state = { screen: 'auth' }
@@ -35,11 +35,11 @@ class App extends Component {
           <a className="header__link" key="homeLink" href="#">Polygonya</a>
           <a className="header__link" key="aboutLink" href="#">?</a>
         </header>
-        <aside key="sprite" className="grid__sprite sprite" style={{backgroundImage: `url('/assets/${this.props.sprite}')`}} />
+        <aside key="sprite" className="grid__sprite sprite" style={this.props.spriteStyle} />
         <main key="main" className="grid__main">
           <div key="quote" className="quote">
             <span key="quoteSpeaker" className="quote__speaker">Каики Ахиру</span>
-            <p key="quoteContent" className="quote__content">...</p>
+            <p key="quoteContent" className="quote__content">{this.props.quote}</p>
           </div>
           {this.renderScreen()}
         </main>
@@ -47,6 +47,15 @@ class App extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    spriteStyle: { backgroundImage: `url('/assets/${state.chan.sprite}')` },
+    quote: state.chan.quote
+  };
+}
+
+const App = connect(mapStateToProps, () => ({}))(AppView);
 
 render(
   <Provider store={store}>
