@@ -28,7 +28,12 @@ export default {
       main: true
     }),
     commonjs({
-      sourceMap: false
+      sourceMap: false,
+      namedExports: {
+        './node_modules/react/index.js': ['Component', 'Children', 'createElement'],
+        './node_modules/react-dom/index.js': ['render'],
+        './node_modules/react-is/index.js': ['isValidElementType']
+      }
     }),
     replace({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)

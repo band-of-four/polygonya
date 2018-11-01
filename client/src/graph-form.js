@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Graph from './graph.js';
 
-export default class GraphForm extends React.Component {
+export default class GraphForm extends Component {
   render() {
     return (
       <form className="graph-form" noValidate={true}>

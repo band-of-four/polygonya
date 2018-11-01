@@ -1,10 +1,10 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { Component } from 'react';
+import { render } from 'react-dom';
 
-import GraphForm from './graph-form.js'
-import History from './history.js'
+import GraphForm from './graph-form.js';
+import History from './history.js';
 
-class App extends React.Component {
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = { screen: 'graph' }
@@ -39,4 +39,7 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App sprite="kaiki-chan-idle.png"/>, document.body);
+render(
+    <App sprite="kaiki-chan-idle..png"/>
+  document.body
+);
