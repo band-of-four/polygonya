@@ -20,7 +20,7 @@ class AppView extends Component {
   renderScreen = () => {
     switch (this.state.screen) {
       case 'auth':
-        return <Auth key="auth" />;
+        return <Auth key="auth" onComplete={() => this.setState({ screen: 'graph' })} />;
       case 'graph':
         return <GraphForm key="graph" showHistory={() => this.setState({ screen: 'history' })} />;
       case 'history':

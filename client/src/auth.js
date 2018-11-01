@@ -6,7 +6,8 @@ import { login } from './actions/auth.js';
 class AuthView extends Component {
   signIn = () => {
     const { username, password } = this.refs;
-    this.props.dispatchSignIn(username.value, password.value);
+    this.props.dispatchSignIn(username.value, password.value)
+      .then((ok) => ok && this.props.onComplete());
   }
 
   render() {

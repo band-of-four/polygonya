@@ -6,7 +6,7 @@ const IDLE = 'kaiki-chan-idle.png';
 const THINKING = 'kaiki-chan-thinking.png';
 
 const defaultState = {
-  sprite: IDLE, quote: '...'
+  sprite: IDLE, quote: 'Мне кажется, ты чем-то похож на "test" с паролем "test"... Смотри, без кавычек!'
 }
 
 export default function chan(state = defaultState, action) {
