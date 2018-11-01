@@ -1,20 +1,29 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import ReduxThunk from 'redux-thunk';
 
+import stateRoot from './reducers';
+import Auth from './auth.js';
 import GraphForm from './graph-form.js';
 import History from './history.js';
+
+const store = createStore(stateRoot, applyMiddleware(ReduxThunk));
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { screen: 'graph' }
+    this.state = { screen: 'auth' }
   }
 
   renderScreen = () => {
     switch (this.state.screen) {
-      case "graph":
+      case 'auth':
+        return <Auth key="auth" />;
+      case 'graph':
         return <GraphForm key="graph" showHistory={() => this.setState({ screen: 'history' })} />;
-      case "history":
+      case 'history':
         return <History key="history" showGraph={() => this.setState({ screen: 'graph' })} />;
     }
   }
@@ -40,6 +49,8 @@ class App extends Component {
 }
 
 render(
-    <App sprite="kaiki-chan-idle..png"/>
+  <Provider store={store}>
+    <App sprite="kaiki-chan-idle.png"/>
+  </Provider>,
   document.body
 );
