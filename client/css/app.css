@@ -31,7 +31,8 @@ body {
   display: grid;
   grid:
     [row1-start] "header header" var(--header-height) [row1-end]
-    [row2-start] "sprite main" auto [row2-end]
+    [row2-start] "sprite textbox" 45% [row2-end]
+    [row3-start] "sprite controls" auto [row3-end]
     / 20fr 35fr;
   grid-column-gap: 8px;
 
@@ -49,6 +50,15 @@ body {
   justify-self: end;
 }
 
+.grid__textbox {
+  grid-area: textbox;
+  align-self: center;
+}
+
+.grid__controls {
+  grid-area: controls;
+}
+
 .grid__main {
   grid-area: main;
   justify-self: start;
@@ -63,6 +73,33 @@ body {
 
 .screen-fade-enter, .screen-fade-leave-to {
   opacity: 0;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.controls__action {
+  display: block;
+  background: white;
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 10px 24px;
+  margin: 10px 0;
+  max-width: 420px;
+  width: 100%;
+
+  font-size: 15px;
+  text-decoration: none;
+  color: black;
+
+  font-family: var(--body-font);
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 /* JSF-specific styles
