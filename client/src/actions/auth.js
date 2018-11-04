@@ -1,4 +1,4 @@
-import { CHAN_LOGIN_AWAIT, CHAN_LOGIN_OK, CHAN_LOGIN_ERR } from '../reducers/chan.js';
+//import { CHAN_LOGIN_AWAIT, CHAN_LOGIN_OK, CHAN_LOGIN_ERR } from '../reducers/chan.js';
 import { withDelay, postJson } from '../utils.js';
 
 export const login = (username, password) => async (dispatch) => {

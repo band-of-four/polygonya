@@ -1,13 +1,17 @@
 export async function withDelay(delayMillis, action) {
   const actionStartMillis = Date.now();
 
-  const ret = await action;
-
-  const delay = actionStartMillis + delayMillis - Date.now();
-  if (delay > 0)
-    await new Promise((resolve) => setTimeout(() => resolve(), delay));
-
-  return ret;
+  try {
+    const ret = await action;
+    const delay = actionStartMillis + delayMillis - Date.now();
+    if (delay > 0) await new Promise((resolve) => setTimeout(() => resolve(), delay));
+    return ret;
+  }
+  catch (e) {
+    const delay = actionStartMillis + delayMillis - Date.now();
+    if (delay > 0) await new Promise((resolve) => setTimeout(() => resolve(), delay));
+    throw e;
+  }
 }
 
 export function postJson(url, payload) {
@@ -18,4 +22,9 @@ export function postJson(url, payload) {
     },
     body: JSON.stringify(payload)
   });
+}
+
+export function pickRandom(array) {
+  /* https://stackoverflow.com/a/4550514/1726690 */
+  return array[Math.floor(Math.random() * array.length)];
 }

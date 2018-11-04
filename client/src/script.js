@@ -3,7 +3,24 @@ export const GAME_DIALOGUE = 'GAME_DIALOGUE';
 export const GAME_TEST = 'GAME_TEST';
 
 const SPRITE_IDLE = 'kaiki-chan-idle.png';
+const SPRITE_ANGRY = 'kaiki-chan-angry.png';
 const SPRITE_THINKING = 'kaiki-chan-thinking.png';
+const SPRITE_BLUSHING = 'kaiki-chan-blushing.png';
+
+export const GAME_SCRIPT_GRAPH_AWAIT = [
+  { type: GAME_TEST, sprite: SPRITE_THINKING, text: 'Хмм, дай подумать...' }
+];
+
+export const GAME_SCRIPT_GRAPH_INSIDE = [
+  { type: GAME_TEST, sprite: SPRITE_BLUSHING, text: 'Ты прав, точка действительно внутри... Попробуй еще один раз.' }
+];
+
+export const GAME_SCRIPT_GRAPH_OUTSIDE = [
+  { type: GAME_TEST, sprite: SPRITE_ANGRY, text: 'Я устала смотреть на твои ошибки! Не могу поверить, что мой код пишет такой идиот. Консоль браузера открывал? Сможешь сосчитать, сколько там предупреждений, или умственных способностей не хватит?' }
+];
+
+export const GAME_SCRIPT_GRAPH_ERROR =
+  { type: GAME_TEST, sprite: SPRITE_BLUSHING, text: 'Прости, я задумалась... Не повторишь?' };
 
 export const GAME_SCRIPT = {
   GAME_TEST: {

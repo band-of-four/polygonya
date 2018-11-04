@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-import chan from './chan.js';
 import game from './game.js';
+import graph from './graph.js';
 
-export default combineReducers({ chan, game })
+export default combineReducers({ game, graph })

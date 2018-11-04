@@ -7,10 +7,15 @@ import ReduxThunk from 'redux-thunk';
 import stateRoot from './reducers';
 import Auth from './auth.js';
 import History from './history.js';
-
 import StoryView from './story-view.js';
 
+import { nextState } from './actions/game.js';
+
 const store = createStore(stateRoot, applyMiddleware(ReduxThunk));
+
+/* FIXME: Remove from the final version */
+const devUrlState = new URL(window.location.href).searchParams.get('state');
+devUrlState && store.dispatch(nextState(devUrlState));
 
 class App extends Component {
   constructor(props) {
