@@ -75,6 +75,43 @@ body {
   opacity: 0;
 }
 
+.cutscene {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 6vh 0;
+
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cutscene__action {
+  display: inline-block;
+  background: white;
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 10px 24px;
+  margin: 10px 0;
+
+  font-size: 15px;
+  text-decoration: none;
+  color: black;
+
+  font-family: var(--body-font);
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.cutscene__content {
+  margin: 0 auto;
+  max-width: 90vw;
+  text-align: center;
+  font-size: 18px;
+  line-height: 1.4em;
+}
+
 .controls {
   display: flex;
   flex-direction: column;
