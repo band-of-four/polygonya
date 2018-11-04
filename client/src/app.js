@@ -6,7 +6,6 @@ import ReduxThunk from 'redux-thunk';
 
 import stateRoot from './reducers';
 import Auth from './auth.js';
-import GraphForm from './graph-form.js';
 import History from './history.js';
 
 import StoryView from './story-view.js';

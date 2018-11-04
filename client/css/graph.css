@@ -1,54 +1,25 @@
 .graph {
   height: 100%;
+  max-height: 100%;
   width: 100%;
 }
 
-.graph-form {
-  display: flex;
-  flex: 1 1;
-  flex-direction: column;
-  align-items: center;
-
-  padding: 6vh 0;
-  min-height: var(--min-layout-height);
-  max-height: calc(100% - var(--quote-height));
-}
-
-.graph-form__columns {
-  display: flex;
-  justify-content: center;
-  width: 80%;
-  margin: 24px 0;
-  min-height: 0;
-}
-
-.graph-form__input-column {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-right: 24px;
-}
-
-.graph-form__graph-column {
-  flex: 1 1;
-}
-
-.graph-form__field {
+.graph-field {
   position: relative;
 }
 
-.graph-form__field:not(:last-child) {
+.graph-field:not(:last-child) {
   margin-bottom: 12px;
 }
 
-.graph-form__label {
+.graph-field__label {
   position: absolute;
   line-height: 33px;
   left: 12px;
 }
 
-.graph-form__input {
-  width: 120px;
+.graph-field__input {
+  width: var(--graph-field-width);
   display: inline-block;
   padding: 8px 8px 8px 30px;
 
@@ -59,7 +30,7 @@
   text-align: right;
 }
 
-.graph-form__button {
+.graph-button {
   display: inline-block;
   background: white;
   border: 1px solid black;

@@ -11,6 +11,9 @@
   --min-layout-height: 500px;
 
   --quote-height: 120px;
+  --textbox-height: 120px;
+
+  --graph-field-width: 120px;
 
   --text-color: #000;
 }
@@ -29,16 +32,25 @@ body {
   padding: 0 24px;
 
   display: grid;
-  grid:
-    [row1-start] "header header" var(--header-height) [row1-end]
-    [row2-start] "sprite textbox" 45% [row2-end]
-    [row3-start] "sprite controls" auto [row3-end]
-    / 20fr 35fr;
   grid-column-gap: 8px;
 
   /* Min-height is chosen such that no elements overlap
    * and scrolling is forced when the viewport is too short */
   min-height: var(--min-layout-height);
+}
+
+.grid--dialogue {
+  grid: [row1-start] "header header" var(--header-height) [row1-end]
+        [row2-start] "sprite textbox" 45% [row2-end]
+        [row3-start] "sprite controls" auto [row3-end]
+        / 20fr 35fr;
+}
+
+.grid--graph {
+  grid: [row1-start] "header header header" var(--header-height) [row1-end]
+        [row2-start] "sprite textbox textbox" var(--textbox-height) [row2-end]
+        [row3-start] "sprite fields graph" auto [row3-end]
+        / 20fr calc(var(--graph-field-width) + 24px) 25fr;
 }
 
 .grid__header {
@@ -57,14 +69,23 @@ body {
 
 .grid__controls {
   grid-area: controls;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.grid__main {
-  grid-area: main;
-  justify-self: start;
+.grid__fields {
+  grid-area: fields;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
-  width: 100%;
-  height: calc(100vh - var(--header-height));
+.grid__graph {
+  grid-area: graph;
+  max-height: 100%;
+  padding: 8vh;
 }
 
 .screen-fade-enter-active, .screen-fade-leave-active {
@@ -85,6 +106,7 @@ body {
   justify-content: space-between;
 }
 
+/* TODO: merge with .button */
 .cutscene__action {
   display: inline-block;
   background: white;
@@ -112,13 +134,7 @@ body {
   line-height: 1.4em;
 }
 
-.controls {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.controls__action {
+.button {
   display: block;
   background: white;
   border: 1px solid black;
@@ -137,6 +153,13 @@ body {
   &:hover {
     cursor: pointer;
   }
+}
+
+.button--graph {
+  width: var(--graph-field-width);
+  margin: 16px 0;
+  padding: 8px 0;
+  text-align: center;
 }
 
 /* JSF-specific styles

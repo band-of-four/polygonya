@@ -6,6 +6,11 @@ const SPRITE_IDLE = 'kaiki-chan-idle.png';
 const SPRITE_THINKING = 'kaiki-chan-thinking.png';
 
 export const GAME_SCRIPT = {
+  GAME_TEST: {
+    type: GAME_TEST,
+    sprite: SPRITE_IDLE
+  },
+
   DAY_0: {
     type: GAME_CUTSCENE, next: 'DAY_0_1',
     text: 'В новой школе все совсем не так, как в старой — учителя строже, ребята все какие-то высокомерные...'
