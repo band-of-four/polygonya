@@ -19,6 +19,7 @@ export default {
       exclude: 'node_modules/**',
       presets: ['@babel/react'],
       plugins: [
+        '@babel/plugin-proposal-object-rest-spread',
         ['@babel/plugin-proposal-class-properties', { loose: true }],
         '@babel/plugin-transform-classes'
       ]

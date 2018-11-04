@@ -22,11 +22,14 @@ export const GAME_SCRIPT_GRAPH_OUTSIDE = [
 export const GAME_SCRIPT_GRAPH_ERROR =
   { type: GAME_TEST, sprite: SPRITE_BLUSHING, text: 'Прости, я задумалась... Не повторишь?' };
 
+export const GAME_SCRIPT_GRAPH_NEUTRAL =
+  { type: GAME_TEST, sprite: SPRITE_IDLE, text: 'Не торопись, подумай и поставь точку так, чтобы она попадала в полигон.' };
+
+export const gameScriptInvalidField = (field, min, max) => (
+  { type: GAME_TEST, sprite: SPRITE_ANGRY, text: `Разве я не говорила тебе, что ${field.toUpperCase()} должен быть между ${min} и ${max}?` });
+
 export const GAME_SCRIPT = {
-  GAME_TEST: {
-    type: GAME_TEST,
-    sprite: SPRITE_IDLE
-  },
+  GAME_TEST: GAME_SCRIPT_GRAPH_NEUTRAL,
 
   DAY_0: {
     type: GAME_CUTSCENE, next: 'DAY_0_1',

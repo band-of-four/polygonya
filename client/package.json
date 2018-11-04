@@ -19,6 +19,7 @@
     "rollup-plugin-babel": "^4.0.3",
     "@babel/core": "^7.1.2",
     "@babel/preset-react": "^7.0.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
     "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/plugin-transform-classes": "^7.1.0",
     "concurrently": "^4.0.1",

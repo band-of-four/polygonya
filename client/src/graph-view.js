@@ -1,30 +1,62 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { addPoint } from './actions/graph.js';
+import { addPoint, fieldError, resetErrors } from './actions/graph.js';
+
+const validInputRanges = {
+  r: { min: 1, max: 5 },
+  x: { min: -3, max: 5 },
+  y: { min: -5, max: 3 }
+};
 
 class Graph extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { r: 2, x: 1, y: 1 };
+  }
+
   render() {
     return (
       <>
-        <section className={this.props.fieldsClass}>
+        <form className={this.props.fieldsClass} onSubmit={this.submitFields}>
           <div className="graph-field">
             <label className="graph-field__label">R</label>
-            <input type="number" step="0.1" v-model="r" name="r" className="graph-field__input" autoFocus={true} />
+            <input type="number" step="0.1" name="r" className="graph-field__input"
+              onChange={this.updateFieldState} value={this.state.r} />
           </div>
           <div className="graph-field">
             <label className="graph-field__label">X</label>
-            <input type="number" step="0.1" v-model="x" name="x" className="graph-field__input" />
+            <input type="number" step="0.1" name="x" className="graph-field__input"
+              onChange={this.updateFieldState} value={this.state.x} />
           </div>
           <div className="graph-field">
             <label className="graph-field__label">Y</label>
-            <input type="number" step="0.1" v-model="y" name="y" className="graph-field__input" />
+            <input type="number" step="0.1" name="y" className="graph-field__input"
+              onChange={this.updateFieldState} value={this.state.y} />
           </div>
-          <a className="button button--graph">Решить</a>
-        </section>
+          <button type="submit" className="button button--graph">Поставить</button>
+        </form>
         <section className={this.props.graphClass}>{this.renderGraph()}</section>
       </>
     );
+  }
+
+  updateFieldState = ({ target: { name: field, value: rawValue } }) => {
+    const value = parseFloat(rawValue);
+    const { min, max } = validInputRanges[field];
+
+    if (isNaN(value) || value < min || value > max)
+      this.props.dispatchFieldError(field, min, max);
+    else {
+      this.props.dispatchResetErrors();
+      this.setState({ ...this.state, [field]: value })
+    }
+  };
+
+  submitFields = (e) => {
+    e.preventDefault();
+    const { r, x, y } = this.state;
+    this.props.dispatchAddPoint(x, y, r);
   }
 
   placePoint = (e) => {
@@ -38,24 +70,30 @@ class Graph extends Component {
     const { x: graphX, y: graphY } = referencePt.matrixTransform(
       this.refs.svg.getScreenCTM().inverse());
 
-    const x = (graphX - (axisDim / 2)) / rDim;
-    const y = -((graphY - (axisDim / 2)) / rDim);
+    const x = Number(((graphX - (axisDim / 2)) / rDim * this.state.r).toFixed(2));
+    const y = Number((-((graphY - (axisDim / 2)) / rDim) * this.state.r).toFixed(2));
 
-    this.props.dispatchAddPoint(x * 4, y * 4);
+    const { min: minX, max: maxX } = validInputRanges.x;
+    const { min: minY, max: maxY } = validInputRanges.y;
+
+    if (x < minX || x > maxX) this.props.dispatchFieldError('x', minX, maxX);
+    else if (y < minY || y > maxY) this.props.dispatchFieldError('y', minY, maxY);
+    else {
+      this.setState({ ...this.state, x, y });
+      this.props.dispatchAddPoint(x, y, this.state.r);
+    }
   }
 
   renderGraphPoints() {
-    const r = 4;
-
     return this.props.points.map(({ x, y, inside }, i) => {
       const axisDim = 400;
       const rDim = 160;
-      const xRel = x / r;
-      const yRel = y / r;
+      const xRel = x / this.state.r;
+      const yRel = y / this.state.r;
       const xAbs = (xRel * rDim) + (axisDim / 2);
       const yAbs = (-yRel * rDim) + (axisDim / 2);
 
-      const fill = inside ? "green" : "red";
+      const fill = inside ? 'green': 'red';
 
       return <circle cx={xAbs} cy={yAbs} key={i} strokeWidth="0" r="3" fill={fill} />
     });
@@ -92,7 +130,9 @@ class Graph extends Component {
 const mapStateToProps = (state) => ({ points: state.graph.points });
 
 const mapDispatchToProps = (dispatch) => ({
-  dispatchAddPoint: (x, y, r) => dispatch(addPoint(x, y, r))
+  dispatchAddPoint: (x, y, r) => dispatch(addPoint(x, y, r)),
+  dispatchFieldError: (field, min, max) => dispatch(fieldError(field, min, max)),
+  dispatchResetErrors: () => dispatch(resetErrors())
 });
 
 const GraphView = connect(mapStateToProps, mapDispatchToProps)(Graph)
