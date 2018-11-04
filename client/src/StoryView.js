@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { GAME_CUTSCENE, GAME_DIALOGUE, GAME_TEST } from './script.js';
 import { nextState } from './actions/game.js';
-import GraphView from './graph-view.js';
+import GraphView from './GraphView.js';
 
 class Story extends Component {
   advanceCutscene = () =>

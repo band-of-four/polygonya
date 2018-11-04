@@ -7,7 +7,7 @@ import ReduxThunk from 'redux-thunk';
 import stateRoot from './reducers';
 import Auth from './auth.js';
 import History from './history.js';
-import StoryView from './story-view.js';
+import StoryView from './StoryView.js';
 
 import { nextState } from './actions/game.js';
 
