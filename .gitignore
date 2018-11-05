@@ -2,7 +2,7 @@ lib/
 target/
 .idea/
 
-project/db.properties
+src/main/resources/application.properties
 
 client/dist/*
 !client/dist/tech-chan-sketch.png

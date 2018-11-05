@@ -29,3 +29,14 @@ Add `ojdbc6` to the local repository:
 mvn install:install-file -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0.3 \
   -Dpackaging=jar -DgeneratePom=true -Dfile=ojdbc6.jar
 ```
+
+Create `src/main/resources/application.properties`:
+```
+spring.datasource.url=jdbc:oracle:thin:@localhost:1521:your_sid
+spring.datasource.username=your_username
+spring.datasource.password=your_pswrd
+spring.datasource.platform=oracle
+spring.datasource.driver-class-name=oracle.jdbc.OracleDriver
+spring.datasource.initialization-mode=always
+spring.jpa.hibernate.ddl-auto=create-drop
+```
