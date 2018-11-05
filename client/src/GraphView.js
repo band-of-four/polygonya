@@ -55,7 +55,7 @@ class Graph extends Component {
       this.props.dispatchFieldError(field, min, max);
     else {
       this.props.dispatchResetErrors();
-      this.setState({ ...this.state, [field]: value })
+      this.setState({ [field]: value })
     }
   };
 
@@ -66,7 +66,7 @@ class Graph extends Component {
   }
 
   onPointPlaced = (x, y) => {
-    this.setState({ ...this.state, x, y });
+    this.setState({ x, y });
     this.props.dispatchAddPoint(x, y, this.state.r);
   }
 }
