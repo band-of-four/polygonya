@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-import game from './game.js';
+import screen from './screen.js';
 import graph from './graph.js';
 
-export default combineReducers({ game, graph })
+export default combineReducers({ screen, graph })

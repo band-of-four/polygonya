@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { GAME_CUTSCENE, GAME_DIALOGUE, GAME_TEST } from './script.js';
-import { nextState } from './actions/game.js';
+import { SCRIPT_CUTSCENE, SCRIPT_DIALOGUE, SCRIPT_GRAPH } from './script.js';
+import { nextScreen } from './actions/screen.js';
 import GraphView from './GraphView.js';
 
 class Story extends Component {
   advanceCutscene = () =>
-    this.props.dispatchNextState(this.props.screen.next);
+    this.props.dispatchNextScreen(this.props.screen.next);
 
-  advanceDialogue = (nextState) => () =>
-    this.props.dispatchNextState(nextState);
+  advanceDialogue = (nextScreen) => () =>
+    this.props.dispatchNextScreen(nextScreen);
 
   renderGrid = (gridClass, controls) => (
     <div className={`grid ${gridClass}`}>
@@ -32,32 +32,33 @@ class Story extends Component {
 
   render() {
     switch (this.props.screen.type) {
-      case GAME_CUTSCENE:
+      case SCRIPT_CUTSCENE:
         return (
           <div className="cutscene">
             <p className="cutscene__content">{this.props.screen.text}</p>
             <a className="cutscene__action" onClick={this.advanceCutscene}>Продолжить</a>
           </div>
         );
-      case GAME_TEST:
+      case SCRIPT_GRAPH:
         return this.renderGrid("grid--graph",
           <GraphView key="graph" fieldsClass="grid__fields" graphClass="grid__graph" />
         );
-      case GAME_DIALOGUE:
+      case SCRIPT_DIALOGUE:
         return this.renderGrid("grid--dialogue",
           <section key="controls" className="grid__controls">
             {this.props.screen.choices.map(({ text, next }, i) => (
               <a className="button" key={i} onClick={this.advanceDialogue(next)}>{text}</a>
             ))}
-          </section>);
+          </section>
+        );
     }
   }
 }
 
-const mapStateToProps = (state) => ({ screen: state.game });
+const mapStateToProps = ({ screen }) => ({ screen });
 
 const mapDispatchToProps = (dispatch) => ({
-  dispatchNextState: (nextId) => dispatch(nextState(nextId))
+  dispatchNextScreen: (nextId) => dispatch(nextScreen(nextId))
 });
 
 const StoryView = connect(mapStateToProps, mapDispatchToProps)(Story)
