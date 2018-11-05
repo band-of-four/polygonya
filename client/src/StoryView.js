@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { SCRIPT_CUTSCENE, SCRIPT_DIALOGUE, SCRIPT_GRAPH } from './script.js';
-import { nextScreen } from './actions/screen.js';
+import { nextScreen } from './actions/game.js';
 import GraphView from './GraphView.js';
 
 class Story extends Component {

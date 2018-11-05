@@ -10,7 +10,7 @@ import Auth from './auth.js';
 import History from './history.js';
 import StoryView from './StoryView.js';
 
-import { nextScreen } from './actions/screen.js';
+import { nextScreen } from './actions/game.js';
 
 let store;
 

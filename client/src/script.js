@@ -1,6 +1,8 @@
 export const SCRIPT_CUTSCENE = 'SCRIPT_CUTSCENE';
 export const SCRIPT_DIALOGUE = 'SCRIPT_DIALOGUE';
 export const SCRIPT_GRAPH = 'SCRIPT_GRAPH';
+export const SCRIPT_RELATIONSHIP_UP_END_DAY = 'SCRIPT_RELATIONSHIP_UP_END_DAY';
+export const SCRIPT_RELATIONSHIP_DOWN_END_DAY = 'SCRIPT_RELATIONSHIP_DOWN_END_DAY';
 
 const SPRITE_IDLE = 'kaiki-chan-idle.png1';
 const SPRITE_ANGRY = 'kaiki-chan-angry.png1';
@@ -25,12 +27,15 @@ export const SCRIPT_GRAPH_ERROR =
 export const SCRIPT_GRAPH_NEUTRAL =
   { type: SCRIPT_GRAPH, sprite: SPRITE_IDLE, text: 'Не торопись, подумай и поставь точку так, чтобы она попадала в полигон.' };
 
+export const SCRIPT_GRAPH_END =
+  { type: SCRIPT_GRAPH, sprite: SPRITE_IDLE, text: 'Отлично. Думаю, на сегодня хватит.' };
+
 export const scriptGraphInvalidField = (field, min, max) => (
   { type: SCRIPT_GRAPH, sprite: SPRITE_ANGRY, text: `Разве я не говорила тебе, что ${field.toUpperCase()} должен быть между ${min} и ${max}?` });
 
-export const SCRIPT = {
-  SCRIPT_GRAPH: SCRIPT_GRAPH_NEUTRAL,
+export const scriptIdForDay = (day) => `DAY_${day}`;
 
+export const SCRIPT = {
   DAY_0: {
     type: SCRIPT_CUTSCENE, next: 'DAY_0_1',
     text: 'В новой школе все совсем не так, как в старой — учителя строже, ребята все какие-то высокомерные...'
@@ -59,5 +64,21 @@ export const SCRIPT = {
     choices: [
       { text: 'Мда, не могу поверить, что эта история настолько линейна.', next: SCRIPT_GRAPH }
     ]
+  },
+  DAY_1: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_1_1',
+    text: 'Тяжело...'
+  },
+  DAY_1_1: {
+    type: SCRIPT_DIALOGUE,
+    text: 'Приветствуя тебя, я соблюдаю нормы общества, в котором мы живем.',
+    choices: [
+      { text: 'Обнимая тебя, я сокрушаю одиночество, в котором мы живем', next: SCRIPT_RELATIONSHIP_UP_END_DAY },
+      { text: 'Кивая головой, я остаюсь холодным к чувствам, скрывающимися за твоими словами', next: SCRIPT_RELATIONSHIP_DOWN_END_DAY }
+    ]
+  },
+  DAY_2: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_2_1',
+    text: 'Трудно...'
   }
 };
