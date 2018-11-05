@@ -8,7 +8,7 @@ const production = process.env.NODE_ENV === "production",
       development = !production;
 
 export default {
-  input: 'src/app.js',
+  input: 'src/App.js',
   output: {
     file: 'dist/app.js',
     format: 'iife',

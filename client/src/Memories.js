@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function History(props) {
+export default function Memories(props) {
   return (
     <div className="view view--overflowing">
       <div className="history__controls">

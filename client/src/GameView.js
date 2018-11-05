@@ -5,7 +5,7 @@ import { SCRIPT_CUTSCENE, SCRIPT_DIALOGUE, SCRIPT_GRAPH } from './script.js';
 import { nextScreen } from './actions/game.js';
 import GraphView from './GraphView.js';
 
-class Story extends Component {
+class Game extends Component {
   advanceCutscene = () =>
     this.props.dispatchNextScreen(this.props.screen.next);
 
@@ -15,8 +15,13 @@ class Story extends Component {
   renderGrid = (gridClass, controls) => (
     <div className={`grid ${gridClass}`}>
       <header key="header" className="grid__header header">
-        <a className="header__link" key="homeLink" href="#">Polygonya</a>
-        <a className="header__link" key="aboutLink" href="#">?</a>
+        <span className="header__info" href="#">
+          {this.props.name}'s Polygonya — day {this.props.day}
+        </span>
+        <span>
+          <a className="header__link" key="memoriesLink">memories</a>
+          <a className="header__link" key="logOutLink" onClick={this.props.onLogout}>quit</a>
+        </span>
       </header>
       <section key="sprite" className="grid__sprite sprite"
                style={{ backgroundImage: `url(/assets/${this.props.screen.sprite})` }} />
@@ -55,12 +60,12 @@ class Story extends Component {
   }
 }
 
-const mapStateToProps = ({ screen }) => ({ screen });
+const mapStateToProps = ({ screen, player: { day, name } }) => ({ screen, day, name });
 
 const mapDispatchToProps = (dispatch) => ({
   dispatchNextScreen: (nextId) => dispatch(nextScreen(nextId))
 });
 
-const StoryView = connect(mapStateToProps, mapDispatchToProps)(Story)
+const GameView = connect(mapStateToProps, mapDispatchToProps)(Game)
 
-export default StoryView;
+export default GameView;

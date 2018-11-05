@@ -1,9 +1,11 @@
+import { transliterateName } from '../utils.js';
+
 export const PLAYER_NEXT_DAY = 'PLAYER_NEXT_DAY';
 export const PLAYER_RELATIONSHIP_UP = 'PLAYER_RELATIONSHIP_UP';
 export const PLAYER_RELATIONSHIP_DOWN = 'PLAYER_RELATIONSHIP_DOWN';
 
 const defaultState = {
-  name: "Anon",
+  name: transliterateName('Анон'),
   day: 0,
   relationshipMeter: 0
 };

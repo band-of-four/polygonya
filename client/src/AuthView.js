@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { login } from './actions/auth.js';
 
-class AuthView extends Component {
+class Auth extends Component {
   signIn = () => {
     const { username, password } = this.refs;
     this.props.dispatchSignIn(username.value, password.value)
@@ -29,6 +29,6 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-const Auth = connect(() => ({}), mapDispatchToProps)(AuthView)
+const AuthView = connect(() => ({}), mapDispatchToProps)(Auth)
 
-export default Auth;
+export default AuthView;

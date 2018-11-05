@@ -6,11 +6,10 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import ReduxThunk from 'redux-thunk';
 
 import stateRoot from './reducers';
-import Auth from './auth.js';
-import History from './history.js';
-import StoryView from './StoryView.js';
-
 import { nextScreen } from './actions/game.js';
+
+import AuthView from './AuthView.js';
+import GameView from './GameView.js';
 
 let store;
 
@@ -26,22 +25,17 @@ else {
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { screen: 'story' }
+    this.state = { screen: 'game' }
   }
 
   render() {
     switch (this.state.screen) {
-      case 'story':
-        return <StoryView />;
+      case 'game':
+        return <GameView onLogout={() => this.setState({ screen: 'auth' })} />;
       case 'auth':
-        return <Auth key="auth" onComplete={() => this.setState({ screen: 'story' })} />;
+        return <AuthView onComplete={() => this.setState({ screen: 'game' })} />;
     }
   }
 }
 
-render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.body
-);
+render(<Provider store={store}><App /></Provider>, document.body);
