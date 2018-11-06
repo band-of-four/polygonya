@@ -6,13 +6,19 @@ import { nextScreen } from './actions/game.js';
 import GraphView from './GraphView.js';
 
 class Game extends Component {
+  constructor(props) {
+    super(props);
+    /* Used for transitioning between cutscenes and dialogue */
+    this.state = { transitionFrom: null, transitionTo: null, transitioning: false };
+  }
+
   advanceCutscene = () =>
     this.props.dispatchNextScreen(this.props.screen.next);
 
   advanceDialogue = (nextScreen) => () =>
     this.props.dispatchNextScreen(nextScreen);
 
-  renderGrid = (gridClass, controls) => (
+  renderGrid = (gridClass, screen, controls) => (
     <div className={`grid ${gridClass}`}>
       <header key="header" className="grid__header header">
         <span className="header__info" href="#">
@@ -24,39 +30,76 @@ class Game extends Component {
         </span>
       </header>
       <section key="sprite" className="grid__sprite sprite"
-               style={{ backgroundImage: `url(/assets/${this.props.screen.sprite})` }} />
+               style={{ backgroundImage: `url(/assets/${screen.sprite})` }} />
       <section key="textbox" className="grid__textbox">
         <div key="quote" className="quote">
           <span key="quoteSpeaker" className="quote__speaker">Каики Ахиру</span>
-          <p key="quoteContent" className="quote__content">{this.props.screen.text}</p>
+          <p key="quoteContent" className="quote__content">{screen.text}</p>
         </div>
       </section>
       {controls}
     </div>
   );
 
-  render() {
-    switch (this.props.screen.type) {
+  renderScreen(screen) {
+    switch (screen.type) {
       case SCRIPT_CUTSCENE:
         return (
           <div className="cutscene">
-            <p className="cutscene__content">{this.props.screen.text}</p>
+            <p className="cutscene__content">{screen.text}</p>
             <a className="cutscene__action" onClick={this.advanceCutscene}>Продолжить</a>
           </div>
         );
       case SCRIPT_GRAPH:
-        return this.renderGrid("grid--graph",
+        return this.renderGrid("grid--graph", screen,
           <GraphView key="graph" fieldsClass="grid__fields" graphClass="grid__graph" />
         );
       case SCRIPT_DIALOGUE:
-        return this.renderGrid("grid--dialogue",
+        return this.renderGrid("grid--dialogue", screen,
           <section key="controls" className="grid__controls">
-            {this.props.screen.choices.map(({ text, next }, i) => (
+            {screen.choices.map(({ text, next }, i) => (
               <a className="button" key={i} onClick={this.advanceDialogue(next)}>{text}</a>
             ))}
           </section>
         );
     }
+  }
+
+  render() {
+    if (!this.state.transitionFrom)
+      return this.renderScreen(this.props.screen);
+
+    if (!this.state.transitioning) {
+      const prevScreen = this.renderScreen(this.state.transitionFrom);
+      return <><div className="transition-overlay" />{prevScreen}</>;
+    }
+    const screen = this.renderScreen(this.state.transitionTo);
+    return <><div className="transition-overlay transition-overlay--opaque" />{screen}</>;
+  }
+
+  static getDerivedStateFromProps({ screen: transitionTo }, state) {
+    if (!state.transitionTo || state.transitionTo.type === transitionTo.type)
+      return { transitionTo };
+
+    return { transitionFrom: state.transitionTo, transitionTo };
+  }
+
+  componentDidUpdate() {
+    if (!this.state.transitionFrom) return;
+
+    if (!this.state.transitioning) {
+      document.querySelector(".transition-overlay").classList.add("transition-overlay--opaque");
+      setTimeout(this.transitionStep.bind(this), 1100);
+    }
+    else {
+      document.querySelector(".transition-overlay").classList.remove("transition-overlay--opaque");
+      setTimeout(this.transitionStep.bind(this), 700);
+    }
+  }
+
+  transitionStep() {
+    if (!this.state.transitioning) this.setState({ transitioning: true });
+    else this.setState({ transitionFrom: null, transitioning: false });
   }
 }
 

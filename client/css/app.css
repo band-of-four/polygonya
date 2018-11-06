@@ -88,14 +88,6 @@ body {
   padding: 8vh;
 }
 
-.screen-fade-enter-active, .screen-fade-leave-active {
-  transition: opacity 0.4s;
-}
-
-.screen-fade-enter, .screen-fade-leave-to {
-  opacity: 0;
-}
-
 .cutscene {
   display: flex;
   flex-direction: column;
@@ -251,4 +243,21 @@ body {
 
 .quote__content {
   margin: 12px 0 0;
+}
+
+.transition-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Overlay form elements */
+  z-index: 999;
+
+  background: transparent;
+  transition: background 700ms ease-in;
+}
+
+.transition-overlay--opaque {
+  background: white;
 }
