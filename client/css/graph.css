@@ -14,18 +14,19 @@
 
 .graph-field__label {
   position: absolute;
-  line-height: 33px;
+  line-height: 40px;
   left: 12px;
 }
 
 .graph-field__input {
   width: var(--graph-field-width);
   display: inline-block;
-  padding: 8px 8px 8px 30px;
+  padding: 10px 8px 8px 30px;
 
-  border: 1px solid black;
-  border-radius: 8px;
+  border-radius: 230px 15px 200px 20px/15px 205px 10px 150px;
+  border: 2px solid var(--border-color);
 
-  font-family: var(--body-sans-font);
+  font: bold 16px var(--main-font);
+
   text-align: right;
 }

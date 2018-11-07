@@ -21,12 +21,10 @@ class Game extends Component {
   renderGrid = (gridClass, screen, controls) => (
     <div className={`grid ${gridClass}`}>
       <header key="header" className="grid__header header">
-        <span className="header__info" href="#">
-          {this.props.name}'s Polygonya — day {this.props.day}
-        </span>
+        <span className="header__info">{this.props.name}, день #{this.props.day}</span>
         <span>
-          <a className="header__link" key="memoriesLink">memories</a>
-          <a className="header__link" key="logOutLink" onClick={this.props.onLogout}>quit</a>
+          <a className="header__link" key="memoriesLink">воспоминания</a>
+          <a className="header__link" key="logOutLink" onClick={this.props.onLogout}>выйти</a>
         </span>
       </header>
       <section key="sprite" className="grid__sprite sprite"

@@ -32,7 +32,7 @@ class Graph extends Component {
     return (
       <div className="graph-field">
         <label className="graph-field__label">{field.toUpperCase()}</label>
-        <input type="number" step="0.1" name={field} className="graph-field__input"
+        <input type="number" step="0.01" name={field} className="graph-field__input"
           onChange={this.updateFieldState} value={this.state[field]} />
       </div>
     );

@@ -68,11 +68,12 @@
 .header__link {
   color: var(--text-color);
   text-decoration: none;
-  font: bold 22px/var(--header-height) var(--header-font);
+  font: normal 26px/var(--header-height) var(--main-font);
 }
 
 .header__link {
   margin-left: 24px;
+  font-size: 22px;
 
   &:hover {
     cursor: pointer;
@@ -94,7 +95,7 @@
   margin: 0 auto;
   max-width: 90vw;
   text-align: center;
-  font-size: 18px;
+  font-size: 24px;
   line-height: 1.4em;
 }
 
@@ -120,14 +121,16 @@
   max-width: 500px;
   min-height: var(--textbox-height);
   margin: 0 auto;
-  border: 1px solid #000;
-  border-radius: 10px;
-  padding: 12px 18px;
-  width: 100%
+  padding: 16px 18px;
+  width: 100%;
+
+  /* Based on https://codepen.io/tmrDevelops/pen/VeRvKX */
+  border-radius: 200px 12px 200px 10px/5px 260px 5px 260px;
+  border: 2px solid var(--border-color);
 }
 
 .textbox__name {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: bold;
   margin-bottom: 12px;
 }

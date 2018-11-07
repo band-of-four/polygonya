@@ -4,9 +4,7 @@
 @import 'history.css';
 
 :root {
-  --body-font: 'Merriweather', serif;
-  --body-sans-font: 'Merriweather Sans', sans-serif;
-  --header-font: 'Gloria Hallelujah', serif;
+  --main-font: 'Neucha', serif;
 
   --header-height: 68px;
   --min-layout-height: 500px;
@@ -14,6 +12,7 @@
   --graph-field-width: 120px;
 
   --text-color: #000;
+  --border-color: #6d6d6d;
 }
 
 * {
@@ -22,7 +21,9 @@
 
 body {
   margin: 0;
-  font-family: var(--body-font);
+
+  font: 18px var(--main-font);
+  letter-spacing: 0.04em;
 }
 
 .transition-overlay {
@@ -61,6 +62,4 @@ body {
 
   border: 1px solid black;
   border-radius: 8px;
-
-  font-family: var(--body-sans-font);
 }
