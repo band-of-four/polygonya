@@ -1,5 +1,6 @@
-@import 'header.css';
+@import 'buttons.css';
 @import 'graph.css';
+@import 'game-view.css';
 @import 'history.css';
 
 :root {
@@ -9,10 +10,7 @@
 
   --header-height: 68px;
   --min-layout-height: 500px;
-
-  --quote-height: 120px;
   --textbox-height: 120px;
-
   --graph-field-width: 120px;
 
   --text-color: #000;
@@ -25,224 +23,6 @@
 body {
   margin: 0;
   font-family: var(--body-font);
-}
-
-.grid {
-  height: 100vh;
-  padding: 0 24px;
-
-  display: grid;
-  grid-column-gap: 8px;
-
-  /* Min-height is chosen such that no elements overlap
-   * and scrolling is forced when the viewport is too short */
-  min-height: var(--min-layout-height);
-}
-
-.grid--dialogue {
-  grid: [row1-start] "header header" var(--header-height) [row1-end]
-        [row2-start] "sprite textbox" 45% [row2-end]
-        [row3-start] "sprite controls" auto [row3-end]
-        / 20fr 35fr;
-}
-
-.grid--graph {
-  grid: [row1-start] "header header header" var(--header-height) [row1-end]
-        [row2-start] "sprite textbox textbox" var(--textbox-height) [row2-end]
-        [row3-start] "sprite fields graph" auto [row3-end]
-        / 20fr calc(var(--graph-field-width) + 24px) 25fr;
-}
-
-.grid__header {
-  grid-area: header;
-}
-
-.grid__sprite {
-  grid-area: sprite;
-  justify-self: end;
-}
-
-.grid__textbox {
-  grid-area: textbox;
-  align-self: center;
-}
-
-.grid__controls {
-  grid-area: controls;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.grid__fields {
-  grid-area: fields;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.grid__graph {
-  grid-area: graph;
-  max-height: 100%;
-  padding: 8vh;
-}
-
-.cutscene {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  padding: 6vh 0;
-
-  align-items: center;
-  justify-content: space-between;
-}
-
-/* TODO: merge with .button */
-.cutscene__action {
-  display: inline-block;
-  background: white;
-  border: 1px solid black;
-  border-radius: 8px;
-  padding: 10px 24px;
-  margin: 10px 0;
-
-  font-size: 15px;
-  text-decoration: none;
-  color: black;
-
-  font-family: var(--body-font);
-
-  &:hover {
-    cursor: pointer;
-  }
-}
-
-.cutscene__content {
-  margin: 0 auto;
-  max-width: 90vw;
-  text-align: center;
-  font-size: 18px;
-  line-height: 1.4em;
-}
-
-.button {
-  display: block;
-  background: white;
-  border: 1px solid black;
-  border-radius: 8px;
-  padding: 10px 24px;
-  margin: 10px 0;
-  max-width: 420px;
-  width: 100%;
-
-  font-size: 15px;
-  text-decoration: none;
-  color: black;
-
-  font-family: var(--body-font);
-
-  &:hover {
-    cursor: pointer;
-  }
-}
-
-.button--graph {
-  width: var(--graph-field-width);
-  margin: 16px 0;
-  padding: 8px 0;
-  text-align: center;
-}
-
-/* JSF-specific styles
- * TODO: decouple CSS from Vue */
-.view {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  min-height: var(--min-layout-height);
-  max-height: calc(80% - var(--quote-height));
-}
-
-.view__button {
-  display: block;
-  background: white;
-  border: 1px solid black;
-  border-radius: 8px;
-  padding: 8px 16px;
-  margin: 0 8px;
-
-  font-size: 15px;
-  text-decoration: none;
-  color: black;
-
-  font-family: var(--body-font);
-
-  &:hover {
-    cursor: pointer;
-  }
-}
-
-.view__field {
-  width: 180px;
-  display: block;
-  padding: 8px;
-  margin-bottom: 16px;
-
-  border: 1px solid black;
-  border-radius: 8px;
-
-  font-family: var(--body-sans-font);
-}
-
-.view__below {
-  margin-top: 48px;
-}
-
-.view--overflowing {
-  overflow: auto;
-  margin-top: 48px;
-  justify-content: flex-start;
-}
-
-.sprite {
-  display: flex;
-  flex: 1 0 auto;
-  width: 100%;
-
-  /* Max-width forces the sprite to have at least 14/31 of the height
-   * visible regardless of viewport size. On narrower screens,
-   * a little bit more is revealed ;) */
-  max-width: calc(100vh * 14/31); 
-  /* Min-width prevents the image from squashing when the viewport is
-   * too short. The value is set to the computed sprite width @ 500px
-   * viewport height (see the min-height property of .grid) */
-  min-width: 240px;
-
-  /* The image is set as an inline attribute */
-  background: no-repeat center top/cover;
-}
-
-.quote {
-  max-width: 500px;
-  min-height: var(--quote-height);
-  margin: 0 auto;
-  border: 1px solid #000;
-  border-radius: 10px;
-  padding: 12px 18px;
-  width: 100%
-}
-
-.quote__speaker {
-  font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 12px;
-}
-
-.quote__content {
-  margin: 12px 0 0;
 }
 
 .transition-overlay {
@@ -260,4 +40,27 @@ body {
 
 .transition-overlay--opaque {
   background: white;
+}
+
+/* TODO: Replace .view with auth- and memories-specific styles */
+.view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  min-height: var(--min-layout-height);
+  max-height: calc(80% - var(--textbox-height));
+}
+
+.view__field {
+  width: 180px;
+  display: block;
+  padding: 8px;
+  margin-bottom: 16px;
+
+  border: 1px solid black;
+  border-radius: 8px;
+
+  font-family: var(--body-sans-font);
 }

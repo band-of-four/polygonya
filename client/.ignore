@@ -1,0 +1,5 @@
+# https://github.com/ggreer/the_silver_searcher
+
+dist/
+node_modules/
+package-lock.json

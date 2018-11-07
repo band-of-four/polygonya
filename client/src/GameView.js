@@ -31,10 +31,10 @@ class Game extends Component {
       </header>
       <section key="sprite" className="grid__sprite sprite"
                style={{ backgroundImage: `url(/assets/${screen.sprite})` }} />
-      <section key="textbox" className="grid__textbox">
-        <div key="quote" className="quote">
-          <span key="quoteSpeaker" className="quote__speaker">Каики Ахиру</span>
-          <p key="quoteContent" className="quote__content">{screen.text}</p>
+      <section key="textbox-container" className="grid__textbox">
+        <div className="textbox">
+          <span key="textboxName" className="textbox__name">Каики Ахиру</span>
+          <p key="textboxText" className="textbox__text">{screen.text}</p>
         </div>
       </section>
       {controls}
@@ -47,7 +47,7 @@ class Game extends Component {
         return (
           <div className="cutscene">
             <p className="cutscene__content">{screen.text}</p>
-            <a className="cutscene__action" onClick={this.advanceCutscene}>Продолжить</a>
+            <a className="button button--inline" onClick={this.advanceCutscene}>Продолжить</a>
           </div>
         );
       case SCRIPT_GRAPH:
@@ -58,7 +58,8 @@ class Game extends Component {
         return this.renderGrid("grid--dialogue", screen,
           <section key="controls" className="grid__controls">
             {screen.choices.map(({ text, next }, i) => (
-              <a className="button" key={i} onClick={this.advanceDialogue(next)}>{text}</a>
+              <a className="button button--dialogue-choice" key={i}
+                 onClick={this.advanceDialogue(next)}>{text}</a>
             ))}
           </section>
         );

@@ -2,10 +2,10 @@ import React from 'react';
 
 export default function Memories(props) {
   return (
-    <div className="view view--overflowing">
+    <div className="view">
       <div className="history__controls">
-        <button className="view__button" onClick={props.showGraph}>Вернуться в реальность</button>
-        <button className="view__button">Забыть все</button>
+        <button className="button" onClick={props.showGraph}>Вернуться в реальность</button>
+        <button className="button">Забыть все</button>
       </div>
       <table className="history__table">
         <thead>

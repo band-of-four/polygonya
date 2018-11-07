@@ -16,7 +16,7 @@ class Auth extends Component {
         <input type="text" className="view__field" placeholder="Твое имя" ref="username" />
         <input type="password" className="view__field" placeholder="Пароль" ref="password" />
 
-        <button type="submit" className="view__button" onClick={this.signIn}>Представиться</button>
+        <button type="submit" className="button" onClick={this.signIn}>Представиться</button>
       </form>
     );
   }

@@ -4,10 +4,10 @@ export const SCRIPT_GRAPH = 'SCRIPT_GRAPH';
 export const SCRIPT_RELATIONSHIP_UP_END_DAY = 'SCRIPT_RELATIONSHIP_UP_END_DAY';
 export const SCRIPT_RELATIONSHIP_DOWN_END_DAY = 'SCRIPT_RELATIONSHIP_DOWN_END_DAY';
 
-const SPRITE_IDLE = 'kaiki-chan-idle.png1';
-const SPRITE_ANGRY = 'kaiki-chan-angry.png1';
-const SPRITE_THINKING = 'kaiki-chan-thinking.png1';
-const SPRITE_BLUSHING = 'kaiki-chan-blushing.png1';
+const SPRITE_IDLE = 'kaiki-chan-idle.png';
+const SPRITE_ANGRY = 'kaiki-chan-angry.png';
+const SPRITE_THINKING = 'kaiki-chan-thinking.png';
+const SPRITE_BLUSHING = 'kaiki-chan-blushing.png';
 
 export const SCRIPT_GRAPH_AWAIT = [
   { type: SCRIPT_GRAPH, sprite: SPRITE_THINKING, text: 'Хмм, дай подумать...' }

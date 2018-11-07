@@ -1,0 +1,137 @@
+.grid {
+  height: 100vh;
+  padding: 0 24px;
+
+  display: grid;
+  grid-column-gap: 8px;
+
+  /* Min-height is chosen such that no elements overlap
+   * and scrolling is forced when the viewport is too short */
+  min-height: var(--min-layout-height);
+}
+
+.grid--dialogue {
+  grid: [row1-start] "header header" var(--header-height) [row1-end]
+        [row2-start] "sprite textbox" 45% [row2-end]
+        [row3-start] "sprite controls" auto [row3-end]
+        / 20fr 35fr;
+}
+
+.grid--graph {
+  grid: [row1-start] "header header header" var(--header-height) [row1-end]
+        [row2-start] "sprite textbox textbox" var(--textbox-height) [row2-end]
+        [row3-start] "sprite fields graph" auto [row3-end]
+        / 20fr calc(var(--graph-field-width) + 24px) 25fr;
+}
+
+.grid__header {
+  grid-area: header;
+}
+
+.grid__sprite {
+  grid-area: sprite;
+  justify-self: end;
+}
+
+.grid__textbox {
+  grid-area: textbox;
+  align-self: center;
+}
+
+.grid__controls {
+  grid-area: controls;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.grid__fields {
+  grid-area: fields;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.grid__graph {
+  grid-area: graph;
+  max-height: 100%;
+  padding: 8vh;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header__info,
+.header__link {
+  color: var(--text-color);
+  text-decoration: none;
+  font: bold 22px/var(--header-height) var(--header-font);
+}
+
+.header__link {
+  margin-left: 24px;
+
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}
+
+.cutscene {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 6vh 0;
+
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cutscene__content {
+  margin: 0 auto;
+  max-width: 90vw;
+  text-align: center;
+  font-size: 18px;
+  line-height: 1.4em;
+}
+
+.sprite {
+  display: flex;
+  flex: 1 0 auto;
+  width: 100%;
+
+  /* Max-width forces the sprite to have at least 14/31 of the height
+   * visible regardless of viewport size. On narrower screens,
+   * a little bit more is revealed ;) */
+  max-width: calc(100vh * 14/31); 
+  /* Min-width prevents the image from squashing when the viewport is
+   * too short. The value is set to the computed sprite width @ 500px
+   * viewport height (see the min-height property of .grid) */
+  min-width: 240px;
+
+  /* The image is set as an inline attribute */
+  background: no-repeat center top/cover;
+}
+
+.textbox {
+  max-width: 500px;
+  min-height: var(--textbox-height);
+  margin: 0 auto;
+  border: 1px solid #000;
+  border-radius: 10px;
+  padding: 12px 18px;
+  width: 100%
+}
+
+.textbox__name {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.textbox__text {
+  margin: 12px 0 0;
+}
