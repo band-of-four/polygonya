@@ -38,5 +38,6 @@ spring.datasource.password=your_pswrd
 spring.datasource.platform=oracle
 spring.datasource.driver-class-name=oracle.jdbc.OracleDriver
 spring.datasource.initialization-mode=always
-spring.jpa.hibernate.ddl-auto=create-drop
+spring.jpa.database-platform=org.hibernate.dialect.Oracle10gDialect
+spring.jpa.generate-ddl=true
 ```

@@ -4,17 +4,18 @@ import javax.persistence._
 
 @Entity
 @Table(name="history_entries")
-class HistoryEntries {
+class HistoryEntry {
+  @Id
+  var id: Long = _
+
   var x: Double = _
 
   var y: Double = _
   
-  var r: Double = _
-  
   var day: Int = _
   
-  @ManyToOne(fetch=FetchType.LAZY)
+  @ManyToOne
   @JoinColumn(name="username")
-  var username: User = _
+  var user: User = _
 }
   

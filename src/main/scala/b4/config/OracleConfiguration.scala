@@ -3,7 +3,7 @@ package b4.config
 import scala.beans.BeanProperty
 import oracle.jdbc.pool.OracleDataSource
 import org.springframework.boot.context.properties.ConfigurationProperties
-import org.springframework.context.annotation.{Bean, Configuration, Profile, Primary}
+import org.springframework.context.annotation.{Bean, Configuration, Primary}
 
 import javax.sql.DataSource
 

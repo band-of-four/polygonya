@@ -1,7 +1,8 @@
 package b4.repository
 
 import org.springframework.data.repository.CrudRepository
+import b4.model.User
 
-trait UserRepository[User, String] extends CrudRepository[User, String] {
-  def findByUsername(username: String): User
+trait UserRepository extends CrudRepository[User, String] {
+  def findByUsername(username: String): Option[User]
 }
