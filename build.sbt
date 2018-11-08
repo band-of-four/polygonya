@@ -17,5 +17,6 @@ libraryDependencies ++= {
     "org.springframework.boot" % "spring-boot-starter-web" % springBootVersion,
     "org.springframework.boot" % "spring-boot-configuration-processor" % springBootVersion,
     "org.springframework.boot" % "spring-boot-starter-data-jpa" % springBootVersion  % "provided",
+    "org.mindrot" % "jbcrypt" % "0.4",
     "com.oracle" % "ojdbc6" % "11.2.0.3")
 }
