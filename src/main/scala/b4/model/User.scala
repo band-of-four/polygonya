@@ -13,4 +13,12 @@ class User {
   var day: Int = _
 
   var relationshipMeter: Int = _
+
+  def this(username: String, passwordHash: String) = {
+    this()
+    this.username = username
+    this.passwordHash = passwordHash
+    this.day = 0
+    this.relationshipMeter = 0
+  }
 }
