@@ -19,9 +19,9 @@
 
 .grid--graph {
   grid: [row1-start] "header header header" var(--header-height) [row1-end]
-        [row2-start] "sprite textbox textbox" var(--textbox-height) [row2-end]
+        [row2-start] "sprite textbox textbox" calc(var(--textbox-height) + 2vh) [row2-end]
         [row3-start] "sprite fields graph" auto [row3-end]
-        / 20fr calc(var(--graph-field-width) + 24px) 25fr;
+        / 17fr calc(var(--graph-field-width) + 24px) 25fr;
 }
 
 .grid__header {

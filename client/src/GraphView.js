@@ -17,10 +17,18 @@ class Graph extends Component {
   }
 
   render() {
+    const containedFields = this.props.fieldsClass ? (
+      <section className={this.props.fieldsClass}>
+        {this.renderField('r')}{this.renderField('x')}{this.renderField('y')}
+      </section>
+    ) : (
+      <>{this.renderField('r')}{this.renderField('x')}{this.renderField('y')}</>
+    );
+
     return (
       <>
-        <form className={this.props.fieldsClass} onSubmit={this.submitFields}>
-          {this.renderField('r')}{this.renderField('x')}{this.renderField('y')}
+        <form className={this.props.formClass} onSubmit={this.submitFields}>
+          {containedFields}
           <button type="submit" className="button button--graph">Поставить</button>
         </form>
         <section className={this.props.graphClass}>{this.renderGraph()}</section>

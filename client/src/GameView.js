@@ -50,7 +50,7 @@ class Game extends Component {
         );
       case SCRIPT_GRAPH:
         return this.renderGrid("grid--graph", screen,
-          <GraphView key="graph" fieldsClass="grid__fields" graphClass="grid__graph" />
+          <GraphView key="graph" formClass="grid__fields" graphClass="grid__graph" />
         );
       case SCRIPT_DIALOGUE:
         return this.renderGrid("grid--dialogue", screen,

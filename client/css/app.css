@@ -1,6 +1,7 @@
 @import 'buttons.css';
 @import 'graph.css';
 @import 'game-view.css';
+@import 'mobile-game-view.css';
 @import 'history.css';
 
 :root {
@@ -10,6 +11,7 @@
   --min-layout-height: 500px;
   --textbox-height: 120px;
   --graph-field-width: 120px;
+  --mobile-controls-height: 200px;
 
   --text-color: #000;
   --border-color: #6d6d6d;

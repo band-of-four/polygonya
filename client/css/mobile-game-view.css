@@ -1,0 +1,88 @@
+.mobile-menu-toggle {
+  position: absolute;
+  right: 0;
+  padding: 10px 16px;
+  margin: 12px;
+  font-size: 24px;
+}
+
+.mobile-sprite {
+  display: flex;
+  flex: 1 0 auto;
+  height: calc(100vh - var(--mobile-controls-height) - 8px);
+  max-width: calc(100vh * 8/17); 
+  width: 100%;
+  margin: 0 auto;
+
+  /* The image is set as an inline attribute */
+  background: no-repeat center top/cover;
+}
+
+.mobile-controls {
+  height: var(--mobile-controls-height);
+  margin: 0 8px 8px;
+}
+
+.mobile-fullscreen-controls {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100vh;
+}
+
+.textbox--mobile {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  height: 100%;
+  max-width: 100%;
+}
+
+.textbox__text--mobile {
+  margin: 0;
+}
+
+.textbox__blinker {
+  animation: blinker 2s linear infinite;
+  text-align: right;
+}
+
+.button--mobile-dialogue-choice {
+  width: calc(100% - 16px);
+  margin: 4vh 8px;
+}
+
+.mobile-grid {
+  display: grid;
+  grid: [row1-start] "graph" auto [row1-end] [row2-start] "form" 130px [row2-end];
+  height: 100vh;
+}
+
+.mobile-grid__graph {
+  grid-area: graph;
+  padding: 16px;
+}
+
+.mobile-grid__form {
+  grid-area: form;
+
+  & .button--graph {
+    margin: 0 auto;
+  }
+}
+
+.mobile-graph-fields {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 16px;
+
+  & .graph-field__input {
+    width: 90px;
+  }
+}
+
+@keyframes blinker {
+  65% { opacity: 0; }
+}

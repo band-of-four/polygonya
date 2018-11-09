@@ -10,6 +10,7 @@ import { nextScreen } from './actions/game.js';
 
 import AuthView from './AuthView.js';
 import GameView from './GameView.js';
+import MobileGameView from './MobileGameView.js';
 
 let store;
 
@@ -28,10 +29,17 @@ class App extends Component {
     this.state = { screen: 'game' }
   }
 
+  isMobile() {
+    return window.matchMedia("(max-width: 600px)").matches;
+  }
+
   render() {
+    console.log(this.isMobile());
     switch (this.state.screen) {
       case 'game':
-        return <GameView onLogout={() => this.setState({ screen: 'auth' })} />;
+        return this.isMobile() ?
+          <MobileGameView onLogout={() => this.setState({ screen: 'auth' })} /> :
+          <GameView onLogout={() => this.setState({ screen: 'auth' })} />;
       case 'auth':
         return <AuthView onComplete={() => this.setState({ screen: 'game' })} />;
     }
