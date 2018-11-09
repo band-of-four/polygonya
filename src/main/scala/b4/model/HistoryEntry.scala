@@ -17,5 +17,13 @@ class HistoryEntry {
   @ManyToOne
   @JoinColumn(name="username")
   var user: User = _
+
+  def this(x: Double, y: Double, day: Int, user: User) {
+    this()
+    this.x = x
+    this.y = y
+    this.day = day
+    this.user = user
+  }
 }
   
