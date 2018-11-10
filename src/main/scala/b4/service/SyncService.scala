@@ -13,6 +13,8 @@ object SyncService {
   case class Request(@BeanProperty newDay: Int,
                      @BeanProperty relationship: Int,
                      @BeanProperty history: java.lang.Iterable[HistoryItem])
+  case class Response(@BeanProperty day: Int,
+                      @BeanProperty relationship: Int)
 }
 
 @Service
@@ -32,4 +34,7 @@ class SyncService {
     }.asJava
     historyRepository.saveAll(history)
   }
+
+  def getInfo(user: User): SyncService.Response =
+    SyncService.Response(user.day, user.relationshipMeter)
 }
