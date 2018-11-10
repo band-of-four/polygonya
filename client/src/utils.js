@@ -17,10 +17,18 @@ export async function withDelay(delayMillis, action) {
 export function postJson(url, payload) {
   return fetch(url, {
     method: 'POST',
+    credentials: 'include',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(payload)
+  });
+}
+
+export function getJson(url) {
+  return fetch(url, {
+    method: 'GET',
+    credentials: 'include'
   });
 }
 
