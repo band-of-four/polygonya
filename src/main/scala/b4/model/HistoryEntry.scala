@@ -1,17 +1,26 @@
 package b4.model
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import javax.persistence._
+
+import scala.beans.BeanProperty
 
 @Entity
 @Table(name="history_entries")
 class HistoryEntry {
   @Id
-  var id: Long = _
+  @GeneratedValue(strategy = GenerationType.SEQUENCE)
+  @JsonIgnore
+  @BeanProperty
+  var id: java.lang.Long = _
 
+  @BeanProperty
   var x: Double = _
 
+  @BeanProperty
   var y: Double = _
-  
+
+  @BeanProperty
   var day: Int = _
   
   @ManyToOne
