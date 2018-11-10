@@ -1,6 +1,8 @@
 package b4.controller
 
-import b4.model.User
+import java.lang
+
+import b4.model.{HistoryEntry, User}
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.{HttpStatus, ResponseEntity}
 import org.springframework.web.bind.annotation._
@@ -33,6 +35,15 @@ class SyncController {
     }
     val response = syncService.getInfo(user)
     new ResponseEntity[SyncService.Response](response, HttpStatus.OK)
+  }
+
+  @RequestMapping(value = Array("/history"), method = Array(RequestMethod.GET))
+  def getHistory(session: HttpSession): ResponseEntity[java.lang.Iterable[HistoryEntry]] = {
+    val user: User = session.getAttribute("user") match {
+      case null => return new ResponseEntity[java.lang.Iterable[HistoryEntry]](HttpStatus.UNAUTHORIZED)
+      case userObj => userObj.asInstanceOf[User]
+    }
+    new ResponseEntity[lang.Iterable[HistoryEntry]](syncService.getHistory(user), HttpStatus.OK)
   }
 }
 

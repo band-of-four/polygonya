@@ -37,4 +37,7 @@ class SyncService {
 
   def getInfo(user: User): SyncService.Response =
     SyncService.Response(user.day, user.relationshipMeter)
+
+  def getHistory(user: User): java.lang.Iterable[HistoryEntry] =
+    historyRepository.findByUser(user)
 }
