@@ -12,9 +12,11 @@ object SyncService {
   case class HistoryItem(@BeanProperty x: Double, @BeanProperty y: Double)
   case class Request(@BeanProperty newDay: Int,
                      @BeanProperty relationship: Int,
+                     @BeanProperty relationshipDelta: Int,
                      @BeanProperty history: java.lang.Iterable[HistoryItem])
   case class Response(@BeanProperty day: Int,
-                      @BeanProperty relationship: Int)
+                      @BeanProperty relationship: Int,
+                      @BeanProperty relationshipDelta: Int)
 }
 
 @Service
@@ -27,6 +29,7 @@ class SyncService {
   def perform(request: SyncService.Request, user: User): Unit = {
     user.day = request.newDay
     user.relationshipMeter = request.relationship
+    user.relationshipDelta = request.relationshipDelta
     userRepository.save(user)
 
     val history = request.history.asScala.map { entry =>
@@ -36,7 +39,7 @@ class SyncService {
   }
 
   def getInfo(user: User): SyncService.Response =
-    SyncService.Response(user.day, user.relationshipMeter)
+    SyncService.Response(user.day, user.relationshipMeter, user.relationshipDelta)
 
   def getHistory(user: User): java.lang.Iterable[HistoryEntry] =
     historyRepository.findByUser(user)
