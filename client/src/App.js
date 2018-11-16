@@ -7,6 +7,8 @@ import ReduxThunk from 'redux-thunk';
 
 import stateRoot from './reducers';
 import { nextScreen } from './actions/game.js';
+import { logout, tryPull } from './actions/app.js';
+import { APP_UI_AWAIT, APP_UI_AUTH, APP_UI_FETCH_ERROR, APP_UI_GAME } from './reducers/app.js';
 
 import AuthView from './AuthView.js';
 import GameView from './GameView.js';
@@ -23,27 +25,34 @@ else {
   devUrlScreen && store.dispatch(nextScreen(devUrlScreen));
 }
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { screen: 'game' }
-  }
+store.dispatch(tryPull());
 
+class App extends Component {
   isMobile() {
     return window.matchMedia("(max-width: 600px)").matches;
   }
 
   render() {
-    console.log(this.isMobile());
-    switch (this.state.screen) {
-      case 'game':
+    switch (this.props.screen) {
+      case APP_UI_AWAIT:
+        return <section>Loading...</section>;
+      case APP_UI_AUTH:
+        return <AuthView />;
+      case APP_UI_GAME:
         return this.isMobile() ?
-          <MobileGameView onLogout={() => this.setState({ screen: 'auth' })} /> :
-          <GameView onLogout={() => this.setState({ screen: 'auth' })} />;
-      case 'auth':
-        return <AuthView onComplete={() => this.setState({ screen: 'game' })} />;
+          <MobileGameView onLogout={() => this.props.dispatchLogout()} /> :
+          <GameView onLogout={() => this.props.dispatchLogout()} />;
+      case APP_UI_FETCH_ERROR:
+        return <section>Error</section>;
     }
   }
 }
 
-render(<Provider store={store}><App /></Provider>, document.body);
+const mapStateToProps = ({ app: { ui }}) => ({ screen: ui });
+const mapDispatchToProps = (dispatch) => ({
+  dispatchLogout: () => dispatch(logout())
+});
+
+const AppView = connect(mapStateToProps, mapDispatchToProps)(App)
+
+render(<Provider store={store}><AppView /></Provider>, document.body);

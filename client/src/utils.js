@@ -25,12 +25,15 @@ export function postJson(url, payload) {
   });
 }
 
-export function getJson(url) {
+export function get(url) {
   return fetch(url, {
     method: 'GET',
     credentials: 'include'
   });
 }
+
+export const httpDelete = (url) =>
+  fetch(url, { method: 'DELETE', credentials: 'include' });
 
 export function pickRandom(array) {
   /* https://stackoverflow.com/a/4550514/1726690 */
