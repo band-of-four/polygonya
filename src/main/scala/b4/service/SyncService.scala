@@ -11,7 +11,6 @@ import scala.collection.JavaConverters._
 object SyncService {
   case class HistoryItem(@BeanProperty x: Double, @BeanProperty y: Double)
   case class Request(@BeanProperty newDay: Int,
-                     @BeanProperty relationship: Int,
                      @BeanProperty relationshipDelta: Int,
                      @BeanProperty history: java.lang.Iterable[HistoryItem])
   case class Response(@BeanProperty day: Int,
@@ -26,16 +25,23 @@ class SyncService {
   @Autowired
   var historyRepository: HistoryRepository = _
 
-  def perform(request: SyncService.Request, user: User): Unit = {
-    user.day = request.newDay
-    user.relationshipMeter = request.relationship
-    user.relationshipDelta = request.relationshipDelta
-    userRepository.save(user)
+  def perform(request: SyncService.Request, user: User): Boolean = {
+    if (user.day + 1 != request.newDay) {
+      return false
+    }
+    else {
+      user.day = request.newDay
+      user.relationshipMeter = user.relationshipMeter + request.relationshipDelta
+      user.relationshipDelta = request.relationshipDelta
+      userRepository.save(user)
 
-    val history = request.history.asScala.map { entry =>
-      new HistoryEntry(x = entry.x, y = entry.y, day = request.newDay - 1, user = user)
-    }.asJava
-    historyRepository.saveAll(history)
+
+      val history = request.history.asScala.map { entry =>
+        new HistoryEntry(x = entry.x, y = entry.y, day = request.newDay - 1, user = user)
+      }.asJava
+      historyRepository.saveAll(history)
+      return true
+    }
   }
 
   def getInfo(user: User): SyncService.Response =

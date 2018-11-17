@@ -18,9 +18,11 @@ class SyncController extends ApplicationController {
   @RequestMapping(value = Array("/perform"), method = Array(RequestMethod.POST))
   def perform(@RequestBody request: SyncService.Request, session: HttpSession): ResponseEntity[Unit] =
     authenticated(session) { user =>
-      syncService.perform(request, user)
+    if (syncService.perform(request, user))
       new ResponseEntity[Unit](HttpStatus.OK)
-    }
+    else
+      new ResponseEntity[Unit](HttpStatus.BAD_REQUEST)
+  }
 
   @RequestMapping(value = Array("/info"), method = Array(RequestMethod.GET))
   def getInfo(session: HttpSession): ResponseEntity[SyncService.Response] =
