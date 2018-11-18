@@ -20,7 +20,7 @@ class AuthController extends ApplicationController {
   def login(@RequestBody request: LoginRequest, session: HttpSession): ResponseEntity[Unit] =
     userService.authorize(request.username, request.password) match {
       case Some(user) =>
-        session.setAttribute("user", user)
+        session.setAttribute("username", user.username)
         new ResponseEntity(HttpStatus.OK)
       case _ =>
         new ResponseEntity(HttpStatus.UNAUTHORIZED)
@@ -30,7 +30,7 @@ class AuthController extends ApplicationController {
   def signUp(@RequestBody request: LoginRequest, session: HttpSession): ResponseEntity[String] = {
     userService.signUp(request.username, request.password) match {
       case Right(user) =>
-        session.setAttribute("user", user)
+        session.setAttribute("username", user.username)
         new ResponseEntity(HttpStatus.OK)
       case Left(err) =>
         new ResponseEntity(err, HttpStatus.UNPROCESSABLE_ENTITY)

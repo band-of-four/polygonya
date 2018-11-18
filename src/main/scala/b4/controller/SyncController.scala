@@ -21,7 +21,7 @@ class SyncController extends ApplicationController {
     if (syncService.perform(request, user))
       new ResponseEntity[Unit](HttpStatus.OK)
     else
-      new ResponseEntity[Unit](HttpStatus.BAD_REQUEST)
+      new ResponseEntity[Unit](HttpStatus.UNPROCESSABLE_ENTITY)
   }
 
   @RequestMapping(value = Array("/info"), method = Array(RequestMethod.GET))

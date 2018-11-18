@@ -43,4 +43,15 @@ class AuthControllerTest extends SpringIntegrationTest {
     createdUser should not be null
     createdUser.passwordHash should startWith ("$2a$") // indicates a BCrypt hash
   }
+
+  "/auth/identity" should "reflect latest database state" in {
+    val userJson = "{\"username\": \"chisa\", \"password\": \"itdidntmatterifiwasthereornot\"}"
+    post("/auth/signup", userJson) shouldBe (200, None)
+    get("/auth/identity") shouldBe (200, Some("chisa"))
+    get("/auth/identity") shouldBe (200, Some("chisa")) // make sure /auth/identity isn't just invalidating the session
+
+    userRepository.deleteByUsername("chisa")
+
+    get("/auth/identity") shouldBe (401, None)
+  }
 }

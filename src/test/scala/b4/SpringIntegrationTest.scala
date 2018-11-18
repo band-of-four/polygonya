@@ -41,7 +41,7 @@ class SpringIntegrationTest extends FlatSpec with BeforeAndAfterEach with Matche
 
   def exchange[T](relativeUrl: String, method: HttpMethod, request: HttpEntity[T]): (Int, Option[String]) = {
     val response = rest.exchange(baseUrl + relativeUrl, method, request, classOf[String])
-    headers.put(HttpHeaders.COOKIE, Option(response.getHeaders.get("Set-Cookie")).getOrElse(java.util.Collections.emptyList()))
+    Option(response.getHeaders.get("Set-Cookie")).map(headers.put(HttpHeaders.COOKIE, _))
     (response.getStatusCodeValue, Option(response.getBody))
   }
 }
