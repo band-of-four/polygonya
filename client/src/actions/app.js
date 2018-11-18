@@ -13,9 +13,9 @@ export const tryPull = () => async (dispatch) => {
 
     const syncRequest = await get('/sync/info');
     if (syncRequest.status !== 200) throw '';
-    const { day, relationship } = await syncRequest.json();
+    const { day, relationship, relationshipDelta } = await syncRequest.json();
 
-    dispatch(setPlayerState(name, day, relationship));
+    dispatch(setPlayerState(name, day, relationship, relationshipDelta));
     dispatch({ type: APP_UI_GAME });
   }
   catch (e) {

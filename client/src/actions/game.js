@@ -19,10 +19,11 @@ export const nextScreen = (scriptId) => async (dispatch) => {
   }
 };
 
-export const setPlayerState = (name, day, relationship) => async (dispatch) => {
-  dispatch({ type: PLAYER_SET, name, day, relationship });
-  dispatch({ type: SCREEN_NEXT, to: scriptIdForDay(day) });
-};
+export const setPlayerState = (name, day, relationship, relationshipDelta) =>
+  async (dispatch) => {
+    dispatch({ type: PLAYER_SET, name, day, relationship, relationshipDelta });
+    dispatch({ type: SCREEN_NEXT, to: scriptIdForDay(day) });
+  };
 
 export const nextDay = () => async (dispatch, getState) => {
   dispatch({ type: PLAYER_NEXT_DAY });
