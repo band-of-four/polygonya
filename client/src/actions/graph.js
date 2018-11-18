@@ -3,7 +3,7 @@ import { SCREEN_GRAPH_AWAIT,
   SCREEN_GRAPH_INSIDE, SCREEN_GRAPH_OUTSIDE,
   SCREEN_GRAPH_ERROR, SCREEN_GRAPH_INVALID_FIELD,
   SCREEN_GRAPH, SCREEN_GRAPH_END } from '../reducers/screen.js';
-import { nextDay } from './game.js';
+import { pushAndAdvanceDay } from './app.js';
 import { withDelay, postJson } from '../utils.js';
 
 const GRAPH_POINTS_INSIDE_REQUIRED = 3;
@@ -33,7 +33,7 @@ export const addPoint = (x, y, r) => async (dispatch, getState) => {
 
     if (numPointsInside === GRAPH_POINTS_INSIDE_REQUIRED) {
       dispatch({ type: SCREEN_GRAPH_END });
-      setTimeout(() => dispatch(nextDay()), 900);
+      setTimeout(() => dispatch(pushAndAdvanceDay()), 900);
     }
     else if (numPointsInside < GRAPH_POINTS_INSIDE_REQUIRED)
       dispatch({ type: inside ? SCREEN_GRAPH_INSIDE : SCREEN_GRAPH_OUTSIDE });

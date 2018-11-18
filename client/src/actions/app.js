@@ -4,12 +4,29 @@ import { APP_UI_AWAIT, APP_UI_FETCH_ERROR,
 import { setPlayerState } from './game.js';
 import { withDelay, postJson, get, httpDelete } from '../utils.js';
 
+function savePlayerUpdate(username, update) {
+  localStorage.setItem(`update-for-${username}`, JSON.stringify(update));
+}
+
+async function sendFailedPlayerUpdates(username) {
+  const failedUpdate = localStorage.getItem(`update-for-${username}`);
+  if (failedUpdate === null) return;
+
+  const request = await postJson('/sync/perform', JSON.parse(failedUpdate));
+  /* 422 indicates a stale update, which we just throw away */
+  if (request.status !== 200 && request.status !== 422) throw '';
+
+  localStorage.removeItem(`update-for-${username}`);
+}
+
 export const tryPull = () => async (dispatch) => {
   try {
     const nameRequest = await get('/auth/identity');
     if (nameRequest.status === 401) return dispatch({ type: APP_UI_AUTH });
     if (nameRequest.status !== 200) throw '';
     const name = await nameRequest.text();
+
+    await sendFailedPlayerUpdates(name);
 
     const syncRequest = await get('/sync/info');
     if (syncRequest.status !== 200) throw '';
@@ -22,6 +39,26 @@ export const tryPull = () => async (dispatch) => {
     dispatch({ type: APP_UI_FETCH_ERROR });
   }
 };
+
+export const pushAndAdvanceDay = () => async (dispatch, getState) => {
+  const { name, day, relationshipMeter, relationshipDelta } = getState().player;
+  const newDay = day + 1;
+  const history = getState().graph.points;
+  
+  const update = { newDay, relationshipDelta, history };
+  savePlayerUpdate(name, update);
+
+  try {
+    const request = await postJson('/sync/perform', update);
+    if (request.status !== 200) throw '';
+
+    localStorage.removeItem(LOCAL_STORAGE_SAVED_UPDATE_KEY);
+    dispatch(setPlayerState(name, newDay, relationshipMeter, relationshipDelta));
+  }
+  catch (e) {
+    dispatch({ type: APP_UI_FETCH_ERROR });
+  }
+}
 
 export const resetAuthScreen = () => ({ type: APP_UI_AUTH });
 
