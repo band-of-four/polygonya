@@ -23,7 +23,7 @@ class Game extends Component {
       <header key="header" className="grid__header header">
         <span className="header__info">{this.props.name}, день #{this.props.day}</span>
         <span>
-          <a className="header__link" key="memoriesLink">воспоминания</a>
+          <a className="header__link" key="memoriesLink" onClick={this.props.onHistory}>воспоминания</a>
           <a className="header__link" key="logOutLink" onClick={this.props.onLogout}>выйти</a>
         </span>
       </header>

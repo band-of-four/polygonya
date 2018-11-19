@@ -1,5 +1,5 @@
 import { APP_UI_AWAIT, APP_UI_FETCH_ERROR,
-  APP_UI_AUTH, APP_UI_GAME,
+  APP_UI_AUTH, APP_UI_GAME, APP_UI_HISTORY,
   APP_AUTH_INVALID_CREDS, APP_AUTH_NAME_TAKEN } from '../reducers/app.js';
 import { setPlayerState } from './game.js';
 import { withDelay, postJson, get, httpDelete } from '../utils.js';
@@ -78,6 +78,8 @@ export const logout = () => async (dispatch) => {
     dispatch({ type: APP_UI_FETCH_ERROR });
   }
 }
+
+export const history = () => ({ type: APP_UI_HISTORY });
 
 async function authRequest(url, username, password, dispatch) {
   try {

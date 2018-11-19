@@ -7,11 +7,12 @@ import ReduxThunk from 'redux-thunk';
 
 import stateRoot from './reducers';
 import { nextScreen } from './actions/game.js';
-import { logout, tryPull } from './actions/app.js';
-import { APP_UI_AWAIT, APP_UI_AUTH, APP_UI_FETCH_ERROR, APP_UI_GAME } from './reducers/app.js';
+import { logout, history, tryPull } from './actions/app.js';
+import { APP_UI_AWAIT, APP_UI_AUTH, APP_UI_FETCH_ERROR, APP_UI_GAME, APP_UI_HISTORY } from './reducers/app.js';
 
 import AuthView from './AuthView.js';
 import GameView from './GameView.js';
+import HistoryView from './HistoryView.js';
 import MobileGameView from './MobileGameView.js';
 
 let store;
@@ -38,10 +39,12 @@ class App extends Component {
         return <section>Loading...</section>;
       case APP_UI_AUTH:
         return <AuthView />;
+      case APP_UI_HISTORY:
+        return <HistoryView />;
       case APP_UI_GAME:
         return this.isMobile() ?
           <MobileGameView onLogout={() => this.props.dispatchLogout()} /> :
-          <GameView onLogout={() => this.props.dispatchLogout()} />;
+          <GameView onLogout={() => this.props.dispatchLogout()} onHistory={() => this.props.dispatchHistory()} />;
       case APP_UI_FETCH_ERROR:
         return <section>Error</section>;
     }
@@ -50,7 +53,8 @@ class App extends Component {
 
 const mapStateToProps = ({ app: { ui }}) => ({ screen: ui });
 const mapDispatchToProps = (dispatch) => ({
-  dispatchLogout: () => dispatch(logout())
+  dispatchLogout: () => dispatch(logout()),
+  dispatchHistory: () => dispatch(history())
 });
 
 const AppView = connect(mapStateToProps, mapDispatchToProps)(App)
