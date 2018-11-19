@@ -10,34 +10,48 @@ const SPRITE_THINKING = '/assets/kaiki-chan-thinking.png';
 const SPRITE_BLUSHING = '/assets/kaiki-chan-blushing.png';
 const SPRITE_SLEEPING = '/assets/kaiki-chan-sleeping.png';
 const SPRITE_SLEEPING_ZZZ = '/assets/kaiki-chan-sleeping-zzz.png';
-
-export const SCRIPT_GRAPH_AWAIT = [
-  { type: SCRIPT_GRAPH, sprite: SPRITE_THINKING, text: 'Хмм, дай подумать...' }
-];
-
-export const SCRIPT_GRAPH_INSIDE = [
-  { type: SCRIPT_GRAPH, sprite: SPRITE_BLUSHING, text: 'Ты прав, точка действительно внутри... Попробуй еще один раз.' }
-];
-
-export const SCRIPT_GRAPH_OUTSIDE = [
-  { type: SCRIPT_GRAPH, sprite: SPRITE_ANGRY, text: 'Я устала смотреть на твои ошибки! Не могу поверить, что мой код пишет такой идиот. Консоль браузера открывал? Сможешь сосчитать, сколько там предупреждений, или умственных способностей не хватит?' }
-];
-
-export const SCRIPT_GRAPH_ERROR =
-  { type: SCRIPT_GRAPH, sprite: SPRITE_BLUSHING, text: 'Прости, я задумалась... Не повторишь?' };
-
-export const SCRIPT_GRAPH_NEUTRAL =
-  { type: SCRIPT_GRAPH, sprite: SPRITE_IDLE, text: 'Не торопись, подумай и поставь точку так, чтобы она попадала в полигон.' };
-
-export const SCRIPT_GRAPH_END =
-  { type: SCRIPT_GRAPH, sprite: SPRITE_IDLE, text: 'Отлично. Думаю, на сегодня хватит.' };
-
-export const scriptGraphInvalidField = (field, min, max) => (
-  { type: SCRIPT_GRAPH, sprite: SPRITE_ANGRY, text: `Разве я не говорила тебе, что ${field.toUpperCase()} должен быть между ${min} и ${max}?` });
+const SPRITE_ZZZ = '/assets/zzz.png';
 
 export const scriptIdForDay = (day) => `DAY_${day}`;
 
 export const SCRIPT = {
+  GRAPH_DEFAULT: {
+    type: SCRIPT_GRAPH,
+    neutral: [SPRITE_IDLE, 'Не торопись, подумай и поставь точку так, чтобы она попадала в полигон.'],
+    error: [SPRITE_BLUSHING, 'Прости, я задумалась... Не повторишь?'],
+    end: [SPRITE_IDLE, 'Отлично. Думаю, на сегодня хватит.'],
+    loading: [
+      [SPRITE_THINKING, 'Хмм, дай подумать...']
+    ],
+    inside: [
+      [SPRITE_BLUSHING, 'Ты прав, точка действительно внутри... Попробуй еще один раз.']
+    ],
+    outside: [
+      [SPRITE_ANGRY, 'Я устала смотреть на твои ошибки! Не могу поверить, что ты до сих пор не усвоил этот вариант.']
+    ],
+    invalidField: (field, min, max) => (
+      [SPRITE_ANGRY, `Разве я не говорила тебе, что ${field.toUpperCase()} должен быть между ${min} и ${max}?`]
+    )
+  },
+  GRAPH_SLEEPING: {
+    type: SCRIPT_GRAPH,
+    neutral: [SPRITE_ZZZ, '*спит*'],
+    error: [SPRITE_ZZZ, 'Мм?'],
+    end: [SPRITE_ZZZ, ''],
+    loading: [
+      [SPRITE_ZZZ, '...']
+    ],
+    inside: [
+      [SPRITE_ZZZ, '*улыбается во сне*']
+    ],
+    outside: [
+      [SPRITE_ZZZ, '*хмурится*']
+    ],
+    invalidField: (field, min, max) => (
+      [SPRITE_ZZZ, `*бормочит что-то про ${field.toUpperCase()} и числа ${min} и ${max}*`]
+    )
+  },
+
   DAY_0: {
     type: SCRIPT_CUTSCENE, next: 'DAY_0_1',
     text: 'В новой школе все совсем не так, как в старой — учителя строже, ребята все какие-то высокомерные...'
@@ -64,7 +78,7 @@ export const SCRIPT = {
     sprite: SPRITE_IDLE,
     text: 'Что ж, приступим. Дан полигон. Ты должен расставить точки в его пределах. Уяснил?',
     choices: [
-      { text: 'Мда, не могу поверить, что эта история настолько линейна.', next: SCRIPT_GRAPH }
+      { text: 'Мда, не могу поверить, что эта история настолько линейна.', next: 'GRAPH_DEFAULT' }
     ]
   },
   DAY_1: {
@@ -103,7 +117,7 @@ export const SCRIPT = {
     sprite: SPRITE_SLEEPING,
     choices: [
       { text: 'Может, укрою ее?', next: 'DAY_1_4' },
-      { text: 'Не буду ее беспокоить, позанимаюсь сам.', next: 'DAY_1_4' }
+      { text: 'Не буду ее беспокоить, позанимаюсь сам.', next: 'GRAPH_SLEEPING' }
     ]
   },
   DAY_2: {

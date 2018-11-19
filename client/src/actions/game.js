@@ -7,8 +7,6 @@ import { pushAndAdvanceDay } from './app.js';
 
 export const nextScreen = (scriptId) => async (dispatch) => {
   switch (scriptId) {
-    case SCRIPT_GRAPH:
-      return dispatch({ type: SCREEN_GRAPH });
     case SCRIPT_RELATIONSHIP_UP_END_DAY:
       dispatch({ type: PLAYER_RELATIONSHIP_UP });
       return dispatch(pushAndAdvanceDay());

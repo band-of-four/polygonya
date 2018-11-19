@@ -1,12 +1,4 @@
-import { SCRIPT,
-  SCRIPT_GRAPH,
-  SCRIPT_GRAPH_AWAIT,
-  SCRIPT_GRAPH_INSIDE,
-  SCRIPT_GRAPH_OUTSIDE,
-  SCRIPT_GRAPH_ERROR,
-  scriptGraphInvalidField,
-  SCRIPT_GRAPH_NEUTRAL,
-  SCRIPT_GRAPH_END } from '../script.js';
+import { SCRIPT, SCRIPT_GRAPH } from '../script.js';
 import { pickRandom } from '../utils.js';
 
 export const SCREEN_NEXT = 'SCREEN_NEXT';
@@ -20,25 +12,38 @@ export const SCREEN_GRAPH_END = 'SCREEN_GRAPH_END';
 
 const defaultState = SCRIPT.DAY_0;
 
-export default function game(state = defaultState, action) {
+export default function screen(state = defaultState, action) {
   switch (action.type) {
     case SCREEN_NEXT:
-      return SCRIPT[action.to];
-    case SCREEN_GRAPH:
-      return SCRIPT_GRAPH_NEUTRAL;
+      const screen = SCRIPT[action.to];
+      if (screen.type === SCRIPT_GRAPH)
+        return graphPick('neutral', action.to);
+      return screen;
     case SCREEN_GRAPH_AWAIT:
-      return pickRandom(SCRIPT_GRAPH_AWAIT);
-    case SCREEN_GRAPH_OUTSIDE:
-      return pickRandom(SCRIPT_GRAPH_OUTSIDE);
+      return graphPickRandom('loading', state.graphId);
     case SCREEN_GRAPH_INSIDE:
-      return pickRandom(SCRIPT_GRAPH_INSIDE);
+      return graphPickRandom('inside', state.graphId);
+    case SCREEN_GRAPH_OUTSIDE:
+      return graphPickRandom('outside', state.graphId);
     case SCREEN_GRAPH_ERROR:
-      return SCRIPT_GRAPH_ERROR;
+      return graphPick('error', state.graphId);
     case SCREEN_GRAPH_INVALID_FIELD:
-      return scriptGraphInvalidField(action.field, action.min, action.max);
+      const { field, min, max } = action;
+      const [ sprite, text ] = SCRIPT[state.graphId].invalidField(field, min, max);
+      return { type: SCRIPT_GRAPH, sprite, text, graphId: state.graphId };
     case SCREEN_GRAPH_END:
-      return SCRIPT_GRAPH_END;
+      return graphPick('end', state.graphId);
     default:
       return state;
   }
+}
+
+function graphPick(stateKind, graphId) {
+  const [ sprite, text ] = SCRIPT[graphId][stateKind];
+  return { type: SCRIPT_GRAPH, sprite, text, graphId };
+}
+
+function graphPickRandom(stateKind, graphId) {
+  const [ sprite, text ] = pickRandom(SCRIPT[graphId][stateKind]);
+  return { type: SCRIPT_GRAPH, sprite, text, graphId };
 }
