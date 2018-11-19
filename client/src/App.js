@@ -17,16 +17,17 @@ import MobileGameView from './MobileGameView.js';
 
 let store;
 
-if (process.env.NODE_ENV === "production")
+if (process.env.NODE_ENV === "production") {
   store = createStore(stateRoot, applyMiddleware(ReduxThunk));
+  store.dispatch(tryPull());
+}
 else {
   store = createStore(stateRoot, composeWithDevTools(applyMiddleware(ReduxThunk)));
-
-  const devUrlScreen = new URL(window.location.href).searchParams.get('screen');
-  devUrlScreen && store.dispatch(nextScreen(devUrlScreen));
+  store.dispatch(tryPull()).then(() => {
+    const devUrlScreen = new URL(window.location.href).searchParams.get('screen');
+    devUrlScreen && store.dispatch(nextScreen(devUrlScreen));
+  });
 }
-
-store.dispatch(tryPull());
 
 class App extends Component {
   isMobile() {

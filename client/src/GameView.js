@@ -12,12 +12,6 @@ class Game extends Component {
     this.state = { transitionFrom: null, transitionTo: null, transitioning: false };
   }
 
-  advanceCutscene = () =>
-    this.props.dispatchNextScreen(this.props.screen.next);
-
-  advanceDialogue = (nextScreen) => () =>
-    this.props.dispatchNextScreen(nextScreen);
-
   renderGrid = (gridClass, screen, controls) => (
     <div className={`grid ${gridClass}`}>
       <header key="header" className="grid__header header">
@@ -28,7 +22,7 @@ class Game extends Component {
         </span>
       </header>
       <section key="sprite" className="grid__sprite sprite"
-               style={{ backgroundImage: `url(/assets/${screen.sprite})` }} />
+               style={{ backgroundImage: `url(${screen.sprite})` }} />
       <section key="textbox-container" className="grid__textbox">
         <div className="textbox">
           <span key="textboxName" className="textbox__name">Каики Ахиру</span>
@@ -42,10 +36,19 @@ class Game extends Component {
   renderScreen(screen) {
     switch (screen.type) {
       case SCRIPT_CUTSCENE:
+        const choices = screen.choices || [{ text: 'Продолжить', next: screen.next }];
+        const controls = choices.map(({ text, next }, i) =>
+          <a className="button button--inline" key={i}
+             onClick={() => this.props.dispatchNextScreen(next)}>{text}</a>
+        );
+        const image = screen.sprite ? (
+          <section className="cutscene__image"><img src={screen.sprite} /></section>
+        ) : null;
         return (
           <div className="cutscene">
             <p className="cutscene__content">{screen.text}</p>
-            <a className="button button--inline" onClick={this.advanceCutscene}>Продолжить</a>
+            {image}
+            <section className="cutscene__controls">{controls}</section>
           </div>
         );
       case SCRIPT_GRAPH:
@@ -57,7 +60,7 @@ class Game extends Component {
           <section key="controls" className="grid__controls">
             {screen.choices.map(({ text, next }, i) => (
               <a className="button button--dialogue-choice" key={i}
-                 onClick={this.advanceDialogue(next)}>{text}</a>
+                 onClick={() => this.props.dispatchNextScreen(next)}>{text}</a>
             ))}
           </section>
         );

@@ -4,10 +4,12 @@ export const SCRIPT_GRAPH = 'SCRIPT_GRAPH';
 export const SCRIPT_RELATIONSHIP_UP_END_DAY = 'SCRIPT_RELATIONSHIP_UP_END_DAY';
 export const SCRIPT_RELATIONSHIP_DOWN_END_DAY = 'SCRIPT_RELATIONSHIP_DOWN_END_DAY';
 
-const SPRITE_IDLE = 'kaiki-chan-idle.png';
-const SPRITE_ANGRY = 'kaiki-chan-angry.png';
-const SPRITE_THINKING = 'kaiki-chan-thinking.png';
-const SPRITE_BLUSHING = 'kaiki-chan-blushing.png';
+const SPRITE_IDLE = '/assets/kaiki-chan-idle.png';
+const SPRITE_ANGRY = '/assets/kaiki-chan-angry.png';
+const SPRITE_THINKING = '/assets/kaiki-chan-thinking.png';
+const SPRITE_BLUSHING = '/assets/kaiki-chan-blushing.png';
+const SPRITE_SLEEPING = '/assets/kaiki-chan-sleeping.png';
+const SPRITE_SLEEPING_ZZZ = '/assets/kaiki-chan-sleeping-zzz.png';
 
 export const SCRIPT_GRAPH_AWAIT = [
   { type: SCRIPT_GRAPH, sprite: SPRITE_THINKING, text: 'Хмм, дай подумать...' }
@@ -67,14 +69,41 @@ export const SCRIPT = {
   },
   DAY_1: {
     type: SCRIPT_CUTSCENE, next: 'DAY_1_1',
-    text: 'Тяжело...'
+    text: 'Как же хорошо я сегодня поспал! Еще и сон такой приятный приснился.'
+  },
+  DAY_1_1: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_1_1',
+    text: 'Вот решу все задачи и заставлю Каики мной гордиться!'
   },
   DAY_1_1: {
     type: SCRIPT_DIALOGUE,
-    text: 'Приветствуя тебя, я соблюдаю нормы общества, в котором мы живем.',
+    sprite: SPRITE_IDLE,
+    text: '*зевает*',
     choices: [
-      { text: 'Обнимая тебя, я сокрушаю одиночество, в котором мы живем', next: SCRIPT_RELATIONSHIP_UP_END_DAY },
-      { text: 'Кивая головой, я остаюсь холодным к чувствам, скрывающимися за твоими словами', next: SCRIPT_RELATIONSHIP_DOWN_END_DAY }
+      { text: 'Бодрого утра! Доставай вариант, я готов', next: 'DAY_1_A1' },
+      { text: 'Засиделась с уроками?', next: 'DAY_1_B1' }
+    ]
+  },
+  DAY_1_A1: {
+    type: SCRIPT_DIALOGUE,
+    sprite: SPRITE_IDLE,
+    text: 'Я рада твоему энтузиазму... *медленно протягивает листок, потягивается*',
+    choices: [
+      { text: 'Ох, ща нарешаю!', next: 'DAY_1_2' },
+      { text: 'Так-так, что тут у нас?', next: 'DAY_1_2' }
+    ]
+  },
+  DAY_1_2: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_1_3',
+    text: '...Каики?'
+  },
+  DAY_1_3: {
+    type: SCRIPT_CUTSCENE,
+    text: '...Во сне она выглядит такой милой.',
+    sprite: SPRITE_SLEEPING,
+    choices: [
+      { text: 'Может, укрою ее?', next: 'DAY_1_4' },
+      { text: 'Не буду ее беспокоить, позанимаюсь сам.', next: 'DAY_1_4' }
     ]
   },
   DAY_2: {
