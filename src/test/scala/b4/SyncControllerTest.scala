@@ -31,6 +31,4 @@ class SyncControllerTest extends SpringIntegrationTest {
     post("/auth/login", existingUserJson)
     get("/sync/history") should be (200, None)
   }
-
-
 }
