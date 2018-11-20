@@ -36,8 +36,8 @@ class Game extends Component {
   renderScreen(screen) {
     switch (screen.type) {
       case SCRIPT_CUTSCENE:
-        const choices = screen.choices || [{ text: 'Продолжить', next: screen.next }];
-        const controls = choices.map(({ text, next }, i) =>
+        const choices = screen.choices || [['Продолжить', screen.next]];
+        const controls = choices.map(([ text, next ], i) =>
           <a className="button button--inline" key={i}
              onClick={() => this.props.dispatchNextScreen(next)}>{text}</a>
         );
@@ -58,7 +58,7 @@ class Game extends Component {
       case SCRIPT_DIALOGUE:
         return this.renderGrid("grid--dialogue", screen,
           <section key="controls" className="grid__controls">
-            {screen.choices.map(({ text, next }, i) => (
+            {screen.choices.map(([ text, next ], i) => (
               <a className="button button--dialogue-choice" key={i}
                  onClick={() => this.props.dispatchNextScreen(next)}>{text}</a>
             ))}
