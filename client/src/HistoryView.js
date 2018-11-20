@@ -16,14 +16,18 @@ class History extends Component {
       );
     else
       return (
+      <div>
         <button type="button" className="button" onClick={this.props.dispatchReturn}>Вернуться в реальность</button>
+        <div>{this.props.history}</div>
+      </div>
       );  
     }
 
   componentDidMount() {
     fetch("/sync/history", { method: 'GET', credentials: 'include' })
       .then(response => response.json())
-      .then(data => this.setState({ history: response.history, isLoading: false });
+      .then(data => this.setState({ history: data.history, isLoading: false }))
+      .then(this.render());
   }
 }
 
