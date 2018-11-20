@@ -2,6 +2,7 @@ import { APP_UI_AWAIT, APP_UI_FETCH_ERROR,
   APP_UI_AUTH, APP_UI_GAME, APP_UI_HISTORY,
   APP_AUTH_INVALID_CREDS, APP_AUTH_NAME_TAKEN } from '../reducers/app.js';
 import { setPlayerState } from './game.js';
+import { resetGraph } from './graph.js';
 import { withDelay, postJson, get, httpDelete } from '../utils.js';
 
 async function sendPendingUpdates(username) {
@@ -51,6 +52,7 @@ export const pushAndAdvanceDay = () => async (dispatch, getState) => {
   const { name, day, relationship, relationshipDelta } = getState().player;
   const newDay = day + 1;
   const history = getState().graph.points;
+  dispatch(resetGraph());
 
   try {
     sendUpdate(name, newDay, relationshipDelta, history);

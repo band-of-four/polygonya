@@ -42,8 +42,8 @@ export const SCRIPT = {
     neutral: [SPRITE_ZZZ, '*спит*'],
     error: [SPRITE_ZZZ, 'Мм?'],
     end: {
-      type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE, text: '',
-      choices: [['Пойду, пожалуй...', SCRIPT_TEST_END_DAY]]
+      type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE, text: '*трет глаза* Смотрю, ты и без меня уже справляешься.',
+      choices: [['Да... Пойду домой, и тебе советую, отдохнешь получше.', SCRIPT_TEST_END_DAY]]
     },
     loading: [
       [SPRITE_ZZZ, '...']

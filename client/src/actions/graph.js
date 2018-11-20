@@ -1,22 +1,38 @@
-import { GRAPH_ADD_POINT } from '../reducers/graph.js';
+import { GRAPH_ADD_POINT, GRAPH_RESET, GRAPH_SET_FIELD,
+  GRAPH_FIELD_VALID_RANGES } from '../reducers/graph.js';
 import { SCREEN_GRAPH_AWAIT,
   SCREEN_GRAPH_INSIDE, SCREEN_GRAPH_OUTSIDE,
   SCREEN_GRAPH_ERROR, SCREEN_GRAPH_INVALID_FIELD,
   SCREEN_GRAPH, SCREEN_GRAPH_END } from '../reducers/screen.js';
-import { pushAndAdvanceDay } from './app.js';
 import { withDelay, postJson } from '../utils.js';
 
 const GRAPH_POINTS_INSIDE_REQUIRED = 3;
 
-export const resetErrors = () => ({
-  type: SCREEN_GRAPH
-});
+export const resetGraph = () => ({ type: GRAPH_RESET });
 
-export const fieldError = (field, min, max) => ({
-  type: SCREEN_GRAPH_INVALID_FIELD, field, min, max
-});
+export const setField = (field, rawValue) => async (dispatch) => {
+  const value = parseFloat(rawValue);
+  const { min, max } = GRAPH_FIELD_VALID_RANGES[field];
 
-export const addPoint = (x, y, r) => async (dispatch, getState) => {
+  if (isNaN(value) || value < min || value > max) {
+    dispatch({ type: SCREEN_GRAPH_INVALID_FIELD, field, min, max });
+    return false;
+  }
+
+  dispatch({ type: SCREEN_GRAPH }); // clear errors if any
+  dispatch({ type: GRAPH_SET_FIELD, field, value });
+  return true;
+}
+
+export const addPointByXY = (x, y) => async (dispatch, getState) => {
+  await dispatch(setField('x', x)) &&
+    await dispatch(setField('y', y)) &&
+    await dispatch(addPoint());
+}
+
+export const addPoint = () => async (dispatch, getState) => {
+  const { x, y, r } = getState().graph;
+
   try {
     dispatch({ type: SCREEN_GRAPH_AWAIT });
 

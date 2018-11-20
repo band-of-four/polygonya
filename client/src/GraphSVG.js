@@ -27,13 +27,7 @@ export default class GraphSVG extends Component {
 
     const x = Number(((graphX - halfAxisLength) / rLength * this.props.r).toFixed(2));
     const y = Number((-(graphY - halfAxisLength) / rLength * this.props.r).toFixed(2));
-
-    if (x < this.props.minX || x > this.props.maxX)
-      this.props.onFieldError('x', this.props.minX, this.props.maxX);
-    else if (y < this.props.minY || y > this.props.maxY)
-      this.props.onFieldError('y', this.props.minY, this.props.maxY);
-    else
-      this.props.onPointPlaced(x, y);
+    this.props.onPointPlaced(x, y);
   }
 
   render() {
