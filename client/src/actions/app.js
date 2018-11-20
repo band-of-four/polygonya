@@ -4,17 +4,24 @@ import { APP_UI_AWAIT, APP_UI_FETCH_ERROR,
 import { setPlayerState } from './game.js';
 import { withDelay, postJson, get, httpDelete } from '../utils.js';
 
-function savePlayerUpdate(username, update) {
-  localStorage.setItem(`update-for-${username}`, JSON.stringify(update));
-}
-
-async function sendFailedPlayerUpdates(username) {
+async function sendPendingUpdates(username) {
   const failedUpdate = localStorage.getItem(`update-for-${username}`);
   if (failedUpdate === null) return;
 
   const request = await postJson('/sync/perform', JSON.parse(failedUpdate));
   /* 422 indicates a stale update, which we just throw away */
   if (request.status !== 200 && request.status !== 422) throw '';
+
+  localStorage.removeItem(`update-for-${username}`);
+}
+
+async function sendUpdate(username, newDay, relationshipDelta, history) {
+  const update = { newDay, relationshipDelta, history };
+
+  localStorage.setItem(`update-for-${username}`, JSON.stringify(update));
+
+  const request = await postJson('/sync/perform', update);
+  if (request.status !== 200) throw '';
 
   localStorage.removeItem(`update-for-${username}`);
 }
@@ -26,7 +33,7 @@ export const tryPull = () => async (dispatch) => {
     if (nameRequest.status !== 200) throw '';
     const name = await nameRequest.text();
 
-    await sendFailedPlayerUpdates(name);
+    await sendPendingUpdates(name);
 
     const syncRequest = await get('/sync/info');
     if (syncRequest.status !== 200) throw '';
@@ -41,19 +48,13 @@ export const tryPull = () => async (dispatch) => {
 };
 
 export const pushAndAdvanceDay = () => async (dispatch, getState) => {
-  const { name, day, relationshipMeter, relationshipDelta } = getState().player;
+  const { name, day, relationship, relationshipDelta } = getState().player;
   const newDay = day + 1;
   const history = getState().graph.points;
-  
-  const update = { newDay, relationshipDelta, history };
-  savePlayerUpdate(name, update);
 
   try {
-    const request = await postJson('/sync/perform', update);
-    if (request.status !== 200) throw '';
-
-    localStorage.removeItem(LOCAL_STORAGE_SAVED_UPDATE_KEY);
-    dispatch(setPlayerState(name, newDay, relationshipMeter, relationshipDelta));
+    sendUpdate(name, newDay, relationshipDelta, history);
+    dispatch(setPlayerState(name, newDay, relationship, relationshipDelta));
   }
   catch (e) {
     dispatch({ type: APP_UI_FETCH_ERROR });

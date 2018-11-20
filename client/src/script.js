@@ -3,6 +3,7 @@ export const SCRIPT_DIALOGUE = 'SCRIPT_DIALOGUE';
 export const SCRIPT_GRAPH = 'SCRIPT_GRAPH';
 export const SCRIPT_RELATIONSHIP_UP_END_DAY = 'SCRIPT_RELATIONSHIP_UP_END_DAY';
 export const SCRIPT_RELATIONSHIP_DOWN_END_DAY = 'SCRIPT_RELATIONSHIP_DOWN_END_DAY';
+export const SCRIPT_TEST_END_DAY = 'SCRIPT_TEST_END_DAY';
 
 const SPRITE_IDLE = '/assets/kaiki-chan-idle.png';
 const SPRITE_ANGRY = '/assets/kaiki-chan-angry.png';
@@ -19,7 +20,10 @@ export const SCRIPT = {
     type: SCRIPT_GRAPH,
     neutral: [SPRITE_IDLE, 'Не торопись, подумай и поставь точку так, чтобы она попадала в полигон.'],
     error: [SPRITE_BLUSHING, 'Прости, я задумалась... Не повторишь?'],
-    end: [SPRITE_IDLE, 'Отлично. Думаю, на сегодня хватит.'],
+    end: {
+      type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE, text: 'Отлично. Думаю, на сегодня хватит.',
+      choices: [['Пойду, пожалуй...', SCRIPT_TEST_END_DAY]]
+    },
     loading: [
       [SPRITE_THINKING, 'Хмм, дай подумать...']
     ],
@@ -37,7 +41,10 @@ export const SCRIPT = {
     type: SCRIPT_GRAPH,
     neutral: [SPRITE_ZZZ, '*спит*'],
     error: [SPRITE_ZZZ, 'Мм?'],
-    end: [SPRITE_ZZZ, ''],
+    end: {
+      type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE, text: '',
+      choices: [['Пойду, пожалуй...', SCRIPT_TEST_END_DAY]]
+    },
     loading: [
       [SPRITE_ZZZ, '...']
     ],
@@ -78,7 +85,8 @@ export const SCRIPT = {
     sprite: SPRITE_IDLE,
     text: 'Что ж, приступим. Дан полигон. Ты должен расставить точки в его пределах. Уяснил?',
     choices: [
-      ['Мда, не могу поверить, что эта история настолько линейна.', 'GRAPH_DEFAULT']
+      ['Мда, не могу поверить, что эта история настолько линейна.', 'GRAPH_DEFAULT'],
+      ['Линейна ли?.. Давай закончим этот день вместе', SCRIPT_RELATIONSHIP_UP_END_DAY]
     ]
   },
   DAY_1: {

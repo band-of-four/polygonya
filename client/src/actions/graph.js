@@ -31,10 +31,8 @@ export const addPoint = (x, y, r) => async (dispatch, getState) => {
     const numPointsInside =
       getState().graph.points.filter(({ inside }) => inside).length;
 
-    if (numPointsInside === GRAPH_POINTS_INSIDE_REQUIRED) {
+    if (numPointsInside === GRAPH_POINTS_INSIDE_REQUIRED)
       dispatch({ type: SCREEN_GRAPH_END });
-      setTimeout(() => dispatch(pushAndAdvanceDay()), 900);
-    }
     else if (numPointsInside < GRAPH_POINTS_INSIDE_REQUIRED)
       dispatch({ type: inside ? SCREEN_GRAPH_INSIDE : SCREEN_GRAPH_OUTSIDE });
   }

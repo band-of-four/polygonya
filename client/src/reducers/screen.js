@@ -32,7 +32,7 @@ export default function screen(state = defaultState, action) {
       const [ sprite, text ] = SCRIPT[state.graphId].invalidField(field, min, max);
       return { type: SCRIPT_GRAPH, sprite, text, graphId: state.graphId };
     case SCREEN_GRAPH_END:
-      return graphPick('end', state.graphId);
+      return SCRIPT[state.graphId].end;
     default:
       return state;
   }
