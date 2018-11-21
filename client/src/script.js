@@ -15,6 +15,8 @@ const SPRITE_ZZZ = '/assets/zzz.png';
 
 export const scriptIdForDay = (day) => `DAY_${day}`;
 
+export const screenType = (screenId) => SCRIPT[screenId].type;
+
 export const SCRIPT = {
   GRAPH_DEFAULT: {
     type: SCRIPT_GRAPH,
@@ -127,6 +129,12 @@ export const SCRIPT = {
       ['Может, укрою ее?', 'DAY_1_4'],
       ['Не буду ее беспокоить, позанимаюсь сам.', 'GRAPH_SLEEPING']
     ]
+  },
+  DAY_1_4: {
+    type: SCRIPT_CUTSCENE,
+    text: 'Тик-так',
+    sprite: SPRITE_SLEEPING,
+    choices: [['Тик-так', 'DAY_1_4']]
   },
   DAY_2: {
     type: SCRIPT_CUTSCENE, next: 'DAY_2_1',

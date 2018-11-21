@@ -10,6 +10,8 @@ const GRAPH_POINTS_INSIDE_REQUIRED = 3;
 
 export const resetGraph = () => ({ type: GRAPH_RESET });
 
+export const finishGraph = () => ({ type: SCREEN_GRAPH_END });
+
 export const setField = (field, rawValue) => async (dispatch) => {
   const value = parseFloat(rawValue);
   const { min, max } = GRAPH_FIELD_VALID_RANGES[field];
@@ -24,11 +26,10 @@ export const setField = (field, rawValue) => async (dispatch) => {
   return true;
 }
 
-export const addPointByXY = (x, y) => async (dispatch, getState) => {
+export const addPointByXY = (x, y) => async (dispatch, getState) =>
   await dispatch(setField('x', x)) &&
     await dispatch(setField('y', y)) &&
     await dispatch(addPoint());
-}
 
 export const addPoint = () => async (dispatch, getState) => {
   const { x, y, r } = getState().graph;
@@ -48,13 +49,12 @@ export const addPoint = () => async (dispatch, getState) => {
       getState().graph.points.filter(({ inside }) => inside).length;
 
     if (numPointsInside === GRAPH_POINTS_INSIDE_REQUIRED)
-      dispatch({ type: SCREEN_GRAPH_END });
+      return true;
     else if (numPointsInside < GRAPH_POINTS_INSIDE_REQUIRED)
       dispatch({ type: inside ? SCREEN_GRAPH_INSIDE : SCREEN_GRAPH_OUTSIDE });
   }
   catch (e) {
     dispatch({ type: SCREEN_GRAPH_ERROR });
-    return false;
   }
-  return true;
+  return false;
 }

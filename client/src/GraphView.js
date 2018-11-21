@@ -21,8 +21,7 @@ class Graph extends Component {
           <button type="submit" className="button button--graph">Поставить</button>
         </form>
         <section className={this.props.graphClass}>
-          <GraphSVG r={this.props.r} points={this.props.points}
-            onPointPlaced={this.props.dispatchAddPointXY} />
+          <GraphSVG r={this.props.r} points={this.props.points} onPointPlaced={this.addPoint} />
         </section>
       </>
     );
@@ -43,7 +42,13 @@ class Graph extends Component {
 
   submitFields = (e) => {
     e.preventDefault();
-    this.props.dispatchAddPoint();
+    this.props.dispatchAddPoint()
+      .then((finished) => finished && this.props.onTestFinish());
+  }
+
+  addPoint = (x, y) => {
+    this.props.dispatchAddPointXY(x, y)
+      .then((finished) => finished && this.props.onTestFinish());
   }
 }
 
