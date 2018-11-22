@@ -96,10 +96,10 @@ export const SCRIPT = {
     text: 'Как же хорошо я сегодня поспал! Еще и сон такой приятный приснился.'
   },
   DAY_1_1: {
-    type: SCRIPT_CUTSCENE, next: 'DAY_1_1',
+    type: SCRIPT_CUTSCENE, next: 'DAY_1_2',
     text: 'Вот решу все задачи и заставлю Каики мной гордиться!'
   },
-  DAY_1_1: {
+  DAY_1_2: {
     type: SCRIPT_DIALOGUE,
     sprite: SPRITE_IDLE,
     text: '*зевает*',
@@ -113,28 +113,28 @@ export const SCRIPT = {
     sprite: SPRITE_IDLE,
     text: 'Я рада твоему энтузиазму... *медленно протягивает листок, потягивается*',
     choices: [
-      ['Ох, ща нарешаю!', 'DAY_1_2'],
-      ['Так-так, что тут у нас?', 'DAY_1_2']
+      ['Ох, ща нарешаю!', 'DAY_1_3'],
+      ['Так-так, что тут у нас?', 'DAY_1_3']
     ]
   },
-  DAY_1_2: {
-    type: SCRIPT_CUTSCENE, next: 'DAY_1_3',
+  DAY_1_3: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_1_4',
     text: '...Каики?'
   },
-  DAY_1_3: {
+  DAY_1_4: {
     type: SCRIPT_CUTSCENE,
     text: '...Во сне она выглядит такой милой.',
     sprite: SPRITE_SLEEPING,
     choices: [
-      ['Может, укрою ее?', 'DAY_1_4'],
+      ['Может, укрою ее?', 'DAY_1_5'],
       ['Не буду ее беспокоить, позанимаюсь сам.', 'GRAPH_SLEEPING']
     ]
   },
-  DAY_1_4: {
+  DAY_1_5: {
     type: SCRIPT_CUTSCENE,
     text: 'Тик-так',
     sprite: SPRITE_SLEEPING,
-    choices: [['Тик-так', 'DAY_1_4']]
+    choices: [['Тик-так', 'DAY_1_5']]
   },
   DAY_2: {
     type: SCRIPT_CUTSCENE, next: 'DAY_2_1',

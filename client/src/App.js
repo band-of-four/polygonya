@@ -23,10 +23,12 @@ if (process.env.NODE_ENV === "production") {
 }
 else {
   store = createStore(stateRoot, composeWithDevTools(applyMiddleware(ReduxThunk)));
-  store.dispatch(tryPull()).then(() => {
+  //store.dispatch(tryPull()).then(() => {
     const devUrlScreen = new URL(window.location.href).searchParams.get('screen');
     devUrlScreen && store.dispatch(nextScreen(devUrlScreen));
-  });
+  //});
+  //
+  store.dispatch({ type: APP_UI_GAME });
 }
 
 class App extends Component {

@@ -39,7 +39,7 @@ body {
   z-index: 999;
 
   background: transparent;
-  transition: background 700ms ease-in;
+  transition: background 600ms ease-in;
 }
 
 .transition-overlay--opaque {
