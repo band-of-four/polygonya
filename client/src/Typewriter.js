@@ -6,6 +6,10 @@ export default class Typewriter extends Component {
     this.state = { printed: '', hidden: props.text, length: props.text.length };
   }
 
+  finishTyping() {
+    this.setState({ printed: this.state.printed + this.state.hidden, hidden: '' });
+  }
+
   render() {
     return (<>
       {this.state.printed}

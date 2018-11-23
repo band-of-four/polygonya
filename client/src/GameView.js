@@ -25,10 +25,10 @@ class Game extends Component {
       <section className="cutscene__image"><img src={screen.sprite} /></section>
     ) : null;
     return (
-      <div className="cutscene">
+      <div className="cutscene" onClick={() => this.refs.typewriter.finishTyping()}>
         <p className="cutscene__content">
           <Typewriter text={screen.text} key={screen.text} initDelay={600}
-            onTypingEnd={() => this.setState({ showControls: true })} />
+            ref="typewriter" onTypingEnd={() => this.setState({ showControls: true })} />
         </p>
         {image}
         <section className={controlsClass}>{controls}</section>
@@ -52,7 +52,7 @@ class Game extends Component {
           <span key="textboxName" className="textbox__name">Каики Ахиру</span>
           <p key="textboxText" className="textbox__text">
             <Typewriter text={screen.text} key={screen.text} initDelay={600}
-              onTypingEnd={() => this.setState({ showControls: true })} />
+              ref="typewriter" onTypingEnd={() => this.setState({ showControls: true })} />
           </p>
         </div>
       </section>
@@ -73,7 +73,7 @@ class Game extends Component {
         const controlsClass = this.state.showControls ?
           'grid__controls js-controls-shown' : 'grid__controls';
         return this.renderGrid("grid--dialogue", this.props.screen,
-          <section key="controls" className={controlsClass}>
+          <section key="controls" className={controlsClass} onClick={() => this.refs.typewriter.finishTyping()}>
             {this.props.screen.choices.map(([ text, next ], i) => (
               <a className="button button--dialogue-choice" key={i}
                  onClick={() => this.nextScreen(this.props.screen.type, next)}>{text}</a>
