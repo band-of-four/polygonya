@@ -33,7 +33,7 @@ class Auth extends Component {
       altText = "Такое имя я уже знаю... Ты уверен, что мы не знакомы?";
 
     return (
-      <form className="form form--full-screen" onSubmit={action}>
+      <form className="form form--full-screen neutral-bg" onSubmit={action}>
         <input type="text" className="field" placeholder="Твое имя" ref="username" />
         <input type="password" className="field" placeholder="Пароль" ref="password" />
         <button type="submit" className="button">{actionText}</button>

@@ -29,6 +29,10 @@ body {
   letter-spacing: 0.04em;
 }
 
+.neutral-bg {
+  background: url(/assets/neutralbg.svg);
+}
+
 .transition-overlay {
   position: absolute;
   top: 0;

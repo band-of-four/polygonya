@@ -5,9 +5,6 @@ target/
 src/main/resources/application.properties
 
 client/dist/*
-!client/dist/tech-chan-sketch.png
-!client/dist/kaiki-chan-idle.png
-!client/dist/kaiki-chan-blushing.png
-!client/dist/kaiki-chan-angry.png
-!client/dist/kaiki-chan-thinking.png
+!client/dist/*.png
+!client/dist/*.svg
 node_modules/

@@ -18,3 +18,8 @@
   border-radius: 230px 15px 200px 20px/15px 205px 10px 150px;
   border: 2px solid var(--border-color);
 }
+
+.field, .field::placeholder {
+  font: 16px var(--main-font);
+  letter-spacing: 0.04em;
+}
