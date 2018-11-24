@@ -62,3 +62,19 @@ body {
     margin-right: 4vw;
   }
 }
+
+.fade-in { animation: fade-in 700ms ease-out forwards; }
+
+.fade-out { animation: fade-out 700ms ease-out forwards; }
+
+@keyframes fade-in {
+  0% { opacity: 0; }
+  10% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes fade-out {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+

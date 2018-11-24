@@ -13,7 +13,6 @@ import { APP_UI_AWAIT, APP_UI_AUTH, APP_UI_FETCH_ERROR, APP_UI_GAME, APP_UI_HIST
 import AuthView from './AuthView.js';
 import GameView from './GameView.js';
 import HistoryView from './HistoryView.js';
-import MobileGameView from './MobileGameView.js';
 
 let store;
 
@@ -32,10 +31,6 @@ else {
 }
 
 class App extends Component {
-  isMobile() {
-    return window.matchMedia("(max-width: 600px)").matches;
-  }
-
   render() {
     switch (this.props.screen) {
       case APP_UI_AUTH:
@@ -43,9 +38,7 @@ class App extends Component {
       case APP_UI_HISTORY:
         return <HistoryView />;
       case APP_UI_GAME:
-        return this.isMobile() ?
-          <MobileGameView onLogout={() => this.props.dispatchLogout()} /> :
-          <GameView onLogout={() => this.props.dispatchLogout()} onHistory={() => this.props.dispatchHistory()} />;
+        return <GameView onLogout={() => this.props.dispatchLogout()} onHistory={() => this.props.dispatchHistory()} />;
       case APP_UI_AWAIT:
         return (
           <section className="info-page neutral-bg">

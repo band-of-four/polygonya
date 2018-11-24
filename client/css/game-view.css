@@ -112,11 +112,8 @@
   visibility: hidden;
 }
 
-.grid__controls > a, .cutscene__controls > a {
-  transform: scale(0);
-}
-
 .js-controls-shown > a {
+  transform: scale(0);
   animation: pop-in 600ms ease-in-out forwards;
 }
 
@@ -150,21 +147,6 @@
   }
 
   animation: fade-in 700ms ease-out forwards;
-}
-
-@keyframes fade-in {
-  0% { opacity: 0; }
-  10% { opacity: 0; }
-  100% { opacity: 1; }
-}
-
-.fade-out {
-  animation: fade-out 700ms ease-out forwards;
-}
-
-@keyframes fade-out {
-  0% { opacity: 1; }
-  100% { opacity: 0; }
 }
 
 .sprite {

@@ -46,6 +46,11 @@
 .textbox__blinker {
   animation: blinker 2s linear infinite;
   text-align: right;
+  opacity: 0;
+}
+
+@keyframes blinker {
+  65% { opacity: 1; }
 }
 
 .button--mobile-dialogue-choice {
@@ -81,8 +86,4 @@
   & .graph-field__input {
     width: 90px;
   }
-}
-
-@keyframes blinker {
-  65% { opacity: 0; }
 }
