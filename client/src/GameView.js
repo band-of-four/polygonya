@@ -37,15 +37,14 @@ class Game extends Component {
   renderGraph = (isMobile) => {
     if (isMobile) return (
       <div class="mobile-grid fade-in js-screen">
-        <header key="menu" className="mobile-menu-toggle button">...</header>
-        <GraphView key="graph" formClass="mobile-grid__form" fieldsClass="mobile-graph-fields" graphClass="mobile-grid__graph"
-          onTestFinish={this.finishGraphTest} />
+        <GraphView formClass="mobile-grid__form" graphClass="mobile-grid__graph"
+          fieldsClass="mobile-graph-fields" onTestFinish={this.finishGraphTest} />
       </div>
     );
 
     return this.renderGrid("grid--graph", this.props.screen,
-      <GraphView key="graph" formClass="grid__fields" graphClass="grid__graph"
-         onTestFinish={this.finishGraphTest} />
+      <GraphView formClass="grid__fields" graphClass="grid__graph"
+        onTestFinish={this.finishGraphTest} />
     );
   };
 
@@ -53,6 +52,8 @@ class Game extends Component {
     if (isMobile)
       return <GameDialogueMobile key={this.props.screen.text}
         screen={this.props.screen} screenClass="js-screen"
+        playerName={this.props.name} day={this.props.day}
+        onHistory={this.props.onHistory} onLogout={this.props.onLogout}
         onNextScreen={(next) => this.nextScreen(this.props.screen.type, next)} />
 
     const controlsClass = `grid__controls js-controls ${this.state.showControls ? 'js-controls--shown' : ''}`;

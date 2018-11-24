@@ -82,3 +82,22 @@
     width: 90px;
   }
 }
+
+.mobile-menu {
+  height: 100vh;
+  text-align: center;
+}
+
+.mobile-menu__name {
+  font-size: 28px;
+}
+
+.mobile-menu__day {
+  margin-bottom: 72px;
+}
+
+.mobile-menu__link {
+  display: block;
+  padding: 12px 0;
+  margin-bottom: 12px;
+}

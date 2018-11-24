@@ -6,7 +6,7 @@ import Typewriter from './Typewriter.js';
 export default class GameDialogueMobile extends Component {
   constructor(props) {
     super(props);
-    this.state = { textTyped: false, showChoices: false };
+    this.state = { textTyped: false, showChoices: false, showMenu: false };
   }
 
   onTextboxClick = () => {
@@ -15,14 +15,29 @@ export default class GameDialogueMobile extends Component {
   };
 
   render() {
+    if (this.state.showMenu) return this.renderMenu();
     if (this.state.showChoices) return this.renderChoices();
     return this.renderSprite();
+  }
+
+  renderMenu() {
+    return (
+      <div className="mobile-menu neutral-bg">
+        <p className="mobile-menu__name">{this.props.playerName}</p>
+        <p className="mobile-menu__day">День #{this.props.day}</p>
+
+        <a className="mobile-menu__link" key="close" onClick={() => this.setState({ showMenu: false })}>вернуться в игру</a>
+        <a className="mobile-menu__link" key="memories" onClick={this.props.onHistory}>воспоминания</a>
+        <a className="mobile-menu__link" key="logout" onClick={this.props.onLogout}>выйти</a>
+      </div>
+    );
   }
 
   renderSprite() {
     return (
       <div className="fade-in">
-        <header key="menu" className="mobile-menu-toggle button">...</header>
+        <header key="menu" className="mobile-menu-toggle button"
+          onClick={() => this.setState({ showMenu: true })}>...</header>
         <section key="sprite" className="mobile-sprite"
           style={{ backgroundImage: `url(${this.props.screen.sprite})` }} />
         <section key="textbox-container" className="mobile-textbox-container" onClick={this.onTextboxClick}>
