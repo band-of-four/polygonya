@@ -21,16 +21,20 @@ class HistoryEntry {
   var y: Double = _
 
   @BeanProperty
+  var r: Double = _
+
+  @BeanProperty
   var day: Int = _
   
   @ManyToOne
   @JoinColumn(name="username")
   var user: User = _
 
-  def this(x: Double, y: Double, day: Int, user: User) {
+  def this(x: Double, y: Double, r: Double, day: Int, user: User) {
     this()
     this.x = x
     this.y = y
+    this.r = r
     this.day = day
     this.user = user
   }

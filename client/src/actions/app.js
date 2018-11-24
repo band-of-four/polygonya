@@ -9,7 +9,7 @@ async function sendPendingUpdates(username) {
   const failedUpdate = localStorage.getItem(`update-for-${username}`);
   if (failedUpdate === null) return;
 
-  const request = await postJson('/sync/perform', JSON.parse(failedUpdate));
+  const request = await postJson('/sync/push', JSON.parse(failedUpdate));
   /* 422 indicates a stale update, which we just throw away */
   if (request.status !== 200 && request.status !== 422) throw '';
 
@@ -21,7 +21,7 @@ async function sendUpdate(username, newDay, relationshipDelta, history) {
 
   localStorage.setItem(`update-for-${username}`, JSON.stringify(update));
 
-  const request = await postJson('/sync/perform', update);
+  const request = await postJson('/sync/push', update);
   if (request.status !== 200) throw '';
 
   localStorage.removeItem(`update-for-${username}`);
@@ -36,7 +36,7 @@ export const tryPull = () => async (dispatch) => {
 
     await sendPendingUpdates(name);
 
-    const syncRequest = await get('/sync/info');
+    const syncRequest = await get('/sync/pull');
     if (syncRequest.status !== 200) throw '';
     const { day, relationship, relationshipDelta } = await syncRequest.json();
 

@@ -1,12 +1,10 @@
 package b4.controller
 
-import java.lang
-
-import b4.model.{HistoryEntry, User}
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.{HttpStatus, ResponseEntity}
 import org.springframework.web.bind.annotation._
 import b4.service.SyncService
+import b4.service.SyncService.HistoryForDay
 import javax.servlet.http.HttpSession
 
 @RestController
@@ -15,27 +13,27 @@ class SyncController extends ApplicationController {
   @Autowired
   var syncService: SyncService = _
 
-  @RequestMapping(value = Array("/perform"), method = Array(RequestMethod.POST))
-  def perform(@RequestBody request: SyncService.Request, session: HttpSession): ResponseEntity[Unit] =
+  @RequestMapping(value = Array("/push"), method = Array(RequestMethod.POST))
+  def perform(@RequestBody request: SyncService.PushRequest, session: HttpSession): ResponseEntity[Unit] =
     authenticated(session) { user =>
-    if (syncService.perform(request, user))
-      new ResponseEntity[Unit](HttpStatus.OK)
-    else
-      new ResponseEntity[Unit](HttpStatus.UNPROCESSABLE_ENTITY)
-  }
+      if (syncService.saveUserState(request, user))
+        new ResponseEntity(HttpStatus.OK)
+      else
+        new ResponseEntity(HttpStatus.UNPROCESSABLE_ENTITY)
+    }
 
-  @RequestMapping(value = Array("/info"), method = Array(RequestMethod.GET))
-  def getInfo(session: HttpSession): ResponseEntity[SyncService.Response] =
+  @RequestMapping(value = Array("/pull"), method = Array(RequestMethod.GET))
+  def getInfo(session: HttpSession): ResponseEntity[SyncService.PullResponse] =
     authenticated(session) { user =>
-      val response = syncService.getInfo(user)
-      new ResponseEntity[SyncService.Response](response, HttpStatus.OK)
+      val response = syncService.getUserState(user)
+      new ResponseEntity(response, HttpStatus.OK)
     }
 
   @RequestMapping(value = Array("/history"), method = Array(RequestMethod.GET))
-  def getHistory(session: HttpSession): ResponseEntity[java.lang.Iterable[HistoryEntry]] =
+  def getHistory(session: HttpSession): ResponseEntity[java.util.Map[Int, HistoryForDay]] =
     authenticated(session) { user =>
       val response = syncService.getHistory(user)
-      new ResponseEntity[lang.Iterable[HistoryEntry]](response, HttpStatus.OK)
+      new ResponseEntity(response, HttpStatus.OK)
     }
 }
 
