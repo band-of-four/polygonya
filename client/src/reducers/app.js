@@ -16,7 +16,7 @@ export default function app(state = defaultState, action) {
     case APP_UI_GAME:
       return { ui: APP_UI_GAME };
     case APP_UI_HISTORY:
-      return { ui: APP_UI_HISTORY };
+      return { ui: APP_UI_HISTORY, history: action.history };
     case APP_UI_AUTH:
       return { ui: APP_UI_AUTH };
     case APP_UI_AWAIT:

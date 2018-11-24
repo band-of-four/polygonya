@@ -82,7 +82,20 @@ export const logout = () => async (dispatch) => {
   }
 }
 
-export const history = () => ({ type: APP_UI_HISTORY });
+export const history = () => async (dispatch) => {
+  try {
+    dispatch({ type: APP_UI_AWAIT });
+
+    const request = await get('/sync/history');
+    if (request.status !== 200) throw '';
+
+    const history = await request.json();
+    dispatch({ type: APP_UI_HISTORY, history });
+  }
+  catch (e) {
+    dispatch({ type: APP_UI_FETCH_ERROR });
+  }
+};
 
 async function authRequest(url, username, password, dispatch) {
   try {
