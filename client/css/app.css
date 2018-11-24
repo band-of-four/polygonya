@@ -1,4 +1,5 @@
 @import 'buttons.css';
+@import 'spinner.css';
 @import 'forms.css';
 @import 'graph.css';
 @import 'game-view.css';
@@ -29,23 +30,35 @@ body {
   letter-spacing: 0.04em;
 }
 
+@media(max-width: 600px) {
+  body {
+    font-size: 20px;
+  }
+}
+
 .neutral-bg {
   background: url(/assets/neutralbg.svg);
 }
 
-.transition-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  /* Overlay form elements */
-  z-index: 999;
-
-  background: transparent;
-  transition: background 600ms ease-in;
+@media(max-width: 600px) {
+  .neutral-bg {
+    background-size: contain;
+  }
 }
 
-.transition-overlay--opaque {
-  background: white;
+/* Loading & error screens */
+.info-page {
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+
+  & > p {
+    margin-left: 4vw;
+    margin-right: 4vw;
+  }
 }

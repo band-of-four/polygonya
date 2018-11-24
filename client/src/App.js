@@ -38,8 +38,6 @@ class App extends Component {
 
   render() {
     switch (this.props.screen) {
-      case APP_UI_AWAIT:
-        return <section>Loading...</section>;
       case APP_UI_AUTH:
         return <AuthView />;
       case APP_UI_HISTORY:
@@ -48,8 +46,21 @@ class App extends Component {
         return this.isMobile() ?
           <MobileGameView onLogout={() => this.props.dispatchLogout()} /> :
           <GameView onLogout={() => this.props.dispatchLogout()} onHistory={() => this.props.dispatchHistory()} />;
+      case APP_UI_AWAIT:
+        return (
+          <section className="info-page neutral-bg">
+            <div className="spinner">
+              {Array(4).fill().map((_, i) => <div className="spinner__line" key={i} />)}
+            </div>
+          </section>
+        );
       case APP_UI_FETCH_ERROR:
-        return <section>Error</section>;
+        return (
+          <section className="info-page neutral-bg">
+            <p>В Сети что-то не так...</p>
+            <p>Проверь свое подключение к Интернету и обнови страницу.</p>
+          </section>
+        );
     }
   }
 }
