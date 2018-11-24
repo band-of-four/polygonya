@@ -33,6 +33,13 @@
   width: 100%;
 }
 
+@media(max-width: 600px) {
+  .button--dialogue-choice {
+    width: calc(100% - 16px);
+    margin: 4vh 8px;
+  }
+}
+
 .button--graph {
   width: var(--graph-field-width);
   margin: 16px 0;

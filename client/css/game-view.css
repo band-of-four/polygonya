@@ -108,16 +108,26 @@
   flex-direction: column;
 }
 
+@media(max-width: 600px) {
+  .cutscene__controls > a {
+    width: calc(100% - 16px);
+    margin: 2vh 8px;
+  }
+}
+
 .js-typewriter-hidden {
   visibility: hidden;
 }
 
-.js-controls-shown > a {
+.js-controls > a {
   transform: scale(0);
+}
+
+.js-controls--shown > a {
   animation: pop-in 600ms ease-in-out forwards;
 }
 
-.js-controls-hidden > a {
+.js-controls--hidden > a {
   animation: pop-out 600ms ease-in-out forwards;
 }
 

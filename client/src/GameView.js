@@ -15,23 +15,20 @@ class Game extends Component {
 
   renderCutscreen = (screen) => {
     const choices = screen.choices || [['Продолжить', screen.next]];
-    const controlsClass = this.state.showControls ?
-      'cutscene__controls js-controls-shown' : 'cutscene__controls';
-    const controls = choices.map(([ text, next ], i) =>
-      <a className="button button--inline" key={i}
-         onClick={() => this.nextScreen(screen.type, next)}>{text}</a>
-    );
-    const image = screen.sprite ? (
-      <section className="cutscene__image"><img src={screen.sprite} /></section>
-    ) : null;
+    const controlsClass = `cutscene__controls js-controls ${this.state.showControls ? 'js-controls--shown' : ''}`;
     return (
       <div className="cutscene" onClick={() => this.refs.typewriter.finishTyping()}>
         <p className="cutscene__content">
-          <Typewriter text={screen.text} key={screen.text} initDelay={600}
-            ref="typewriter" onTypingEnd={() => this.setState({ showControls: true })} />
+          <Typewriter text={screen.text} key={screen.text} initDelay={600} ref="typewriter"
+            onTypingEnd={() => this.setState({ showControls: true })} />
         </p>
-        {image}
-        <section className={controlsClass}>{controls}</section>
+        {screen.sprite && <section className="cutscene__image"><img src={screen.sprite} /></section>}
+        <section className={controlsClass}>
+          {choices.map(([ text, next ], i) =>
+            <a className="button button--inline" key={i}
+              onClick={() => this.nextScreen(screen.type, next)}>{text}</a>
+          )}
+        </section>
       </div>
     );
   };
@@ -57,7 +54,7 @@ class Game extends Component {
         <header key="menu" className="mobile-menu-toggle button">...</header>
         <section key="sprite" className="mobile-sprite"
                  style={{ backgroundImage: `url(${this.props.screen.sprite})` }} />
-        <section key="textbox-container" className="mobile-controls" onClick={() => {
+        <section key="textbox-container" className="mobile-textbox-container" onClick={() => {
           if (this.state.showControls) this.setState({ mobileShowChoice: true });
           else this.refs.typewriter.finishTyping()
         }}>
@@ -76,7 +73,7 @@ class Game extends Component {
     );
     if (isMobile && this.state.mobileShowChoice) return (
       <div className="mobile-fullscreen-controls">
-        <section className="mobile-controls">
+        <section className="mobile-textbox-container">
           <div className="textbox textbox--mobile">
             <span key="textboxName" className="textbox__name">Каики Ахиру</span>
             <p key="textboxText" className="textbox__text textbox__text--mobile">
@@ -85,9 +82,9 @@ class Game extends Component {
             <div key="textboxBlinker" />
           </div>
         </section>
-        <section class="js-controls-shown">
+        <section className="js-controls js-controls--shown">
           {this.props.screen.choices.map(([ text, next ], i) => (
-            <a className="button button--dialogue-choice button--mobile-dialogue-choice" key={i}
+            <a className="button button--dialogue-choice" key={i}
               onClick={() => {
                 this.state.mobileShowChoice = false;
                 this.nextScreen(this.props.screen.type, next)
@@ -97,8 +94,7 @@ class Game extends Component {
       </div>
     );
 
-    const controlsClass = this.state.showControls ?
-      'grid__controls js-controls-shown' : 'grid__controls';
+    const controlsClass = `grid__controls js-controls ${this.state.showControls ? 'js-controls--shown' : ''}`;
     return this.renderGrid("grid--dialogue", this.props.screen,
       <section key="controls" className={controlsClass} onClick={() => this.refs.typewriter.finishTyping()}>
         {this.props.screen.choices.map(([ text, next ], i) => (
@@ -146,14 +142,14 @@ class Game extends Component {
   nextScreen = (currentType, scriptId) => {
     this.state.showControls = false; // FIXME: dirty hack to avoid state update
     if (currentType !== screenType(scriptId)) {
-      document.querySelector('.js-controls-shown').classList.add('js-controls-hidden');
+      document.querySelector('.js-controls').classList.add('js-controls--hidden');
       setTimeout(() => {
         document.querySelector('.cutscene, .grid, .mobile-fullscreen-controls').classList.add('fade-out');
         setTimeout(() => this.props.dispatchNextScreen(scriptId), 600);
       }, 600);
     }
     else if (currentType === SCRIPT_DIALOGUE || currentType === SCRIPT_CUTSCENE) {
-      document.querySelector('.js-controls-shown').classList.add('js-controls-hidden');
+      document.querySelector('.js-controls').classList.add('js-controls--hidden');
       setTimeout(() => this.props.dispatchNextScreen(scriptId), 600);
     }
     else this.props.dispatchNextScreen(scriptId);

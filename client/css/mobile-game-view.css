@@ -18,7 +18,7 @@
   background: no-repeat center top/cover;
 }
 
-.mobile-controls {
+.mobile-textbox-container {
   height: var(--mobile-controls-height);
   margin: 0 8px 8px;
 }
@@ -51,11 +51,6 @@
 
 @keyframes blinker {
   65% { opacity: 1; }
-}
-
-.button--mobile-dialogue-choice {
-  width: calc(100% - 16px);
-  margin: 4vh 8px;
 }
 
 .mobile-grid {
