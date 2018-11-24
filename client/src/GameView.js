@@ -6,18 +6,19 @@ import { nextScreen } from './actions/game.js';
 import { finishGraph } from './actions/graph.js';
 import GraphView from './GraphView.js';
 import Typewriter from './Typewriter.js';
+import GameDialogueMobile from './GameDialogueMobile.js';
 
 class Game extends Component {
   constructor(props) {
     super(props);
-    this.state = { showControls: false, mobileShowChoice: false };
+    this.state = { showControls: false };
   }
 
   renderCutscreen = (screen) => {
     const choices = screen.choices || [['Продолжить', screen.next]];
     const controlsClass = `cutscene__controls js-controls ${this.state.showControls ? 'js-controls--shown' : ''}`;
     return (
-      <div className="cutscene" onClick={() => this.refs.typewriter.finishTyping()}>
+      <div className="cutscene js-screen" onClick={() => this.refs.typewriter.finishTyping()}>
         <p className="cutscene__content">
           <Typewriter text={screen.text} key={screen.text} initDelay={600} ref="typewriter"
             onTypingEnd={() => this.setState({ showControls: true })} />
@@ -35,7 +36,7 @@ class Game extends Component {
 
   renderGraph = (isMobile) => {
     if (isMobile) return (
-      <div class="mobile-grid">
+      <div class="mobile-grid fade-in js-screen">
         <header key="menu" className="mobile-menu-toggle button">...</header>
         <GraphView key="graph" formClass="mobile-grid__form" fieldsClass="mobile-graph-fields" graphClass="mobile-grid__graph"
           onTestFinish={this.finishGraphTest} />
@@ -49,50 +50,10 @@ class Game extends Component {
   };
 
   renderDialogue = (isMobile) => {
-    if (isMobile && !this.state.mobileShowChoice) return (
-      <div className="fade-in">
-        <header key="menu" className="mobile-menu-toggle button">...</header>
-        <section key="sprite" className="mobile-sprite"
-                 style={{ backgroundImage: `url(${this.props.screen.sprite})` }} />
-        <section key="textbox-container" className="mobile-textbox-container" onClick={() => {
-          if (this.state.showControls) this.setState({ mobileShowChoice: true });
-          else this.refs.typewriter.finishTyping()
-        }}>
-          <div className="textbox textbox--mobile" onClick={this.openDialogueChoices}>
-            <span key="textboxName" className="textbox__name">Каики Ахиру</span>
-            <p key="textboxText" className="textbox__text textbox__text--mobile">
-              <Typewriter text={this.props.screen.text} ref="typewriter" initDelay={600}
-                key={this.props.screen.text} onTypingEnd={() => this.setState({ showControls: true })} />
-            </p>
-            <div key="textboxBlinker" className="textbox__blinker">
-              {this.state.showControls ? 'продолжить...' : <span>&nbsp;</span>}
-            </div>
-          </div>
-        </section>
-      </div>
-    );
-    if (isMobile && this.state.mobileShowChoice) return (
-      <div className="mobile-fullscreen-controls">
-        <section className="mobile-textbox-container">
-          <div className="textbox textbox--mobile">
-            <span key="textboxName" className="textbox__name">Каики Ахиру</span>
-            <p key="textboxText" className="textbox__text textbox__text--mobile">
-              {this.props.screen.text}
-            </p>
-            <div key="textboxBlinker" />
-          </div>
-        </section>
-        <section className="js-controls js-controls--shown">
-          {this.props.screen.choices.map(([ text, next ], i) => (
-            <a className="button button--dialogue-choice" key={i}
-              onClick={() => {
-                this.state.mobileShowChoice = false;
-                this.nextScreen(this.props.screen.type, next)
-              }}>{text}</a>
-          ))}
-        </section>
-      </div>
-    );
+    if (isMobile)
+      return <GameDialogueMobile key={this.props.screen.text}
+        screen={this.props.screen} screenClass="js-screen"
+        onNextScreen={(next) => this.nextScreen(this.props.screen.type, next)} />
 
     const controlsClass = `grid__controls js-controls ${this.state.showControls ? 'js-controls--shown' : ''}`;
     return this.renderGrid("grid--dialogue", this.props.screen,
@@ -106,7 +67,7 @@ class Game extends Component {
   };
 
   renderGrid = (gridClass, screen, controls) => (
-    <div className={`grid ${gridClass}`}>
+    <div className={`grid ${gridClass} js-screen`}>
       <header key="header" className="grid__header header">
         <span className="header__info">{this.props.name}, день #{this.props.day}</span>
         <span>
@@ -144,7 +105,7 @@ class Game extends Component {
     if (currentType !== screenType(scriptId)) {
       document.querySelector('.js-controls').classList.add('js-controls--hidden');
       setTimeout(() => {
-        document.querySelector('.cutscene, .grid, .mobile-fullscreen-controls').classList.add('fade-out');
+        document.querySelector('.js-screen').classList.add('fade-out');
         setTimeout(() => this.props.dispatchNextScreen(scriptId), 600);
       }, 600);
     }
@@ -157,7 +118,7 @@ class Game extends Component {
 
   finishGraphTest = () => {
     this.state.showControls = false; // FIXME: dirty hack to avoid state update
-    document.querySelector('.grid, .mobile-grid').classList.add('fade-out');
+    document.querySelector('.js-screen').classList.add('fade-out');
     setTimeout(() => this.props.dispatchFinishGraph(), 900);
   }
 }
