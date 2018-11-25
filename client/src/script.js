@@ -12,6 +12,7 @@ const SPRITE_BLUSHING = '/assets/kaiki-chan-blushing.png';
 const SPRITE_SLEEPING = '/assets/kaiki-chan-sleeping.png';
 const SPRITE_SLEEPING_ZZZ = '/assets/kaiki-chan-sleeping-zzz.png';
 const SPRITE_ZZZ = '/assets/zzz.png';
+const SPRITE_PROM_INV = '/assets/prom-invitation.png';
 
 export const scriptIdForDay = (day) => `DAY_${day}`;
 
@@ -156,6 +157,16 @@ export const SCRIPT = {
     text: 'Смотри: у тебя есть чертеж, на него нанесены координатные оси. На каком-то расстоянии от них проложены линии. Посмотри на рисунок и скажи, что из этого получается.',
     choices: [['...', 'DAY_2_3']]
   },
+  /* Layer 07 */
+  DAY_7: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_7_1', sprite: SPRITE_PROM_INV,
+    text: ''
+  },
+  DAY_7_1: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'На что ты там уставился?',
+    choices: [['...', 'SMTH']]
+  
 };
 
 /* Yes I'm aware this is a hack */
