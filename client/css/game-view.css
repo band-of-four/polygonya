@@ -123,11 +123,11 @@
   transform: scale(0);
 }
 
-.js-controls--shown > a {
+.js-controls--pop-in > a {
   animation: pop-in 600ms ease-in-out forwards;
 }
 
-.js-controls--hidden > a {
+.js-controls--pop-out > a {
   animation: pop-out 600ms ease-in-out forwards;
 }
 

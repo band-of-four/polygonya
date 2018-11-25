@@ -74,7 +74,7 @@ export default class GameDialogueMobile extends Component {
             <div key="textboxBlinker" />
           </div>
         </section>
-        <section className={`js-controls ${this.state.popOutControls ? 'js-controls--hidden' : 'js-controls--shown'}`}>
+        <section className={`js-controls ${this.state.popOutControls ? 'js-controls--pop-out' : 'js-controls--pop-in'}`}>
           {this.props.screen.choices.map(([ text, next ], i) => (
             <a className="button button--dialogue-choice" key={i} onClick={() => this.nextScreen(next)}>{text}</a>
           ))}

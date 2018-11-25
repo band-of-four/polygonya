@@ -16,7 +16,7 @@ class Game extends Component {
 
   renderCutscreen = (screen) => {
     const choices = screen.choices || [['Продолжить', screen.next]];
-    const controlsClass = `cutscene__controls js-controls ${this.state.popInControls ? 'js-controls--shown' : this.state.popOutControls ? 'js-controls--hidden' : ''}`;
+    const controlsClass = `cutscene__controls js-controls ${this.state.popInControls ? 'js-controls--pop-in' : this.state.popOutControls ? 'js-controls--pop-out' : ''}`;
     return (
       <div className={`cutscene js-screen ${this.state.fadeOut ? 'fade-out' : ''}`} onClick={() => this.refs.typewriter.finishTyping()}>
         <p className="cutscene__content">
@@ -56,7 +56,7 @@ class Game extends Component {
         onHistory={this.props.onHistory} onLogout={this.props.onLogout}
         onNextScreen={(next) => this.nextScreen(this.props.screen.type, next)} />
 
-    const controlsClass = `grid__controls js-controls ${this.state.popInControls ? 'js-controls--shown' : this.state.popOutControls ? 'js-controls--hidden' : ''}`;
+    const controlsClass = `grid__controls js-controls ${this.state.popInControls ? 'js-controls--pop-in' : this.state.popOutControls ? 'js-controls--pop-out' : ''}`;
     return this.renderGrid("grid--dialogue", this.props.screen,
       <section key="controls" className={controlsClass} onClick={() => this.refs.typewriter.finishTyping()}>
         {this.props.screen.choices.map(([ text, next ], i) => (
