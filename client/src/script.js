@@ -3,6 +3,7 @@ export const SCRIPT_DIALOGUE = 'SCRIPT_DIALOGUE';
 export const SCRIPT_GRAPH = 'SCRIPT_GRAPH';
 export const SCRIPT_RELATIONSHIP_UP_END_DAY = 'SCRIPT_RELATIONSHIP_UP_END_DAY';
 export const SCRIPT_RELATIONSHIP_DOWN_END_DAY = 'SCRIPT_RELATIONSHIP_DOWN_END_DAY';
+export const SCRIPT_RELATIONSHIP_NONE_END_DAY = 'SCRIPT_RELATIONSHIP_NONE_END_DAY';
 export const SCRIPT_TEST_END_DAY = 'SCRIPT_TEST_END_DAY';
 
 const SPRITE_IDLE = '/assets/kaiki-chan-idle.png';
@@ -13,10 +14,13 @@ const SPRITE_SLEEPING = '/assets/kaiki-chan-sleeping.png';
 const SPRITE_SLEEPING_ZZZ = '/assets/kaiki-chan-sleeping-zzz.png';
 const SPRITE_ZZZ = '/assets/zzz.png';
 const SPRITE_PROM_INV = '/assets/prom-invitation.png';
+const SPRITE_EMPTY_GRAPH = '/assets/empty-graph.svg';
+const SPRITE_GRAPH_INSIDE = '/assets/graph-inside.svg';
+const SPRITE_GRAPH_INSIDE_OUTSIDE = '/assets/graph-outside.svg';
 
 export const scriptIdForDay = (day) => `DAY_${day}`;
 
-export const screenType = (screenId) => SCRIPT[screenId].type;
+export const screenType = (screenId) => SCRIPT[screenId] && SCRIPT[screenId].type;
 
 export const SCRIPT = {
   GRAPH_DEFAULT: {
@@ -132,7 +136,7 @@ export const SCRIPT = {
   DAY_1_B3: {
     type: SCRIPT_DIALOGUE, sprite: SPRITE_ANGRY,
     text: 'Мда, такого я от тебя не ожидала. Иди-ка ты домой, подумай над собой хорошенько, а завтра начнем с нуля.',
-    choices: [['Хорошо...', SCRIPT_RELATIONSHIP_UP_END_DAY]]
+    choices: [['Хорошо...', SCRIPT_RELATIONSHIP_NONE_END_DAY]]
   },
   /* Layer 02 */
   DAY_2: {
@@ -154,8 +158,52 @@ export const SCRIPT = {
   },
   DAY_2_2: {
     type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
-    text: 'Смотри: у тебя есть чертеж, на него нанесены координатные оси. На каком-то расстоянии от них проложены линии. Посмотри на рисунок и скажи, что из этого получается.',
+    text: 'Смотри: у тебя есть чертеж, на нем координатные оси и линии. Посмотри на рисунок и скажи, что из этого получается.',
     choices: [['...', 'DAY_2_3']]
+  },
+  DAY_2_3: {
+    type: SCRIPT_CUTSCENE, sprite: SPRITE_EMPTY_GRAPH,
+    text: 'Хмм, никаких осей здесь нет. Только две стрелочки и...',
+    choices: [
+      ['Фигура из линий', 'DAY_2_4'],
+      ['План комнаты', 'DAY_2_3_WRONG']
+    ]
+  },
+  DAY_2_3_WRONG: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: '*осудительно качая головой* Подумай еще.',
+    choices: [['Ладно...', 'DAY_2_3']]
+  },
+  DAY_2_4: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'Правильно, они образуют фигуру, причем замкнутую, то есть полигон. Твое задание — расставить точки так, чтобы они все были внутри него.',
+    choices: [['Точки?..', 'DAY_2_5']]
+  },
+  DAY_2_5: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'Просто возьми карандаш и поставь его в любое место на чертеже, а потом скажи мне, попал ли ты внутрь полигона или оказался снаружи.',
+    choices: [['Понял.', 'DAY_2_6']]
+  },
+  DAY_2_6: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_2_7', sprite: SPRITE_GRAPH_INSIDE,
+    text: 'Вот эта точка — внутри.'
+  },
+  DAY_2_7: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_2_8', sprite: SPRITE_GRAPH_INSIDE_OUTSIDE,
+    text: 'А вот эта — снаружи.'
+  },
+  DAY_2_8: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'Все верно. Попробуешь решить настоящий вариант?',
+    choices: [
+      ['Да, давай', 'GRAPH_DEFAULT'],
+      ['Знаешь, я немного устал...', 'DAY_2_9']
+    ]
+  },
+  DAY_2_9: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'Понимаю, нужно время, чтобы это усвоить. Увидимся завтра.',
+    choices: [['Договорились.', SCRIPT_RELATIONSHIP_NONE_END_DAY]]
   },
   /* Layer 07 */
   DAY_7: {
@@ -198,7 +246,3 @@ export const SCRIPT = {
     ]
   }
 };
-
-/* Yes I'm aware this is a hack */
-SCRIPT.DAY_0 = SCRIPT.DAY_1;
-
