@@ -20,7 +20,8 @@ object SyncService {
 
   case class PullResponse(@BeanProperty day: Int,
                           @BeanProperty relationship: Int,
-                          @BeanProperty relationshipDelta: Int)
+                          @BeanProperty relationshipDelta: Int,
+                          @BeanProperty testsDone: Int)
 
   case class ComputedHistoryItem(@BeanProperty x: Double,
                                  @BeanProperty y: Double,
@@ -45,6 +46,9 @@ class SyncService {
     user.day = request.newDay
     user.relationshipMeter = user.relationshipMeter + request.relationshipDelta
     user.relationshipDelta = request.relationshipDelta
+
+    if (request.history.asScala.nonEmpty) user.testsDone += 1
+
     userRepository.save(user)
 
     val history = request.history.asScala.map { entry =>
@@ -56,7 +60,7 @@ class SyncService {
   }
 
   def getUserState(user: User): SyncService.PullResponse =
-    SyncService.PullResponse(user.day, user.relationshipMeter, user.relationshipDelta)
+    SyncService.PullResponse(user.day, user.relationshipMeter, user.relationshipDelta, user.testsDone)
 
   def getHistory(user: User): java.util.Map[Int, HistoryForDay] =
     historyRepository

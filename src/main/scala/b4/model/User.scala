@@ -16,6 +16,8 @@ class User {
 
   var relationshipDelta: Int = _
 
+  var testsDone: Int = _
+
   def this(username: String, passwordHash: String) = {
     this()
     this.username = username
@@ -23,5 +25,6 @@ class User {
     this.day = 1
     this.relationshipMeter = 0
     this.relationshipDelta = 0
+    this.testsDone = 0
   }
 }

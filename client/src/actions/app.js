@@ -38,9 +38,9 @@ export const tryPull = () => async (dispatch) => {
 
     const syncRequest = await httpGet('/sync/pull');
     if (syncRequest.status !== 200) throw '';
-    const { day, relationship, relationshipDelta } = await syncRequest.json();
+    const { day, relationship, relationshipDelta, testsDone } = await syncRequest.json();
 
-    dispatch(setPlayerState(name, day, relationship, relationshipDelta));
+    dispatch(setPlayerState(name, day, relationship, relationshipDelta, testsDone));
     dispatch({ type: APP_UI_GAME });
   }
   catch (e) {
@@ -53,11 +53,12 @@ export const pushAndAdvanceDay = () => async (dispatch, getState) => {
   const lastR = getState().graph.r;
   const newDay = day + 1;
   const history = getState().graph.points;
+  const testsDone = getState().player.testsDone;
   dispatch(resetGraph());
 
   try {
     sendUpdate(name, newDay, relationshipDelta, history, lastR);
-    dispatch(setPlayerState(name, newDay, relationship, relationshipDelta));
+    dispatch(setPlayerState(name, newDay, relationship, relationshipDelta, testsDone));
   }
   catch (e) {
     dispatch({ type: APP_UI_FETCH_ERROR });

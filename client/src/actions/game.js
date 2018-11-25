@@ -1,6 +1,6 @@
 import { SCREEN_NEXT, SCREEN_GRAPH } from '../reducers/screen.js';
 import { PLAYER_RELATIONSHIP_UP, PLAYER_RELATIONSHIP_DOWN,
-  PLAYER_SET } from '../reducers/player.js';
+  PLAYER_TEST_DONE, PLAYER_SET } from '../reducers/player.js';
 import { SCRIPT_RELATIONSHIP_UP_END_DAY, SCRIPT_RELATIONSHIP_DOWN_END_DAY,
   SCRIPT_RELATIONSHIP_NONE_END_DAY, SCRIPT_TEST_END_DAY,
   SCRIPT_GRAPH, scriptIdForDay } from '../script.js';
@@ -15,15 +15,17 @@ export const nextScreen = (scriptId) => async (dispatch) => {
       dispatch({ type: PLAYER_RELATIONSHIP_DOWN });
       return dispatch(pushAndAdvanceDay());
     case SCRIPT_RELATIONSHIP_NONE_END_DAY:
+      return dispatch(pushAndAdvanceDay());
     case SCRIPT_TEST_END_DAY:
+      dispatch({ type: PLAYER_TEST_DONE });
       return dispatch(pushAndAdvanceDay());
     default:
       return dispatch({ type: SCREEN_NEXT, to: scriptId });
   }
 };
 
-export const setPlayerState = (name, day, relationship, relationshipDelta) =>
+export const setPlayerState = (name, day, relationship, relationshipDelta, testsDone) =>
   async (dispatch) => {
-    dispatch({ type: PLAYER_SET, name, day, relationship, relationshipDelta });
+    dispatch({ type: PLAYER_SET, name, day, relationship, relationshipDelta, testsDone });
     dispatch({ type: SCREEN_NEXT, to: scriptIdForDay(day) });
   };
