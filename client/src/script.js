@@ -10,6 +10,7 @@ const SPRITE_IDLE = '/assets/kaiki-chan-idle.png';
 const SPRITE_ANGRY = '/assets/kaiki-chan-angry.png';
 const SPRITE_THINKING = '/assets/kaiki-chan-thinking.png';
 const SPRITE_BLUSHING = '/assets/kaiki-chan-blushing.png';
+const SPRITE_SLEEPY = '/assets/kaiki-chan-sleepy.png';
 const SPRITE_SLEEPING = '/assets/kaiki-chan-sleeping.png';
 const SPRITE_SLEEPING_ZZZ = '/assets/kaiki-chan-sleeping-zzz.png';
 const SPRITE_ZZZ = '/assets/zzz.png';
@@ -56,7 +57,7 @@ export const SCRIPT = {
     neutral: [SPRITE_ZZZ, '*спит*'],
     error: [SPRITE_ZZZ, 'Мм?'],
     end: {
-      type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE, text: '*трет глаза* Смотрю, ты и без меня уже справляешься.',
+      type: SCRIPT_DIALOGUE, sprite: SPRITE_SLEEPY, text: '*трет глаза* Смотрю, ты и без меня уже справляешься.',
       choices: [['Да... Пойду домой, и тебе советую, отдохнешь получше.', SCRIPT_TEST_END_DAY]]
     },
     loading: [SPRITE_ZZZ, '...'],
@@ -922,6 +923,56 @@ export const SCRIPT = {
     type: SCRIPT_CUTSCENE, next: SCRIPT_RELATIONSHIP_UP_END_DAY,
     text: 'Всё-таки, Ахиру-сан особенная...'
   },
+  /* Layer 12 */
+  DAY_12: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_12_1',
+    text: 'Я так хорошо спал сегодня, такой приятный сон снился...'
+  },
+  DAY_12_1: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_12_2',
+    text: 'Сегодня я решу все задачи правильно и заставлю Ахиру-сан мной гордиться.'
+  },
+  DAY_12_2: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_SLEEPY,
+    text: '*зевает*',
+    choices: [
+      ['Бодрого утра! Доставай граф, я готов', 'DAY_12_A'],
+      ['Засиделась с уроками?', 'DAY_12_B']
+    ]
+  },
+  /* Layer 12. Branch A */
+  DAY_12_A: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_SLEEPY,
+    text: 'Я рада твоему энтузиазму *медленно протягивает листок, потягивается*',
+    choices: [
+      ['Ох, ща нарешаю!', 'DAY_12_3'],
+      ['Так-так, что тут у нас?', 'DAY_12_3']
+    ]
+  },
+  /* Layer 12. Branch B */
+  DAY_12_B: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_SLEEPY,
+    text: 'Какая тебе разница? Займись своими проблемами.',
+    choices: [['Ну я же волнуюсь...', 'DAY_12_3']]
+  },
+  DAY_12_3: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_12_4', sprite: SPRITE_SLEEPING,
+    text: '...Ахиру-сан?'
+  },
+  DAY_12_4: {
+    type: SCRIPT_CUTSCENE, sprite: SPRITE_SLEEPING_ZZZ,
+    text: '...Во сне она выглядит такой милой.',
+    choices: [
+      ['Может, укрою ее?', 'DAY_12_5'],
+      ['Не буду ее беспокоить, позанимаюсь сам.', 'GRAPH_SLEEPING']
+    ]
+  },
+  DAY_12_5: {
+    type: SCRIPT_CUTSCENE, sprite: SPRITE_SLEEPING,
+    text: 'Тик-так, тик-так, тик-так',
+    choices: [['Тик-так', SCRIPT_RELATIONSHIP_UP_END_DAY]]
+  },
+
   /* Layer 13 */
   DAY_13: {
     type: SCRIPT_CUTSCENE, next: 'DAY_13_1',
