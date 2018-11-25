@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 
 import GraphSVG from './GraphSVG.js';
 
-const TESTS_REQUIRED = 0; /* TODO: 2 */
+const TESTS_REQUIRED = 2;
+const RELATIONSHIP_REQUIRED = 5;
 
 const POINTS_TEST_PASSED = [
   { x: -5.0, y: -5.0, inside: true },
@@ -38,23 +39,32 @@ class Epilogue extends Component {
   }
 
   render() {
+    const mark = this.state.finished && (
+      <div className="epilogue__test-mark">
+        {this.props.testPassed ? 'пройдено' : 'потрачено'}
+      </div>
+    );
+
     return (
       <section className={`epilogue ${this.props.className}`}>
         <div className="epilogue__graph-container">
           <GraphSVG r={10} points={this.state.points} />
         </div>
+        {mark}
       </section>
     );  
   }
 
   placePoint = () => {
-    console.log(this);
     const points = this.props.testPassed ? POINTS_TEST_PASSED : POINTS_TEST_FAILED;
     const nextIndex = this.state.points.length;
 
     if (nextIndex === 10) {
       this.setState({ finished: true });
-      this.props.onFinished();
+      /* Look at the commit date */
+      const ending = this.props.testPassed ? this.props.relationshipOk ? 'good' : 'neutral' : 'fail';
+
+      setTimeout(() => this.props.onFinished(ending), 1000);
       return;
     }
 
@@ -67,9 +77,11 @@ class Epilogue extends Component {
   }
 }
 
-const mapStateToProps = ({ player }) => ({ testPassed: player.testsDone >= TESTS_REQUIRED });
-const mapDispatchToProps = (dispatch) => ({ });
+const mapStateToProps = ({ player }) => ({
+  testPassed: player.testsDone >= TESTS_REQUIRED,
+  relationshipOk: player.relationship >= RELATIONSHIP_REQUIRED
+});
 
-const EpilogueView = connect(mapStateToProps, mapDispatchToProps)(Epilogue)
+const EpilogueView = connect(mapStateToProps, () => ({}))(Epilogue)
 
 export default EpilogueView;

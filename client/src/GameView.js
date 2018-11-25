@@ -99,9 +99,9 @@ class Game extends Component {
       case SCRIPT_CUTSCENE: return this.renderCutscreen(this.props.screen);
       case SCRIPT_GRAPH:    return this.renderGraph(isMobile);
       case SCRIPT_DIALOGUE: return this.renderDialogue(isMobile);
-      case SCRIPT_EPILOGUE:
-        return <EpilogueView className={this.state.fadeOut ? 'fade-out' : ''}
-          onFinished={() => this.nextScreen(this.props.screen.type, this.props.screen.next)} />;
+      case SCRIPT_EPILOGUE: return <EpilogueView className={this.state.fadeOut ? 'fade-out' : ''} onFinished={(ending) => {
+        this.nextScreen(this.props.screen.type, this.props.screen[ending])
+      }} />;
     }
   }
 

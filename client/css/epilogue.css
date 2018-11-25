@@ -8,7 +8,7 @@
 
 .epilogue__test-mark {
   position: absolute;
-  animation: test-mark-appear 0.4s ease-in-out forwards;
+  animation: test-mark-appear 0.2s ease-in forwards;
 }
 
 @keyframes test-mark-appear {
@@ -17,18 +17,12 @@
     top: 0;
     left: 0;
   }
-  30%, 40%, 50%, 100% {
-    top: 50vh;
-    left: 50vw;
-  }
-  30% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1);
-  }
   100% {
-    transform: scale(1);
+    /* this is horrible */
+    top: calc(50vh - 10px);
+    left: calc(50vw - 35px);
+
+    transform: scale(5);
   }
 }
 
