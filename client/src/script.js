@@ -321,8 +321,52 @@ export const SCRIPT = {
     choices: [['Просто интересно...', 'DAY_8_16']]
   },
   DAY_8_16: {
-    type: SCRIPT_CUTSCENE, next: 'DAY_9',
+    type: SCRIPT_CUTSCENE, next: SCRIPT_RELATIONSHIP_NONE_END_DAY,
     text: 'Мне слабо верится, что она совсем не заинтересована в этом балу, пожалуй, она не откровенна со мной'
+  },
+  /* Layer 09 */
+  DAY_9: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'Доброе утро! Приступим?',
+    choices: [['*зевает* Да, давай', 'DAY_9_1']]
+  },
+  DAY_9_1: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'Не выспался?',
+    choices: [
+      ['Нет, все в порядке', 'GRAPH_DEFAULT'],
+      ['Знаешь, сегодня ночью я прошел Дум в хард режиме!', 'DAY_9_2']
+    ]
+  },
+  DAY_9_2: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'О, я смотрю ты страшно горд собой?',
+    choices: [['Да, знаю, что ты скажешь - опять занимался глупостями', 'DAY_9_3']]
+  },
+  DAY_9_3: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'Именно',
+    choices: [['Прости, я не могу похвастаться таким же количеством заслуг как у тебя. Но я прошел Дум в харде, и да, я горд собой', 'DAY_9_4']]
+  },
+  DAY_9_4: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'А знаешь, мне однажды удалось покормить белку с рук в городском парке',
+    choices: [['Что?', 'DAY_9_5']]
+  },
+  DAY_9_5: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'Ну, ты знал, что в нашем парке живут белки?',
+    choices: [['Эмм, нет...', 'DAY_9_6']]
+  },
+  DAY_9_6: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'Ну вот, потому что их немного и они прячутся. А мне однажды удалось покормить одну, прямо с рук, представляешь? Правда, пришлось полдня просидеть под деревом с орешками в руках, но оно того стоило!',
+    choices: [['Я читал, что ты была победителем государственной математической олимпиады - и ты гордишься тем, что покормила белку?', 'DAY_9_7']]
+  },
+  DAY_9_7: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'Крайне милую белку, это важно. Пойдем, покажу, где это было?',
+    choices: [['Пойдем!', SCRIPT_RELATIONSHIP_UP_END_DAY]]
   }
   
 };
