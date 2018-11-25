@@ -11,17 +11,17 @@ import GameDialogueMobile from './GameDialogueMobile.js';
 class Game extends Component {
   constructor(props) {
     super(props);
-    this.state = { showControls: false };
+    this.state = { popInControls: false, popOutControls: false, fadeOut: false };
   }
 
   renderCutscreen = (screen) => {
     const choices = screen.choices || [['Продолжить', screen.next]];
-    const controlsClass = `cutscene__controls js-controls ${this.state.showControls ? 'js-controls--shown' : ''}`;
+    const controlsClass = `cutscene__controls js-controls ${this.state.popInControls ? 'js-controls--shown' : this.state.popOutControls ? 'js-controls--hidden' : ''}`;
     return (
-      <div className="cutscene js-screen" onClick={() => this.refs.typewriter.finishTyping()}>
+      <div className={`cutscene js-screen ${this.state.fadeOut ? 'fade-out' : ''}`} onClick={() => this.refs.typewriter.finishTyping()}>
         <p className="cutscene__content">
           <Typewriter text={screen.text} key={screen.text} initDelay={600} ref="typewriter"
-            onTypingEnd={() => this.setState({ showControls: true })} />
+            onTypingEnd={() => this.setState({ popInControls: true })} />
         </p>
         {screen.sprite && <section className="cutscene__image"><img src={screen.sprite} /></section>}
         <section className={controlsClass}>
@@ -36,7 +36,7 @@ class Game extends Component {
 
   renderGraph = (isMobile) => {
     if (isMobile) return (
-      <div class="mobile-grid fade-in js-screen">
+      <div class={`mobile-grid js-screen ${this.state.fadeOut ? 'fade-out' : 'fade-in'}`}>
         <GraphView formClass="mobile-grid__form" graphClass="mobile-grid__graph"
           fieldsClass="mobile-graph-fields" onTestFinish={this.finishGraphTest} />
       </div>
@@ -51,12 +51,12 @@ class Game extends Component {
   renderDialogue = (isMobile) => {
     if (isMobile)
       return <GameDialogueMobile key={this.props.screen.text}
-        screen={this.props.screen} screenClass="js-screen"
+        screen={this.props.screen} screenClass={`js-screen ${this.state.fadeOut ? 'fade-out' : ''}`}
         playerName={this.props.name} day={this.props.day}
         onHistory={this.props.onHistory} onLogout={this.props.onLogout}
         onNextScreen={(next) => this.nextScreen(this.props.screen.type, next)} />
 
-    const controlsClass = `grid__controls js-controls ${this.state.showControls ? 'js-controls--shown' : ''}`;
+    const controlsClass = `grid__controls js-controls ${this.state.popInControls ? 'js-controls--shown' : this.state.popOutControls ? 'js-controls--hidden' : ''}`;
     return this.renderGrid("grid--dialogue", this.props.screen,
       <section key="controls" className={controlsClass} onClick={() => this.refs.typewriter.finishTyping()}>
         {this.props.screen.choices.map(([ text, next ], i) => (
@@ -68,7 +68,7 @@ class Game extends Component {
   };
 
   renderGrid = (gridClass, screen, controls) => (
-    <div className={`grid ${gridClass} js-screen`}>
+    <div className={`grid ${gridClass} js-screen ${this.state.fadeOut ? 'fade-out' : ''}`}>
       <header key="header" className="grid__header header">
         <span className="header__info">{this.props.name}, день #{this.props.day}</span>
         <span>
@@ -83,7 +83,7 @@ class Game extends Component {
           <span key="textboxName" className="textbox__name">Каики Ахиру</span>
           <p key="textboxText" className="textbox__text">
             <Typewriter text={screen.text} key={screen.text} initDelay={600}
-              ref="typewriter" onTypingEnd={() => this.setState({ showControls: true })} />
+              ref="typewriter" onTypingEnd={() => this.setState({ popInControls: true })} />
           </p>
         </div>
       </section>
@@ -102,25 +102,32 @@ class Game extends Component {
   }
 
   nextScreen = (currentType, scriptId) => {
-    this.state.showControls = false; // FIXME: dirty hack to avoid state update
+    this.setState({ popInControls: false, popOutControls: true });
     if (currentType !== screenType(scriptId)) {
-      document.querySelector('.js-controls').classList.add('js-controls--hidden');
       setTimeout(() => {
-        document.querySelector('.js-screen').classList.add('fade-out');
-        setTimeout(() => this.props.dispatchNextScreen(scriptId), 600);
+        this.setState({ fadeOut: true });
+        setTimeout(() => {
+          this.props.dispatchNextScreen(scriptId);
+          this.setState({ popOutControls: false, fadeOut: false });
+        }, 600);
       }, 600);
     }
     else if (currentType === SCRIPT_DIALOGUE || currentType === SCRIPT_CUTSCENE) {
-      document.querySelector('.js-controls').classList.add('js-controls--hidden');
-      setTimeout(() => this.props.dispatchNextScreen(scriptId), 600);
+      this.setState({ popInControls: false, popOutControls: true });
+      setTimeout(() => {
+        this.props.dispatchNextScreen(scriptId);
+        this.setState({ popOutControls: false });
+      }, 600);
     }
     else this.props.dispatchNextScreen(scriptId);
   }
 
   finishGraphTest = () => {
-    this.state.showControls = false; // FIXME: dirty hack to avoid state update
-    document.querySelector('.js-screen').classList.add('fade-out');
-    setTimeout(() => this.props.dispatchFinishGraph(), 900);
+    this.setState({ popInControls: false, fadeOut: true });
+    setTimeout(() => {
+      this.props.dispatchFinishGraph();
+      this.setState({ fadeOut: false });
+    }, 900);
   }
 }
 

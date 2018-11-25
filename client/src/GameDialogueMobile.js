@@ -6,8 +6,13 @@ import Typewriter from './Typewriter.js';
 export default class GameDialogueMobile extends Component {
   constructor(props) {
     super(props);
-    this.state = { textTyped: false, showChoices: false, showMenu: false };
+    this.state = { textTyped: false, showChoices: false, showMenu: false, popOutControls: false };
   }
+
+  nextScreen = (next) => {
+    this.setState({ popOutControls: true });
+    this.props.onNextScreen(next);
+  };
 
   onTextboxClick = () => {
     if (this.state.textTyped) this.setState({ showChoices: true });
@@ -69,10 +74,9 @@ export default class GameDialogueMobile extends Component {
             <div key="textboxBlinker" />
           </div>
         </section>
-        <section className="js-controls js-controls--shown">
+        <section className={`js-controls ${this.state.popOutControls ? 'js-controls--hidden' : 'js-controls--shown'}`}>
           {this.props.screen.choices.map(([ text, next ], i) => (
-            <a className="button button--dialogue-choice" key={i}
-              onClick={() => this.props.onNextScreen(next)}>{text}</a>
+            <a className="button button--dialogue-choice" key={i} onClick={() => this.nextScreen(next)}>{text}</a>
           ))}
         </section>
       </div>
