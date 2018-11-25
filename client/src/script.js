@@ -202,6 +202,102 @@ export const SCRIPT = {
     text: 'Понимаю, нужно время, чтобы это усвоить. Увидимся завтра.',
     choices: [['Договорились.', SCRIPT_RELATIONSHIP_NONE_END_DAY]]
   },
+  /* Layer 03 */
+  DAY_3: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_3_1',
+    text: 'Ну и попал. Я уже вижу, как день за днем сижу, согнувшись над листочком, и выслушиваю поучения Ахиру-сан...'
+  },
+  DAY_3_1: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_3_2',
+    text: 'Нет, так дело не пойдет. Надо найти с ней что-то общее, иначе к концу занятий мы начнем друг друга ненавидеть.'
+  },
+  DAY_3_2: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'Надеюсь, ты помнишь, что мы вчера учили?',
+    choices: [
+      ['Более-менее.', 'DAY_3_A'],
+      ['Да, и я как раз хотел спросить...', 'DAY_3_B']
+    ]
+  },
+  /* Layer 03. Branch A */
+  DAY_3_A: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'Хорошо, вот, держи сегодняшний вариант.',
+    choices: [['Постараюсь решить его сам.', 'GRAPH_DEFAULT']]
+  },
+  /* Layer 03. Branch B */
+  DAY_3_B: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'Это как-то относится к нашему занятию?',
+    choices: [['Нет, но...', 'DAY_3_B1']]
+  },
+  DAY_3_B1: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_3_B2',
+    text: 'И почему я заранее не подумал о том, что скажу дальше?'
+  },
+  DAY_3_B2: {
+    type: SCRIPT_CUTSCENE, text: 'Что сказать, что сказать, что сказать?',
+    choices: [['— Ты смотрела вчерашнюю серию ДжоДжо?', 'DAY_3_B3']]
+  },
+  DAY_3_B3: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: '... ... ...',
+    choices: [['...', 'DAY_3_B4']]
+  },
+  DAY_3_B4: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_THINKING,
+    text: 'Какими еще бесполезными вещами ты занимаешься?',
+    choices: [
+      ['А-а ты не думала, что сериалы — тоже в каком-то роде математика?', 'DAY_3_B4_A'],
+      ['Ну, не математикой уж точно.', 'DAY_3_B4_B']
+    ]
+  },
+  /* Layer 03. Branch B -> branch B (quick fail) */
+  DAY_3_B4_B: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_ANGRY,
+    text: 'Что ты сказал?! Я вообще-то на тебя свободное время трачу, мог бы хоть немного уважения проявить!',
+    choices: [['Думаю, сегодня нам не о чем больше говорить.', SCRIPT_RELATIONSHIP_DOWN_END_DAY]]
+  },
+  /* Layer 03. Branch B -> branch A. */
+  DAY_3_B4_A: {
+    type: SCRIPT_DIALOGUE, next: 'DAY_3_B4_A1',
+    text: 'Что я только что сказал?..',
+  },
+  DAY_3_B4_A1: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_THINKING,
+    text: 'Хмм, продолжай.',
+    choices: [
+      ['Ну, весь сюжет можно представить... Представить графом переходов между устойчивыми состояниями!', 'DAY_3_B4_A2'],
+      ['З-знаешь, давай лучше позанимаемся.', 'GRAPH_DEFAULT']
+    ]
+  },
+  DAY_3_B4_A2: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: '...Откуда ты знаешь про графы переходов?',
+    choices: [
+      ['Я это только что придумал..?', 'DAY_3_B4_A3'],
+      ['Не стоит меня недооценивать.', 'DAY_3_B4_A3']
+    ]
+  },
+  DAY_3_B4_A3: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'Лучше бы ты на учебу свою энергию направил! Мысль интересная, но я бы кое-что уточнила...',
+    choices: [['Мм?', 'DAY_3_B4_A4']]
+  },
+  DAY_3_B4_A4: {
+    type: SCRIPT_CUTSCENE, text: 'Тик-так, тик-так, тик-так',
+    choices: [['Тик-так', 'DAY_3_B4_A5']]
+  },
+  DAY_3_B4_A5: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: '...И вот что я хотела уточнить про теорию графов. Есть вопросы?',
+    choices: [['У-уф, мне кажется, за окном стемнело.', 'DAY_3_B4_A6']]
+  },
+  DAY_3_B4_A6: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_BLUSHING,
+    text: 'Что-то я заговорилась... Давно такого не было.',
+    choices: [['Все хорошо. Увидимся завтра!', SCRIPT_RELATIONSHIP_UP_END_DAY]]
+  },
   /* Layer 07 */
   DAY_7: {
     type: SCRIPT_CUTSCENE, next: 'DAY_7_1', sprite: SPRITE_PROM_INV,
