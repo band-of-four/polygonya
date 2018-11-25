@@ -4,7 +4,7 @@ export const PLAYER_SET = 'PLAYER_SET'
 
 const defaultState = {
   name: 'Анон',
-  day: 0,
+  day: 1,
   relationship: 0,
   relationshipDelta: 0
 };

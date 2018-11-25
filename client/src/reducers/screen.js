@@ -9,7 +9,7 @@ export const SCREEN_GRAPH_ERROR = 'SCREEN_GRAPH_ERROR';
 export const SCREEN_GRAPH_INVALID_FIELD = 'SCREEN_GRAPH_INVALID_FIELD';
 export const SCREEN_GRAPH_END = 'SCREEN_GRAPH_END';
 
-const defaultState = SCRIPT.DAY_0;
+const defaultState = SCRIPT.DAY_1;
 
 export default function screen(state = defaultState, action) {
   switch (action.type) {

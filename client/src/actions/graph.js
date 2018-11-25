@@ -4,7 +4,7 @@ import { SCREEN_GRAPH_AWAIT,
   SCREEN_GRAPH_INSIDE, SCREEN_GRAPH_OUTSIDE,
   SCREEN_GRAPH_ERROR, SCREEN_GRAPH_INVALID_FIELD,
   SCREEN_GRAPH, SCREEN_GRAPH_END } from '../reducers/screen.js';
-import { withDelay, postJson } from '../utils.js';
+import { withDelay, httpPost } from '../utils.js';
 
 const GRAPH_POINTS_INSIDE_REQUIRED = 3;
 
@@ -37,7 +37,7 @@ export const addPoint = () => async (dispatch, getState) => {
   try {
     dispatch({ type: SCREEN_GRAPH_AWAIT });
 
-    const request = await withDelay(900, postJson('/graph/check', { x, y, r }));
+    const request = await withDelay(900, httpPost('/graph/check', { x, y, r }));
 
     if (request.status !== 200) throw '';
 

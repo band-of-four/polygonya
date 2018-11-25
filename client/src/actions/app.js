@@ -3,13 +3,13 @@ import { APP_UI_AWAIT, APP_UI_FETCH_ERROR,
   APP_AUTH_INVALID_CREDS, APP_AUTH_NAME_TAKEN } from '../reducers/app.js';
 import { setPlayerState } from './game.js';
 import { resetGraph } from './graph.js';
-import { withDelay, postJson, get, httpDelete } from '../utils.js';
+import { withDelay, httpPost, httpGet, httpDelete } from '../utils.js';
 
 async function sendPendingUpdates(username) {
   const failedUpdate = localStorage.getItem(`update-for-${username}`);
   if (failedUpdate === null) return;
 
-  const request = await postJson('/sync/push', JSON.parse(failedUpdate));
+  const request = await httpPost('/sync/push', JSON.parse(failedUpdate));
   /* 422 indicates a stale update, which we just throw away */
   if (request.status !== 200 && request.status !== 422) throw '';
 
@@ -21,7 +21,7 @@ async function sendUpdate(username, newDay, relationshipDelta, history) {
 
   localStorage.setItem(`update-for-${username}`, JSON.stringify(update));
 
-  const request = await postJson('/sync/push', update);
+  const request = await httpPost('/sync/push', update);
   if (request.status !== 200) throw '';
 
   localStorage.removeItem(`update-for-${username}`);
@@ -29,14 +29,14 @@ async function sendUpdate(username, newDay, relationshipDelta, history) {
 
 export const tryPull = () => async (dispatch) => {
   try {
-    const nameRequest = await get('/auth/identity');
+    const nameRequest = await httpGet('/auth/identity');
     if (nameRequest.status === 401) return dispatch({ type: APP_UI_AUTH });
     if (nameRequest.status !== 200) throw '';
     const name = await nameRequest.text();
 
     await sendPendingUpdates(name);
 
-    const syncRequest = await get('/sync/pull');
+    const syncRequest = await httpGet('/sync/pull');
     if (syncRequest.status !== 200) throw '';
     const { day, relationship, relationshipDelta } = await syncRequest.json();
 
@@ -86,7 +86,7 @@ export const history = () => async (dispatch) => {
   try {
     dispatch({ type: APP_UI_AWAIT });
 
-    const request = await get('/sync/history');
+    const request = await httpGet('/sync/history');
     if (request.status !== 200) throw '';
 
     const history = await request.json();
@@ -101,7 +101,7 @@ async function authRequest(url, username, password, dispatch) {
   try {
     dispatch({ type: APP_UI_AWAIT });
 
-    const request = await withDelay(900, postJson(url, { username, password }));
+    const request = await withDelay(900, httpPost(url, { username, password }));
     if (request.status === 401)
       return dispatch({ type: APP_AUTH_INVALID_CREDS });
     if (request.status === 422) {

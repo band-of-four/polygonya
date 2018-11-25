@@ -14,23 +14,16 @@ export async function withDelay(delayMillis, action) {
   }
 }
 
-export function postJson(url, payload) {
-  return fetch(url, {
+export const httpPost = (url, payload) =>
+  fetch(url, {
     method: 'POST',
     credentials: 'include',
-    headers: {
-      'Content-Type': 'application/json'
-    },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload)
   });
-}
 
-export function get(url) {
-  return fetch(url, {
-    method: 'GET',
-    credentials: 'include'
-  });
-}
+export const httpGet = (url) =>
+  fetch(url, { method: 'GET', credentials: 'include' });
 
 export const httpDelete = (url) =>
   fetch(url, { method: 'DELETE', credentials: 'include' });
