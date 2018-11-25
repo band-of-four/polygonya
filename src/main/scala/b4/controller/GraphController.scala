@@ -25,7 +25,7 @@ class GraphController {
 
   def areaCheck(x: Double, y: Double, r: Double): Boolean = 
     if (x < 0 && y < 0)           sqrt(pow(x, 2) + pow(y, 2)) <= r
-    else if (x >= 0 && y <= 0)    x <= r/2 && -y <= r
+    else if (x <= 0 && y >= 0)    -x <= r && y <= r/2
     else if (x >= 0 && y > 0)     x/2 <= (r/2 - y/2)
     else false
 }
