@@ -367,6 +367,80 @@ export const SCRIPT = {
     type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
     text: 'Крайне милую белку, это важно. Пойдем, покажу, где это было?',
     choices: [['Пойдем!', SCRIPT_RELATIONSHIP_UP_END_DAY]]
+  },
+  /* Layer 10 */
+  DAY_10: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_10_1',
+    text: 'Уже не первый раз просыпаю свой будильник, но так мрачно утро еще не складывалось.'
+  },
+  DAY_10_1: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_10_2',
+    text: 'На улице — толпа, что не пройти, автобус, который обычно задерживается, конечно же приехал раньше и показал мне свой оранжевый хвост...'
+  },
+  DAY_10_2: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_10_3',
+    text: 'И чем я разгневал богов? Надеюсь, хоть Ахиру-сан я не сильно разозлю.'
+  },
+  DAY_10_3: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'Я приготовила новый граф, в следующий раз уж не опаздывай.',
+    choices: [
+      ['А у нас вроде занятия не по расписанию', 'DAY_10_SAD_TROMBONE'],
+      ['Да, конечно, прости...', 'DAY_10_4']
+    ]
+  },
+  DAY_10_SAD_TROMBONE: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_ANGRY,
+    text: 'А ведь ты прав. Тогда я пойду домой!',
+    choices: [['Как пожелаешь', SCRIPT_RELATIONSHIP_DOWN_END_DAY]]
+  },
+  DAY_10_4: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'Ох, ну ты и даешь...',
+    choices: [['А?', 'DAY_10_5']]
+  },
+  DAY_10_5: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'Мятая рубашка, пятно на рукаве, а на голове вообще что?! Ты в зеркало перед выходом смотрел?',
+    choices: [
+      ['Я вообще стараюсь в зеркало лишний раз не смотреть...', 'DAY_10_6'],
+      ['Прости, я просто спешил на занятие', 'DAY_10_6'],
+    ]
+  },
+  DAY_10_6: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'Оно и видно… Дай сюда, поправлю',
+    choices: [['*уф*', 'DAY_10_7']]
+  },
+  DAY_10_7: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_10_8',
+    text: 'Оу, к такому я был не готов...'
+  },
+  DAY_10_8: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_BLUSHING,
+    text: 'И не зазнавайся, я просто не могу на это смотреть!',
+    choices: [['Х-хорошо...', 'DAY_10_9']]
+  },
+  DAY_10_9: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'Вот, так-то лучше. Ты хоть позавтракал?',
+    choices: [['Н-нет.', 'DAY_10_10']]
+  },
+  DAY_10_10: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: '*глубоко вздыхая* Пойду, поставлю чайник, принесу пирожных.',
+    choices: [
+      ['Спасибо...', 'DAY_10_11'],
+      ['Мне не нужны твои пироженки, какими бы сладкими они у тебя не были!', 'DAY_10_AMERICAN_CHOPPER']
+    ]
+  },
+  DAY_10_AMERICAN_CHOPPER: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_ANGRY,
+    text: 'В таком случае, можешь идти домой!',
+    choices: [['Отлично!', SCRIPT_RELATIONSHIP_DOWN_END_DAY]]
+  },
+  DAY_10_11: {
+    type: SCRIPT_CUTSCENE, next: SCRIPT_RELATIONSHIP_UP_END_DAY,
+    text: 'Очень вкусные пирожные, интересно, Ахиру-сан сама их приготовила?'
   }
-  
 };
