@@ -700,11 +700,11 @@ export const SCRIPT = {
   DAY_8_15: {
     type: SCRIPT_DIALOGUE, sprite: SPRITE_ANGRY,
     text: 'А тебе-то что?',
-    choices: [['Просто интересно...', 'DAY_8_16']]
+    choices: [['Может, ты пошла бы со мной...', 'DAY_8_16']]
   },
   DAY_8_16: {
     type: SCRIPT_CUTSCENE, next: SCRIPT_RELATIONSHIP_NONE_END_DAY,
-    text: 'Мне слабо верится, что она совсем не заинтересована в этом балу, пожалуй, она не откровенна со мной'
+    text: 'Так и не ответила... "Я подумаю" - посмотрим, что из этого выйдет.'
   },
   /* Layer 09 */
   DAY_9: {
@@ -1020,10 +1020,71 @@ export const SCRIPT = {
     /* TODO: finish layer 13 */
   },
 
-  DAY_14: { type: SCRIPT_EPILOGUE, next: 'DAY_14_1' },
-  DAY_14_1: {
-    type: SCRIPT_CUTSCENE, next: 'DAY_14_1',
-    text: 'Тик-так'
+  DAY_14: { type: SCRIPT_EPILOGUE, good: 'DAY_14_GOOD', neutral: 'DAY_14_NEUTRAL', fail: 'DAY_14_FAIL' },
+  DAY_14_GOOD: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_14_GOOD_1',
+    text: 'Я сдал! Не может быть!'
+  },
+  DAY_14_GOOD_1: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_14_GOOD_2',
+    text: 'Надо поблагодарить Каики - это целиком её заслуга'
+  },
+  DAY_14_GOOD_2: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_14_GOOD_3',
+    text: 'Если она, конечно, придет...'
+  },
+  DAY_14_GOOD_3: {
+    type: SCRIPT_CUTSCENE,
+    text: 'Тик-так, тик-так, тик-так',
+    choices: [['Тик-так', 'DAY_14_GOOD_4']]
+  },
+  DAY_14_GOOD_4: {
+    type: SCRIPT_CUTSCENE, sprite: SPRITE_DRESS,
+    next: 'DAY_15_GOOD_5',
+    text: 'Она пришла!..'
+  },
+  DAY_14_GOOD_5: {
+    type: SCRIPT_CUTSCENE, sprite: SPRITE_DRESS,
+    text: 'И учились они долго и счастливо!'
+  },
+
+
+  DAY_14_NEUTRAL: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_14_NEUTRAL_1',
+    text: 'Я сдал! Не может быть!'
+  },
+  DAY_14_NEUTRAL_1: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_14_NEUTRAL_2',
+    text: 'Надо поблагодарить Каики - это целиком её заслуга'
+  },
+  DAY_14_NEUTRAL_2: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_14_NEUTRAL_3',
+    text: 'Если она, конечно, придет...'
+  },
+  DAY_14_NEUTRAL_3: {
+    type: SCRIPT_CUTSCENE,
+    text: 'Тик-так, тик-так, тик-так',
+    choices: [['Тик-так', 'DAY_14_NEUTRAL_4']]
+  },
+  DAY_14_NEUTRAL_4: {
+    type: SCRIPT_CUTSCENE, next: DAY_14_NEUTRAL_5,
+    text: 'Бал уже подходит к концу, а ее все нет...'
+  },
+  DAY_14_NEUTRAL_5: {
+    type: SCRIPT_CUTSCENE, next: DAY_14_NEUTRAL_6,
+    text: 'Видимо, она уже не придет...'
+  },
+  DAY_14_NEUTRAL_6: {
+    type: SCRIPT_CUTSCENE,
+    text: 'По крайней мере, мы теперь учимся вместе - возможно у меня еще будет шанс...'
   }
 
+  DAY_14_BAD: {
+    type: SCRIPT_CUTSCENE, next: DAY_14_BAD_1,
+    text: 'О нет! Тест не пройден!'
+  },
+  DAY_14_BAD_1: {
+    type: SCRIPT_CUTSCENE,
+    text: 'Ни о каком бале не может идти и речи... Я больше не смогу посмотреть в лицо Каики! Время менять личность...'
+  }
 };
