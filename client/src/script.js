@@ -165,8 +165,38 @@ export const SCRIPT = {
   DAY_7_1: {
     type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
     text: 'На что ты там уставился?',
-    choices: [['...', 'SMTH']]
-  
+    choices: [
+      ['*протянуть листовку*', 'DAY_7_А'],
+      ['Что ЭТО такое???', 'DAY_7_B'],
+      ['А почему день 15?', 'DAY_7_C']
+    ]
+  },
+  /* Layer 07. Branch A */
+  DAY_7_A: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'Это не похоже на решение задачи, что я должна там увидеть?',
+    choices: [['У тебя... Уже есть планы?', 'DAY_7_A2']]
+  },
+  DAY_7_A2: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_ANGRY,
+    text: 'Х-хватит говорить о глупостях!.. Тем более, не сдашь тест — всё равно на бал не пойдешь. Доставай уже тетрадь!',
+    choices: [['...', 'GRAPH_DEFAULT']]
+  },
+  /* Layer 07. Branch B */
+  DAY_7_B: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'Это называется Осенняя трата времени, ты что, захотел пойти?',
+    choices: [['У тебя... Уже есть планы?', 'DAY_7_A2']]
+  },
+  /* Layer 07. Branch C */
+  DAY_7_C: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: '...Ты безнадежен.',
+    choices: [
+      ['*протянуть листовку*', 'DAY_7_А'],
+      ['Что ЭТО такое???', 'DAY_7_B']
+    ]
+  }
 };
 
 /* Yes I'm aware this is a hack */
