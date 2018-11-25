@@ -13,6 +13,8 @@ const SPRITE_BLUSHING = '/assets/kaiki-chan-blushing.png';
 const SPRITE_SLEEPING = '/assets/kaiki-chan-sleeping.png';
 const SPRITE_SLEEPING_ZZZ = '/assets/kaiki-chan-sleeping-zzz.png';
 const SPRITE_ZZZ = '/assets/zzz.png';
+const SPRITE_SAD = '/assets/kaiki-chan-sad.png';
+const SPRITE_HOT = '/assets/kaiki-chan-hot.png';
 const SPRITE_PROM_INV = '/assets/prom-invitation.png';
 const SPRITE_EMPTY_GRAPH = '/assets/empty-graph.svg';
 const SPRITE_GRAPH_INSIDE = '/assets/graph-inside.svg';
@@ -821,7 +823,105 @@ export const SCRIPT = {
     type: SCRIPT_CUTSCENE, next: SCRIPT_RELATIONSHIP_UP_END_DAY,
     text: 'Очень вкусные пирожные, интересно, Ахиру-сан сама их приготовила?'
   },
-
+  /* Layer 11 */
+  DAY_11: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_11_1',
+    text: 'Дождь еще с ночи льет как из ведра. Месяц назад я и подумать не мог, что побегу в школу в такую погоду'
+  },
+  DAY_11_1: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_11_2',
+    text: 'В такие дни я всегда чувствую себя подавленным'
+  },
+  DAY_11_2: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_11_3',
+    text: 'Особенно, когда нужно выходить из дома'
+  },
+  DAY_11_3: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'Приветики! Ну, что, готов сегодня позаниматься продуктивно?',
+    choices: [
+      ['Да, конечно, давай', 'GRAPH_DEFAULT'],
+      ['Какое там...', 'DAY_11_4']
+    ]
+  },
+  DAY_11_4: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_11_5',
+    text: 'Каики сегодня прямо светится...'
+  },
+  DAY_11_5: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_11_6',
+    text: 'Конечно, это определенным образом компенсирует мрачность на улице, но...'
+  },
+  DAY_11_6: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_11_7',
+    text: 'Каким образом ей это удается?'
+  },
+  DAY_11_7: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'Что такое? Ты сегодня какой-то мрачный',
+    choices: [
+      ['Ничего страшного, давай позанимаемся', 'GRAPH_DEFAULT'],
+      ['Ветренно...', 'DAY_11_8']
+    ]
+  },
+  DAY_11_8: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'Ну, у нас это нормально для этого времени года...',
+    choices: [['Да и вообще, столько всего навалилось', 'DAY_11_9']]
+  },
+  DAY_11_9: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'Понимаю тебя, бывает трудно',
+    choices: [
+      ['Куда тебе, у тебя всегда всё отлично!', 'DAY_11_THIS_IS_SO_SAD'],
+      ['Но, похоже, ты справляешься довольно хорошо', 'DAY_11_10']
+    ]
+  },
+  DAY_11_THIS_IS_SO_SAD: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_ANGRY,
+    text: 'А вот и нет, придурок!',
+    choices: [['Пойду домой...', SCRIPT_RELATIONSHIP_DOWN_END_DAY]]
+  },
+  DAY_11_10: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'Нужно найти способ избавляться от негативной энергии',
+    choices: [['И каков же твой, если не секрет?', 'DAY_11_11']]
+  },
+  DAY_11_11: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'Да нет, не секрет, просто никто особо не интересовался. Я люблю плавать',
+    choices: [['Вау... П-плавать?..', 'DAY_11_FANSERVICE']]
+  },
+  DAY_11_FANSERVICE: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_11_12', sprite: SPRITE_HOT,
+    text: '*~*'
+  },
+  DAY_11_12: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_ANGRY,
+    text: 'Идиот, о чём ты там замечтался!?',
+    choices: [['П-прости, я тут...', 'DAY_11_13']]
+  },
+  DAY_11_13: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'Ладно, заниматься сегодня ты все равно не готов. Может, выпьем чаю?',
+    choices: [
+      ['Ну уж нет, у нас много дел', 'DAY_11_PRESS_F'],
+      ['Конечно, ставлю чайник', 'DAY_11_14']
+    ]
+  },
+  DAY_11_PRESS_F: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_SAD,
+    text: 'Да, ты прав...',
+    choices: [['Тогда не будем терять времени', 'GRAPH_DEFAULT']]
+  },
+  DAY_11_14: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_11_15',
+    text: 'Никогда бы не подумал, что такое ужасное утро может вести к такому прекрасному дню'
+  },
+  DAY_11_15: {
+    type: SCRIPT_CUTSCENE, next: SCRIPT_RELATIONSHIP_UP_END_DAY,
+    text: 'Всё-таки, Ахиру-сан особенная...'
+  },
   /* Layer 13 */
   DAY_13: {
     type: SCRIPT_CUTSCENE, next: 'DAY_13_1',
@@ -864,7 +964,7 @@ export const SCRIPT = {
   },
   DAY_13_4: {
     type: SCRIPT_CUTSCENE, next: 'DAY_13_5',
-    text: 'Сообщение прочитала, но уже несколько минут не отвечает. Обидел ли я тебя чем-то, Каики?',
+    text: 'Сообщение прочитала, но уже несколько минут не отвечает. Обидел ли я тебя чем-то, Каики?'
+    /* TODO: finish layer 13 */
   }
-  /* TODO: finish layer 13 */
 };
