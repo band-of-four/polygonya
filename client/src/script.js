@@ -956,11 +956,11 @@ export const SCRIPT = {
     choices: [['Ну я же волнуюсь...', 'DAY_12_3']]
   },
   DAY_12_3: {
-    type: SCRIPT_CUTSCENE, next: 'DAY_12_4', sprite: SPRITE_SLEEPING,
+    type: SCRIPT_CUTSCENE, next: 'DAY_12_4',
     text: '...Ахиру-сан?'
   },
   DAY_12_4: {
-    type: SCRIPT_CUTSCENE, sprite: SPRITE_SLEEPING_ZZZ,
+    type: SCRIPT_CUTSCENE, sprite: SPRITE_SLEEPING,
     text: '...Во сне она выглядит такой милой.',
     choices: [
       ['Может, укрою ее?', 'DAY_12_5'],
@@ -968,7 +968,7 @@ export const SCRIPT = {
     ]
   },
   DAY_12_5: {
-    type: SCRIPT_CUTSCENE, sprite: SPRITE_SLEEPING,
+    type: SCRIPT_CUTSCENE, sprite: SPRITE_SLEEPING_ZZZ,
     text: 'Тик-так, тик-так, тик-так',
     choices: [['Тик-так', SCRIPT_RELATIONSHIP_UP_END_DAY]]
   },
