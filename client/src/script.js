@@ -298,6 +298,288 @@ export const SCRIPT = {
     text: 'Что-то я заговорилась... Давно такого не было.',
     choices: [['Все хорошо. Увидимся завтра!', SCRIPT_RELATIONSHIP_UP_END_DAY]]
   },
+  /* Layer 04 */
+  DAY_4: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_4_1',
+    text: 'Занятия с Ахиру-сан оказались... Интересными?'
+  },
+  DAY_4_1: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_4_2',
+    text: 'Почему-то мне не хочется опозориться перед ней завтра... Приду домой и подготовлюсь.'
+  },
+  DAY_4_2: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_4_3',
+    text: '...Стоп. Заниматься математикой в свободное время? Что на меня нашло?'
+  },
+  DAY_4_3: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'Я составила для тебя новый вариант.',
+    choices: [['Давай сюда, я подготовился.', 'DAY_4_4']]
+  },
+  DAY_4_4: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'Неужели? А давай посоревнуемся!',
+    choices: [
+      ['Хех, знаешь, я еще не готов', 'GRAPH_DEFAULT'],
+      ['А давай!', 'DAY_4_5']
+    ]
+  },
+  DAY_4_5: {
+    type: SCRIPT_CUTSCENE, text: 'Тик-так, тик-так, тик-так',
+    choices: [['Тик-так', 'DAY_4_6']]
+  },
+  DAY_4_6: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_ANGRY,
+    text: 'Я не могла проиграть тебе, Анон!',
+    choices: [['Да ладно тебе, это всего лишь глупое соревнование.', 'DAY_4_7']]
+  },
+  DAY_4_7: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_ANGRY,
+    text: 'Не бывает глупых соревнований, бывают глупые люди!',
+    choices: [['Тише, тише, ты чего?', 'DAY_4_8']]
+  },
+  DAY_4_8: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_ANGRY,
+    text: 'Тебе просто повезло! Я занимаюсь математикой с детства, такой, как ты, не мог обойти меня!..',
+    choices: [['Не думал, что ты так серьезно к этому относишься.', 'DAY_4_9']]
+  },
+  DAY_4_9: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_ANGRY,
+    text: 'А ты бы не относился серьезно к тому, чему посвятил всю жизнь?',
+    choices: [
+      ['Ну, большую часть времени я занимался непонятно чем...', 'DAY_4_A'],
+      ['Эм, ты странная...', 'DAY_4_B']
+    ]
+  },
+  /* Layer 04. Neutral ending */
+  DAY_4_A: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_ANGRY,
+    text: 'Так займись уже чем-нибудь!',
+    choices: [['Как скажешь...', SCRIPT_RELATIONSHIP_NONE_DAY_END]]
+  },
+  /* Layer 04. Bad ending */
+  DAY_4_B: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_ANGRY, /* FIXME: sad sprite */
+    text: 'А не пойти ли тебе домой?',
+    choices: [['Как скажешь...', SCRIPT_RELATIONSHIP_DOWN_DAY_END]]
+  },
+  /* Layer 05 */
+  DAY_5: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_5_1',
+    text: 'В чем-то Ахиру-сан права. Просиживаю штаны целый день, пока мои лучшие годы уходят...'
+  },
+  DAY_5_1: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_5_2',
+    text: 'Надо бы посмотреть, что интересного происходит в школе. По-моему, где-то у входа была доска с плакатами.',
+  },
+  DAY_5_2: {
+    type: SCRIPT_CUTSCENE,
+    text: 'Ого, у чирлидеров открытая тренировка! Только мне немного неловко заявиться туда, никого не зная...',
+    choices: [
+      ['...Нет, лучше сосредоточусь на занятиях', 'DAY_5_TEST'],
+      ['Не попросить ли Ахиру-сан помочь мне?', 'DAY_5_3']
+    ]
+  },
+  DAY_5_TEST: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'Ну, что. Новый день, новый вариант. Поехали?',
+    choices: [['Всегда готов, Ахиру-сан.', 'GRAPH_DEFAULT']]
+  },
+  DAY_5_3: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'Ну, что. Новый день, новый вариант. Поехали?',
+    choices: [['Погоди. Ты слышала, завтра у чирлидеров будет открытая тренировка?', 'DAY_5_4']]
+  },
+  DAY_5_4: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'Да, и что с того?',
+    choices: [['Пойдешь?', 'DAY_5_5']]
+  },
+  DAY_5_5: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_ANGRY,
+    text: 'Даже если бы я хотела сделать какую-нибудь глупость, я предпочла бы... Всё, что угодно, но не это.',
+    choices: [
+      ['Оу, извини. Давай лучше вернемся к занятиям.', 'GRAPH_DEFAULT'],
+      ['А что, чирлидеры решают графы быстрее тебя?', 'DAY_5_YOU_DIED'],
+      ['Прости, я не хотел тебя расстроить.', 'DAY_5_6'],
+    ]
+  },
+  DAY_5_YOU_DIED: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_ANGRY,
+    text: 'Не пойти ли тебе домой, умник?',
+    choices: [['Как скажешь.', SCRIPT_RELATIONSHIP_DOWN_END_DAY]]
+  },
+  DAY_5_6: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_BLUSHING,
+    text: 'Да ничего, я сама завелась зря.',
+    choices: [['Капитан чирлидеров, наверное, красавица... Знаешь её?', 'DAY_5_7']]
+  },
+  DAY_5_7: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_ANGRY,
+    text: '...или не зря.',
+    choices: [['Я подумал, что ты смогла бы нас завтра познакомить.', 'DAY_5_8']]
+  },
+  DAY_5_8: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_ANGRY,
+    text: 'Лучше бы о тесте думал, а не об этой!.. *бормочет*',
+    choices: [
+      ['О, так ты знаешь ее?', 'DAY_5_9'],
+      ['Прости, конечно, ты права. Давай займемся делами.', 'GRAPH_DEFAULT']
+    ]
+  },
+  DAY_5_9: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'Мы в одном классе с ней. По правде говоря, старостой должна была быть она, но...',
+    choices: [['Но?', 'DAY_5_10']]
+  },
+  DAY_5_10: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'У неё и так забот полно — я решила помочь и взять эту обязанность на себя.',
+    choices: [['Вот как. Значит, она твоя подруга?', 'DAY_5_11']]
+  },
+  DAY_5_11: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_ANGRY,
+    text: 'Подруга?!! Она, может, и менее бесполезна на общем фоне, но тесно общаться мы не стали бы никогда!',
+    choices: [['Менее... бесполезна?', 'DAY_5_12']]
+  },
+  DAY_5_12: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_BLUSHING,
+    text: 'Я не могу не признать её талант к точным наукам... Мы учились в одном математическом лицее, я знаю, на что она способна.',
+    choices: [['Почему же вы тогда не ладили?', 'DAY_5_13']]
+  },
+  DAY_5_13: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_BLUSHING, /* TODO sad sprite */
+    text: 'Мне стыдно признаваться, но я не останавливалась ни перед чем, чтобы доказать, что упорный труд важнее природных способностей...',
+    choices: [['Ни перед чем?..', 'DAY_5_14']]
+  },
+  DAY_5_14: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_BLUSHING, /* TODO sad sprite */
+    text: 'Последнее, что помню — как занижала результаты её тестов, когда помогала учителю их проверять—',
+    choices: [['...', 'DAY_5_14']]
+  },
+  DAY_5_14: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_BLUSHING, /* TODO sad sprite */
+    text: 'Как глупо, глупо, глупо! Стыдно об этом вспоминать...',
+    choices: [['...', 'DAY_5_15']]
+  },
+  DAY_5_15: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_BLUSHING, /* TODO sad sprite */
+    text: 'Если ты не против, продолжим занятия завтра.',
+    choices: [['Да, конечно.', 'DAY_5_16']]
+  },
+  DAY_5_16: {
+    type: SCRIPT_CUTSCENE, next: SCRIPT_RELATIONSHIP_UP_END_DAY,
+    text: 'Она выглядела совсем расстроеной... Может, придумать что-нибудь, чтобы поднять ей настроение завтра?'
+  },
+  /* Layer 06 */
+  DAY_6: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'Здравствуй. Доставай тетрадь, сегодня душно, хочу закончить побыстрее.',
+    choices: [
+      ['*достает тетрадь*', 'GRAPH_DEFAULT'],
+      ['Знаешь, у меня есть идея получше—', 'DAY_6_1']
+    ]
+  },
+  DAY_6_1: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: '...',
+    choices: [
+      ['А, не обращай внимания...', 'GRAPH_DEFAULT'],
+      ['Может, откроем окно?', 'DAY_6_YOU_THOUGHT_WERE_BRANCHING_BUT_NOPE'],
+      ['Не хочешь пройтись, подышать воздухом?', 'DAY_6_2']
+    ]
+  },
+  DAY_6_YOU_THOUGHT_WERE_BRANCHING_BUT_NOPE: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_ANGRY,
+    text: 'Ты думаешь, я бы не догадалась сама?..',
+    choices: [
+      ['Прости, я не заметил, что оно открыто.', 'GRAPH_DEFAULT'],
+      ['Тогда давай позанимаемся в парке.', 'DAY_6_2']
+    ]
+  },
+  DAY_6_2: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'Ты зовешь меня на прогулку?',
+    choices: [
+      ['Прости, что-то и на меня жара подействовала... Давай заниматься.', 'GRAPH_DEFAULT'],
+      ['А ты сможешь мне отказать?', 'DAY_6_YOU_DIED'],
+      ['Да.', 'DAY_6_3']
+    ]
+  },
+  DAY_6_YOU_DIED: {
+    type: SCRIPT_CUTSCENE, text: 'А рука у Ахиру-сан тяжелая... Надеюсь, синяка не останется.',
+    next: SPRITE_RELATIONSHIP_DOWN_END_DAY
+  },
+  DAY_6_3: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'Ладно, иногда ты предлагаешь не совсем бесполезные вещи... Ну, пойдем, пройдемся.',
+    choices: [['Го.', 'DAY_6_4']]
+  },
+  DAY_6_4: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'Здесь и правда свежее— *урчание*',
+    choices: [
+      ['Кажется, я что-то слышал. Ты что-то сказала?', 'DAY_6_YOU_DIED'],
+      ['О, ты проголодалась? Я знаю кафешку за углом.', 'DAY_6_4'],
+    ]
+  },
+  DAY_6_5: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'Пойдем.',
+    choices: [['Го.', 'DAY_6_6']]
+  },
+  DAY_6_6: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_6_7',
+    text: 'Над дверью прозвенел колокольчик. Надо же, это место со вчера совсем не изменилось...',
+  },
+  DAY_6_7: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'Я нечасто бываю в таких местах... Даже не знаю, как себя вести.',
+    choices: [
+      ['Не переживай, я тебе все покажу.', 'DAY_6_8'],
+      ['Доверься мне.', 'DAY_6_8'],
+    ]
+  },
+  DAY_6_8: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'Тогда я найду нам место.',
+    choices: [
+      ['Я пока принесу нам онигири.', 'DAY_6_9'],
+      ['Я вернусь с тайяки.', 'DAY_6_9'],
+    ]
+  },
+  DAY_6_9: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_6_10',
+    text: 'В очереди меня настигли сомнения...',
+  },
+  DAY_6_10: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_BLUSHING,
+    text: 'Ох, это так вкусно~',
+    choices: [['Может, займемся теперь математикой?', 'DAY_6_11']]
+  },
+  DAY_6_11: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_BLUSHING,
+    text: '*с набитым ртом* Знаешь, я покушала, и мне та-а-ак лениво и хорошо...',
+    choices: [['Ты же говорила, что редко бываешь в таких местах?', 'DAY_6_12']]
+  },
+  DAY_6_12: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_BLUSHING,
+    text: 'Я предпочитаю есть в тишине, чужая болтовня меня отвлекает.',
+    choices: [
+      ['А наша болтовня тебе больше не кажется чужой?', 'DAY_6_A'],
+      ['Может, пойдем дальше, если тебе не комфортно?', 'DAY_6_B'],
+    ]
+  },
+  DAY_6_A: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_BLUSHING,
+    text: 'Пожалуй...',
+    choices: [['*улыбнуться*', SCRIPT_RELATIONSHIP_UP_END_DAY]]
+  },
+  DAY_6_A: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_BLUSHING,
+    text: 'Нет, сейчас все хорошо...',
+    choices: [['*улыбнуться*', SCRIPT_RELATIONSHIP_UP_END_DAY]]
+  },
   /* Layer 07 */
   DAY_7: {
     type: SCRIPT_CUTSCENE, next: 'DAY_7_1', sprite: SPRITE_PROM_INV,
