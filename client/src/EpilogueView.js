@@ -28,8 +28,8 @@ const POINTS_TEST_FAILED = [
   { x: -0.1, y: 0.5, inside: true },
   { x: 2.0, y: -3.0, inside: false },
   { x: -6.0, y: -1.0, inside: true },
-  { x: -5.0, y: 5.0, inside: false },
-  { x: 2.6, y: 2.5, inside: false }
+  { x: -6.0, y: 6.0, inside: false },
+  { x: 3.0, y: 3.0, inside: false }
 ];
 
 class Epilogue extends Component {
