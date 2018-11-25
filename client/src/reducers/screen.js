@@ -1,5 +1,4 @@
 import { SCRIPT, SCRIPT_GRAPH } from '../script.js';
-import { pickRandom } from '../utils.js';
 
 export const SCREEN_NEXT = 'SCREEN_NEXT';
 export const SCREEN_GRAPH = 'SCREEN_GRAPH';
@@ -20,11 +19,11 @@ export default function screen(state = defaultState, action) {
         return graphPick('neutral', action.to);
       return screen;
     case SCREEN_GRAPH_AWAIT:
-      return graphPickRandom('loading', state.graphId);
+      return graphPick('loading', state.graphId);
     case SCREEN_GRAPH_INSIDE:
-      return graphPickRandom('inside', state.graphId);
+      return graphPick('inside', state.graphId);
     case SCREEN_GRAPH_OUTSIDE:
-      return graphPickRandom('outside', state.graphId);
+      return graphPick('outside', state.graphId);
     case SCREEN_GRAPH_ERROR:
       return graphPick('error', state.graphId);
     case SCREEN_GRAPH_INVALID_FIELD:
@@ -40,10 +39,5 @@ export default function screen(state = defaultState, action) {
 
 function graphPick(stateKind, graphId) {
   const [ sprite, text ] = SCRIPT[graphId][stateKind];
-  return { type: SCRIPT_GRAPH, sprite, text, graphId };
-}
-
-function graphPickRandom(stateKind, graphId) {
-  const [ sprite, text ] = pickRandom(SCRIPT[graphId][stateKind]);
   return { type: SCRIPT_GRAPH, sprite, text, graphId };
 }

@@ -34,8 +34,3 @@ export function get(url) {
 
 export const httpDelete = (url) =>
   fetch(url, { method: 'DELETE', credentials: 'include' });
-
-export function pickRandom(array) {
-  /* https://stackoverflow.com/a/4550514/1726690 */
-  return array[Math.floor(Math.random() * array.length)];
-}

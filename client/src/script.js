@@ -31,18 +31,23 @@ export const SCRIPT = {
       type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE, text: 'Отлично. Думаю, на сегодня хватит.',
       choices: [['Пойду, пожалуй...', SCRIPT_TEST_END_DAY]]
     },
-    loading: [
-      [SPRITE_THINKING, 'Хмм, дай подумать...']
-    ],
-    inside: [
-      [SPRITE_BLUSHING, 'Ты прав, точка действительно внутри... Попробуй еще один раз.']
-    ],
-    outside: [
-      [SPRITE_ANGRY, 'Я устала смотреть на твои ошибки! Не могу поверить, что ты до сих пор не усвоил этот вариант.']
-    ],
-    invalidField: (field, min, max) => (
-      [SPRITE_ANGRY, `Разве я не говорила тебе, что ${field.toUpperCase()} должен быть между ${min} и ${max}?`]
-    )
+    loading: [SPRITE_THINKING, 'Дай подумать...'],
+    inside: [SPRITE_BLUSHING, 'Ты прав, точка действительно внутри... Попробуй еще один раз.'],
+    outside: [SPRITE_ANGRY, 'Я устала смотреть на твои ошибки! Не могу поверить, что ты до сих пор не усвоил этот вариант.'],
+    invalidField: (field, min, max) => [SPRITE_ANGRY, `Разве я не говорила тебе, что ${field.toUpperCase()} должен быть между ${min} и ${max}?`]
+  },
+  GRAPH_FIRST_TRY: {
+    type: SCRIPT_GRAPH,
+    neutral: [SPRITE_IDLE, 'Не торопись, подумай и поставь точку так, чтобы она попадала в полигон.'],
+    error: [SPRITE_BLUSHING, 'Прости, я задумалась... Не повторишь?'],
+    end: {
+      type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE, text: 'Для первого раза ты справился очень даже неплохо. Жду тебя завтра в это же время.',
+      choices: [['До встречи, Ахиру-сан.', SCRIPT_TEST_END_DAY]]
+    },
+    loading: [SPRITE_THINKING, 'Давай посмотрим...'],
+    inside: [SPRITE_BLUSHING, 'Ты прав, точка действительно внутри... Поставь еще одну.'],
+    outside: [SPRITE_IDLE, 'Не торопись, подумай и поставь точку так, чтобы она попадала в полигон'],
+    invalidField: (field, min, max) => [SPRITE_IDLE, `Не спеши, помни, что ${field.toUpperCase()} должен быть между ${min} и ${max}.`]
   },
   GRAPH_SLEEPING: {
     type: SCRIPT_GRAPH,
@@ -52,18 +57,10 @@ export const SCRIPT = {
       type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE, text: '*трет глаза* Смотрю, ты и без меня уже справляешься.',
       choices: [['Да... Пойду домой, и тебе советую, отдохнешь получше.', SCRIPT_TEST_END_DAY]]
     },
-    loading: [
-      [SPRITE_ZZZ, '...']
-    ],
-    inside: [
-      [SPRITE_ZZZ, '*улыбается во сне*']
-    ],
-    outside: [
-      [SPRITE_ZZZ, '*хмурится*']
-    ],
-    invalidField: (field, min, max) => (
-      [SPRITE_ZZZ, `*бормочит что-то про ${field.toUpperCase()} и числа ${min} и ${max}*`]
-    )
+    loading: [SPRITE_ZZZ, '...'],
+    inside: [SPRITE_ZZZ, '*улыбается во сне*'],
+    outside: [SPRITE_ZZZ, '*хмурится*'],
+    invalidField: (field, min, max) => [SPRITE_ZZZ, `*бормочит что-то про ${field.toUpperCase()} и числа ${min} и ${max}*`]
   },
 
   /* Layer 01 */
@@ -196,7 +193,7 @@ export const SCRIPT = {
     type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
     text: 'Все верно. Попробуешь решить настоящий вариант?',
     choices: [
-      ['Да, давай', 'GRAPH_DEFAULT'],
+      ['Да, давай', 'GRAPH_FIRST_TRY'],
       ['Знаешь, я немного устал...', 'DAY_2_9']
     ]
   },

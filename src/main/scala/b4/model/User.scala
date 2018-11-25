@@ -20,7 +20,7 @@ class User {
     this()
     this.username = username
     this.passwordHash = passwordHash
-    this.day = 0
+    this.day = 1
     this.relationshipMeter = 0
     this.relationshipDelta = 0
   }
