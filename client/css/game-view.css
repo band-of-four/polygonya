@@ -154,6 +154,7 @@
   & > img {
     max-width: 100%;
     max-height: 100%;
+    object-fit: contain;
   }
 
   animation: fade-in 700ms ease-out forwards;
