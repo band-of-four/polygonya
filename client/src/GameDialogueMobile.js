@@ -59,7 +59,7 @@ export default class GameDialogueMobile extends Component {
 
   renderChoices() {
     return (
-      <div className={`mobile-fullscreen-controls ${this.props.screenClass}`}>
+      <div className={`mobile-fullscreen-controls neutral-bg ${this.props.screenClass}`}>
         <section className="mobile-textbox-container">
           <div className="textbox textbox--mobile">
             <span key="textboxName" className="textbox__name">Каики Ахиру</span>
