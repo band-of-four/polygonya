@@ -2,7 +2,7 @@ package b4.service
 
 import b4.model.{HistoryEntry, User}
 import b4.repository.{HistoryRepository, UserRepository}
-import b4.service.SyncService.{HistoryForDay, HistoryItem}
+import b4.service.SyncService.{ComputedHistoryItem, HistoryForDay}
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -22,8 +22,12 @@ object SyncService {
                           @BeanProperty relationship: Int,
                           @BeanProperty relationshipDelta: Int)
 
+  case class ComputedHistoryItem(@BeanProperty x: Double,
+                                 @BeanProperty y: Double,
+                                 @BeanProperty inside: Boolean)
+
   case class HistoryForDay(@BeanProperty r: Double,
-                           @BeanProperty history: java.lang.Iterable[HistoryItem])
+                           @BeanProperty history: java.lang.Iterable[ComputedHistoryItem])
 }
 
 @Service
@@ -32,6 +36,8 @@ class SyncService {
   var userRepository: UserRepository = _
   @Autowired
   var historyRepository: HistoryRepository = _
+  @Autowired
+  var graphService: GraphService = _
 
   def saveUserState(request: SyncService.PushRequest, user: User): Boolean = {
     if (user.day + 1 != request.newDay) return false
@@ -57,6 +63,10 @@ class SyncService {
       .findByUser(user)
       .asScala
       .groupBy(_.day)
-      .mapValues(entries => HistoryForDay(entries.head.r, entries.map(e => HistoryItem(e.x, e.y)).asJava))
+      .mapValues { entries =>
+        HistoryForDay(
+          entries.head.r,
+          entries.map(e => ComputedHistoryItem(e.x, e.y, graphService.check(e.x, e.y, e.r))).asJava)
+      }
       .asJava
 }

@@ -16,8 +16,8 @@ async function sendPendingUpdates(username) {
   localStorage.removeItem(`update-for-${username}`);
 }
 
-async function sendUpdate(username, newDay, relationshipDelta, history) {
-  const update = { newDay, relationshipDelta, history };
+async function sendUpdate(username, newDay, relationshipDelta, history, lastR) {
+  const update = { newDay, relationshipDelta, history, lastR };
 
   localStorage.setItem(`update-for-${username}`, JSON.stringify(update));
 
@@ -50,12 +50,13 @@ export const tryPull = () => async (dispatch) => {
 
 export const pushAndAdvanceDay = () => async (dispatch, getState) => {
   const { name, day, relationship, relationshipDelta } = getState().player;
+  const lastR = getState().graph.r;
   const newDay = day + 1;
   const history = getState().graph.points;
   dispatch(resetGraph());
 
   try {
-    sendUpdate(name, newDay, relationshipDelta, history);
+    sendUpdate(name, newDay, relationshipDelta, history, lastR);
     dispatch(setPlayerState(name, newDay, relationship, relationshipDelta));
   }
   catch (e) {

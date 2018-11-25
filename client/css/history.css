@@ -1,32 +1,21 @@
 .history {
-  overflow-y: auto;
+  height: 100vh;
+  overflow: auto;
+
+  text-align: center;
 }
 
-.history__controls {
+.history-controls {
   display: flex;
   justify-content: center;
 }
 
-.history__table {
+.history-table {
   border-collapse: collapse;
   margin: 16px auto;
 
-  & th {
-    border: 1px solid #000;
+  & th, & td {
     padding: 8px 16px;
-  }
-}
-
-.history__button {
-  background: white;
-  border: 1px solid black;
-  border-radius: 8px;
-  padding: 8px 16px;
-  margin: 0 8px;
-
-  font-family: var(--main-font);
-
-  &:hover {
-    cursor: pointer;
+    text-align: center;
   }
 }
