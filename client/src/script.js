@@ -357,13 +357,13 @@ export const SCRIPT = {
   DAY_4_A: {
     type: SCRIPT_DIALOGUE, sprite: SPRITE_ANGRY,
     text: 'Так займись уже чем-нибудь!',
-    choices: [['Как скажешь...', SCRIPT_RELATIONSHIP_NONE_DAY_END]]
+    choices: [['Как скажешь...', SCRIPT_RELATIONSHIP_NONE_END_DAY]]
   },
   /* Layer 04. Bad ending */
   DAY_4_B: {
     type: SCRIPT_DIALOGUE, sprite: SPRITE_ANGRY, /* FIXME: sad sprite */
     text: 'А не пойти ли тебе домой?',
-    choices: [['Как скажешь...', SCRIPT_RELATIONSHIP_DOWN_DAY_END]]
+    choices: [['Как скажешь...', SCRIPT_RELATIONSHIP_DOWN_END_DAY]]
   },
   /* Layer 05 */
   DAY_5: {
@@ -510,7 +510,7 @@ export const SCRIPT = {
   },
   DAY_6_YOU_DIED: {
     type: SCRIPT_CUTSCENE, text: 'А рука у Ахиру-сан тяжелая... Надеюсь, синяка не останется.',
-    next: SPRITE_RELATIONSHIP_DOWN_END_DAY
+    next: SCRIPT_RELATIONSHIP_DOWN_END_DAY
   },
   DAY_6_3: {
     type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
