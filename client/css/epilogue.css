@@ -1,0 +1,67 @@
+.epilogue__graph-container {
+  margin-top: 25vh;
+  height: 50vh;
+  & > .graph {
+    animation: graph-rotate 10s linear forwards;
+  }
+}
+
+.epilogue__test-mark {
+  position: absolute;
+  animation: test-mark-appear 0.4s ease-in-out forwards;
+}
+
+@keyframes test-mark-appear {
+  0% {
+    transform: scale(100);
+    top: 0;
+    left: 0;
+  }
+  30%, 40%, 50%, 100% {
+    top: 50vh;
+    left: 50vw;
+  }
+  30% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes graph-rotate {
+  0% { transform: rotate(0deg); }
+  8% { transform: rotate(0deg); }
+  9% { transform: rotate(40deg); }
+  10% { transform: rotate(36deg); }
+  18% { transform: rotate(36deg); }
+  19% { transform: rotate(76deg); }
+  20% { transform: rotate(72deg); }
+  28% { transform: rotate(72deg); }
+  29% { transform: rotate(112deg); }
+  30% { transform: rotate(108deg); }
+  38% { transform: rotate(108deg); }
+  39% { transform: rotate(148deg); }
+  40% { transform: rotate(144deg); }
+  48% { transform: rotate(144deg); }
+  49% { transform: rotate(184deg); }
+  50% { transform: rotate(180deg); }
+  58% { transform: rotate(180deg); }
+  59% { transform: rotate(220deg); }
+  60% { transform: rotate(216deg); }
+  68% { transform: rotate(216deg); }
+  69% { transform: rotate(256deg); }
+  70% { transform: rotate(252deg); }
+  78% { transform: rotate(252deg); }
+  79% { transform: rotate(292deg); }
+  80% { transform: rotate(288deg); }
+  88% { transform: rotate(288deg); }
+  89% { transform: rotate(328deg); }
+  90% { transform: rotate(324deg); }
+  98% { transform: rotate(324deg); }
+  99% { transform: rotate(364deg); }
+  100% { transform: rotate(360deg); }
+}

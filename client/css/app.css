@@ -5,6 +5,7 @@
 @import 'game-view.css';
 @import 'mobile-game-view.css';
 @import 'history.css';
+@import 'epilogue.css';
 
 :root {
   --main-font: 'Neucha', serif;

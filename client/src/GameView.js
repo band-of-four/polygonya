@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { SCRIPT_CUTSCENE, SCRIPT_DIALOGUE, SCRIPT_GRAPH, screenType } from './script.js';
+import { SCRIPT_CUTSCENE, SCRIPT_DIALOGUE, SCRIPT_GRAPH, SCRIPT_EPILOGUE, screenType } from './script.js';
 import { nextScreen } from './actions/game.js';
 import { finishGraph } from './actions/graph.js';
 import GraphView from './GraphView.js';
 import Typewriter from './Typewriter.js';
 import GameDialogueMobile from './GameDialogueMobile.js';
+import EpilogueView from './EpilogueView.js';
 
 class Game extends Component {
   constructor(props) {
@@ -98,6 +99,9 @@ class Game extends Component {
       case SCRIPT_CUTSCENE: return this.renderCutscreen(this.props.screen);
       case SCRIPT_GRAPH:    return this.renderGraph(isMobile);
       case SCRIPT_DIALOGUE: return this.renderDialogue(isMobile);
+      case SCRIPT_EPILOGUE:
+        return <EpilogueView className={this.state.fadeOut ? 'fade-out' : ''}
+          onFinished={() => this.nextScreen(this.props.screen.type, this.props.screen.next)} />;
     }
   }
 

@@ -1,6 +1,7 @@
 export const SCRIPT_CUTSCENE = 'SCRIPT_CUTSCENE';
 export const SCRIPT_DIALOGUE = 'SCRIPT_DIALOGUE';
 export const SCRIPT_GRAPH = 'SCRIPT_GRAPH';
+export const SCRIPT_EPILOGUE = 'SCRIPT_EPILOGUE';
 export const SCRIPT_RELATIONSHIP_UP_END_DAY = 'SCRIPT_RELATIONSHIP_UP_END_DAY';
 export const SCRIPT_RELATIONSHIP_DOWN_END_DAY = 'SCRIPT_RELATIONSHIP_DOWN_END_DAY';
 export const SCRIPT_RELATIONSHIP_NONE_END_DAY = 'SCRIPT_RELATIONSHIP_NONE_END_DAY';
@@ -1017,5 +1018,12 @@ export const SCRIPT = {
     type: SCRIPT_CUTSCENE, next: 'DAY_13_5',
     text: 'Сообщение прочитала, но уже несколько минут не отвечает. Обидел ли я тебя чем-то, Каики?'
     /* TODO: finish layer 13 */
+  },
+
+  DAY_14: { type: SCRIPT_EPILOGUE, next: 'DAY_14_1' },
+  DAY_14_1: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_14_1',
+    text: 'Тик-так'
   }
+
 };
