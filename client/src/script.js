@@ -14,9 +14,10 @@ const SPRITE_BLUSHING = '/assets/kaiki-chan-blushing.png';
 const SPRITE_SLEEPY = '/assets/kaiki-chan-sleepy.png';
 const SPRITE_SLEEPING = '/assets/kaiki-chan-sleeping.png';
 const SPRITE_SLEEPING_ZZZ = '/assets/kaiki-chan-sleeping-zzz.png';
-const SPRITE_ZZZ = '/assets/zzz.png';
 const SPRITE_SAD = '/assets/kaiki-chan-sad.png';
 const SPRITE_HOT = '/assets/kaiki-chan-hot.png';
+const SPRITE_DRESS = '/assets/kaiki-chan-prom.png';
+const SPRITE_ZZZ = '/assets/zzz.png';
 const SPRITE_PROM_INV = '/assets/prom-invitation.png';
 const SPRITE_EMPTY_GRAPH = '/assets/empty-graph.svg';
 const SPRITE_GRAPH_INSIDE = '/assets/graph-inside.svg';
@@ -449,25 +450,34 @@ export const SCRIPT = {
   DAY_5_12: {
     type: SCRIPT_DIALOGUE, sprite: SPRITE_BLUSHING,
     text: 'Я не могу не признать её талант к точным наукам... Мы учились в одном математическом лицее, я знаю, на что она способна.',
-    choices: [['Почему же вы тогда не ладили?', 'DAY_5_13']]
+    choices: [['Почему же вы тогда не ладили?', 'DAY_5_12_CUT_JUSTIFICATION']]
+  },
+  DAY_5_12_CUT_JUSTIFICATION: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_BLUSHING,
+    text: '...',
+    choices: [['...', 'DAY_5_12_CUT']]
+  },
+  DAY_5_12_CUT: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_5_13',
+    text: 'Почему Ахиру-сан остановилась? Неужели я спросил что-то лишнее?..'
   },
   DAY_5_13: {
-    type: SCRIPT_DIALOGUE, sprite: SPRITE_BLUSHING, /* TODO sad sprite */
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_SAD,
     text: 'Мне стыдно признаваться, но я не останавливалась ни перед чем, чтобы доказать, что упорный труд важнее природных способностей...',
-    choices: [['Ни перед чем?..', 'DAY_5_14']]
+    choices: [['...', 'DAY_5_14']]
   },
   DAY_5_14: {
-    type: SCRIPT_DIALOGUE, sprite: SPRITE_BLUSHING, /* TODO sad sprite */
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_SAD,
     text: 'Последнее, что помню — как занижала результаты её тестов, когда помогала учителю их проверять—',
     choices: [['...', 'DAY_5_14']]
   },
   DAY_5_14: {
-    type: SCRIPT_DIALOGUE, sprite: SPRITE_BLUSHING, /* TODO sad sprite */
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_SAD,
     text: 'Как глупо, глупо, глупо! Стыдно об этом вспоминать...',
     choices: [['...', 'DAY_5_15']]
   },
   DAY_5_15: {
-    type: SCRIPT_DIALOGUE, sprite: SPRITE_BLUSHING, /* TODO sad sprite */
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_SAD,
     text: 'Если ты не против, продолжим занятия завтра.',
     choices: [['Да, конечно.', 'DAY_5_16']]
   },
@@ -627,7 +637,7 @@ export const SCRIPT = {
   /* Layer 08 */
   DAY_8: {
     type: SCRIPT_CUTSCENE, next: 'DAY_8_1',
-    text: 'Похоже, она не собирается на бал... Что, если ей просто не с кем идти?'
+    text: 'Похоже, на бал она не собирается... Что, если ей просто не с кем идти?'
   },
   DAY_8_1: {
     type: SCRIPT_CUTSCENE, next: 'DAY_8_2',
@@ -649,11 +659,11 @@ export const SCRIPT = {
   },
   DAY_8_5: {
     type: SCRIPT_CUTSCENE, next: 'DAY_8_6',
-    text: 'Что же это такое? Никак не могу сосредоточиться и решить хотя бы что-нибудь…'
+    text: 'Что же это такое? Никак не могу сосредоточиться и решить хотя бы что-нибудь...'
   },
   DAY_8_6: {
     type: SCRIPT_CUTSCENE, next: 'DAY_8_7',
-    text: 'Резкий стук в окно заставил меня подпрыгнуть. Через стекло на меня смотрел воробей. Каики даже не пошевелилась, продолжая вертеть в руке брелок.'
+    text: 'Резкий стук в окно заставил меня подпрыгнуть. Через стекло на меня смотрел воробей. Ахиру-сан даже не пошевелилась, продолжая вертеть в руке брелок.'
   },
   DAY_8_7: {
     type: SCRIPT_CUTSCENE, next: 'DAY_8_8',
@@ -674,65 +684,68 @@ export const SCRIPT = {
   },
   DAY_8_10: {
     type: SCRIPT_DIALOGUE, sprite: SPRITE_BLUSHING,
-    text: 'Почему-то такие вещи всегда заставляют меня нервничать. Прости, если вела себя слишком резко с тобой',
-    choices: [['Нервничать? Но почему? Ты, должно быть, очень популярна…', 'DAY_8_11']]
+    text: 'Почему-то такие вещи всегда заставляют меня нервничать. Прости, если вела себя слишком резко с тобой.',
+    choices: [['Нервничать? Но почему? Ты, должно быть, очень популярна...', 'DAY_8_11']]
   },
   DAY_8_11: {
     type: SCRIPT_DIALOGUE, sprite: SPRITE_BLUSHING,
     text: 'Ты так думаешь? Боюсь, ты будешь разочарован.',
-    choices: [['Но… Твоё фото висит в холле на первом этаже, ты староста лучшего класса, я о таком только мечтать могу.', 'DAY_8_12']]
+    choices: [['Но... Твоё фото висит в холле на первом этаже, ты староста лучшего класса, я о таком только мечтать могу!', 'DAY_8_12']]
   },
   DAY_8_12: {
     type: SCRIPT_DIALOGUE, sprite: SPRITE_BLUSHING,
-    text: 'Я никогда не была популярной в твоем понимании. Наверное, просто не стремилась к этому',
+    text: 'Я никогда не была популярной в твоем понимании. Наверное, просто не стремилась к этому.',
     choices: [['И поэтому тебе не по душе идея с балом?', 'DAY_8_13']]
   },
   DAY_8_13: {
     type: SCRIPT_DIALOGUE, sprite: SPRITE_ANGRY,
-    text: 'Идея с балом просто глупа. Притвориться на один день, что мы лучше, чем есть на самом деле - какой в этом толк? Все равно на следующий день пойдем на занятия, как раньше.',
+    text: 'Идея с балом просто глупа. Притвориться на один день, что мы лучше, чем есть на самом деле — какой в этом толк? Все равно на следующий день пойдем на занятия, как раньше.',
     choices: [['Тебе не кажется, что это прекрасная возможность наладить отношения с одноклассниками?', 'DAY_8_14']]
   },
   DAY_8_14: {
     type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
-    text: 'Ты думаешь, мне это интересно? Снова тебя разочарую',
-    choices: [['Может тебе просто не с кем пойти?', 'DAY_8_15']]
+    text: 'Ты думаешь, мне это интересно? Снова тебя разочарую.',
+    choices: [['Может, тебе просто не с кем пойти?', 'DAY_8_15']]
   },
   DAY_8_15: {
     type: SCRIPT_DIALOGUE, sprite: SPRITE_ANGRY,
     text: 'А тебе-то что?',
-    choices: [['Может, ты пошла бы со мной...', 'DAY_8_16']]
+    choices: [['Т-ты могла бы пойти со мной...', 'DAY_8_16']]
   },
   DAY_8_16: {
-    type: SCRIPT_CUTSCENE, next: SCRIPT_RELATIONSHIP_NONE_END_DAY,
-    text: 'Так и не ответила... "Я подумаю" - посмотрим, что из этого выйдет.'
+    type: SCRIPT_CUTSCENE, next: SCRIPT_RELATIONSHIP_UP_END_DAY,
+    text: 'Ответа на свое предложение я так и не получил... Буду утешать себя тем лишь тем, что я не услышал слова "нет".'
   },
   /* Layer 09 */
   DAY_9: {
     type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
     text: 'Доброе утро! Приступим?',
-    choices: [['*зевает* Да, давай', 'DAY_9_1']]
+    choices: [['*зевает* Да, давай.', 'DAY_9_1']]
   },
   DAY_9_1: {
     type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
     text: 'Не выспался?',
     choices: [
-      ['Нет, все в порядке', 'GRAPH_DEFAULT'],
+      ['Нет, все в порядке.', 'GRAPH_DEFAULT'],
       ['Знаешь, сегодня ночью я прошел Дум в хард режиме!', 'DAY_9_2']
     ]
   },
   DAY_9_2: {
     type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
-    text: 'О, я смотрю ты страшно горд собой?',
-    choices: [['Да, знаю, что ты скажешь - опять занимался глупостями', 'DAY_9_3']]
+    text: 'О, смотрю, ты страшно горд собой?',
+    choices: [['Знаю, что ты скажешь — опять занимался глупостями...', 'DAY_9_3']]
   },
   DAY_9_3: {
     type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
-    text: 'Именно',
-    choices: [['Прости, я не могу похвастаться таким же количеством заслуг как у тебя. Но я прошел Дум в харде, и да, я горд собой', 'DAY_9_4']]
+    text: 'Именно, глупостями.',
+    choices: [
+      ['Ну, прости, что не могу похвастаться победами на олимпиадах, как ты.', 'DAY_9_4'],
+      ['А я все равно горд собой. Дум в харде — даже не представляешь, как сложно было.', 'DAY_9_4']
+    ]
   },
   DAY_9_4: {
     type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
-    text: 'А знаешь, мне однажды удалось покормить белку с рук в городском парке',
+    text: '...Знаешь, а мне однажды удалось покормить белку с рук в городском парке.',
     choices: [['Что?', 'DAY_9_5']]
   },
   DAY_9_5: {
@@ -742,13 +755,19 @@ export const SCRIPT = {
   },
   DAY_9_6: {
     type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
-    text: 'Ну вот, потому что их немного и они прячутся. А мне однажды удалось покормить одну, прямо с рук, представляешь? Правда, пришлось полдня просидеть под деревом с орешками в руках, но оно того стоило!',
-    choices: [['Я читал, что ты была победителем государственной математической олимпиады - и ты гордишься тем, что покормила белку?', 'DAY_9_7']]
+    text: 'Ну вот, потому что их немного и они прячутся. А я однажды покормила одну, прямо с рук, представляешь?',
+    choices: [['...', 'DAY_9_6_CONT']]
+  },
+  /* I hate tiny mobile screens */
+  DAY_9_6_CONT: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'Правда, пришлось полдня просидеть под деревом с орешками в руках, но оно того стоило!',
+    choices: [['После всех своих побед ты гордишься тем, что покормила белку?', 'DAY_9_7']]
   },
   DAY_9_7: {
     type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
-    text: 'Крайне милую белку, это важно. Пойдем, покажу, где это было?',
-    choices: [['Пойдем!', SCRIPT_RELATIONSHIP_UP_END_DAY]]
+    text: 'Крайне милую белку, это важно! Пойдем, покажу, где это было?',
+    choices: [['Пойдем...', SCRIPT_RELATIONSHIP_UP_END_DAY]]
   },
   /* Layer 10 */
   DAY_10: {
@@ -767,14 +786,14 @@ export const SCRIPT = {
     type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
     text: 'Я приготовила новый граф, в следующий раз уж не опаздывай.',
     choices: [
-      ['А у нас вроде занятия не по расписанию', 'DAY_10_SAD_TROMBONE'],
+      ['А у нас вроде занятия не по расписанию.', 'DAY_10_SAD_TROMBONE'],
       ['Да, конечно, прости...', 'DAY_10_4']
     ]
   },
   DAY_10_SAD_TROMBONE: {
     type: SCRIPT_DIALOGUE, sprite: SPRITE_ANGRY,
     text: 'А ведь ты прав. Тогда я пойду домой!',
-    choices: [['Как пожелаешь', SCRIPT_RELATIONSHIP_DOWN_END_DAY]]
+    choices: [['Как пожелаешь.', SCRIPT_RELATIONSHIP_DOWN_END_DAY]]
   },
   DAY_10_4: {
     type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
@@ -786,34 +805,34 @@ export const SCRIPT = {
     text: 'Мятая рубашка, пятно на рукаве, а на голове вообще что?! Ты в зеркало перед выходом смотрел?',
     choices: [
       ['Я вообще стараюсь в зеркало лишний раз не смотреть...', 'DAY_10_6'],
-      ['Прости, я просто спешил на занятие', 'DAY_10_6'],
+      ['Прости, я просто спешил на занятие.', 'DAY_10_6'],
     ]
   },
   DAY_10_6: {
     type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
-    text: 'Оно и видно… Дай сюда, поправлю',
-    choices: [['*уф*', 'DAY_10_7']]
+    text: 'Оно и видно... Дай сюда, поправлю.',
+    choices: [['*у-уф*', 'DAY_10_7']]
   },
   DAY_10_7: {
     type: SCRIPT_CUTSCENE, next: 'DAY_10_8',
-    text: 'Оу, к такому я был не готов...'
+    text: 'К такому я был не готов...'
   },
   DAY_10_8: {
     type: SCRIPT_DIALOGUE, sprite: SPRITE_BLUSHING,
-    text: 'И не зазнавайся, я просто не могу на это смотреть!',
+    text: 'И не зазнавайся!.. Просто не люблю неопрятность.',
     choices: [['Х-хорошо...', 'DAY_10_9']]
   },
   DAY_10_9: {
     type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
     text: 'Вот, так-то лучше. Ты хоть позавтракал?',
-    choices: [['Н-нет.', 'DAY_10_10']]
+    choices: [['Н-нет...', 'DAY_10_10']]
   },
   DAY_10_10: {
     type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
     text: '*глубоко вздыхая* Пойду, поставлю чайник, принесу пирожных.',
     choices: [
       ['Спасибо...', 'DAY_10_11'],
-      ['Мне не нужны твои пироженки, какими бы сладкими они у тебя не были!', 'DAY_10_AMERICAN_CHOPPER']
+      ['М-мне не нужны твои пироженки, какими бы сладкими они у тебя не были!', 'DAY_10_AMERICAN_CHOPPER']
     ]
   },
   DAY_10_AMERICAN_CHOPPER: {
@@ -823,60 +842,64 @@ export const SCRIPT = {
   },
   DAY_10_11: {
     type: SCRIPT_CUTSCENE, next: SCRIPT_RELATIONSHIP_UP_END_DAY,
-    text: 'Очень вкусные пирожные, интересно, Ахиру-сан сама их приготовила?'
+    text: 'Чудесные пирожные... Интересно, Ахиру-сан сама их приготовила?'
   },
   /* Layer 11 */
   DAY_11: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_11_INTRO_CONT',
+    text: 'Дождь еще с ночи льет как из ведра. Месяц назад я бы даже из кровати не вылез, а сейчас бегу по лужам в школу.'
+  },
+  DAY_11_INTRO_CONT: {
     type: SCRIPT_CUTSCENE, next: 'DAY_11_1',
-    text: 'Дождь еще с ночи льет как из ведра. Месяц назад я и подумать не мог, что побегу в школу в такую погоду'
+    text: 'Все вокруг такое серое и хмурое.'
   },
   DAY_11_1: {
     type: SCRIPT_CUTSCENE, next: 'DAY_11_2',
-    text: 'В такие дни я всегда чувствую себя подавленным'
+    text: 'Хмурый полицейский на углу, хмурая старушка на переходе, хмурая девочка с оскалившимся псом на поводке...'
   },
   DAY_11_2: {
     type: SCRIPT_CUTSCENE, next: 'DAY_11_3',
-    text: 'Особенно, когда нужно выходить из дома'
+    text: 'И на всех льет дождь. Невыносимо.'
   },
   DAY_11_3: {
     type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
     text: 'Приветики! Ну, что, готов сегодня позаниматься продуктивно?',
     choices: [
-      ['Да, конечно, давай', 'GRAPH_DEFAULT'],
+      ['Давай...', 'GRAPH_DEFAULT'],
       ['Какое там...', 'DAY_11_4']
     ]
   },
   DAY_11_4: {
     type: SCRIPT_CUTSCENE, next: 'DAY_11_5',
-    text: 'Каики сегодня прямо светится...'
+    text: 'Ахиру-сан прямо светится...'
   },
   DAY_11_5: {
     type: SCRIPT_CUTSCENE, next: 'DAY_11_6',
-    text: 'Конечно, это определенным образом компенсирует мрачность на улице, но...'
+    text: 'Она первая, от кого мне сегодня не хочется отводить взгляд.'
   },
   DAY_11_6: {
     type: SCRIPT_CUTSCENE, next: 'DAY_11_7',
-    text: 'Каким образом ей это удается?'
+    text: 'Ни тени грусти не лице... Как ей это удается?'
   },
   DAY_11_7: {
     type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
-    text: 'Что такое? Ты сегодня какой-то мрачный',
+    text: 'Что такое? Ты сегодня какой-то мрачный.',
     choices: [
-      ['Ничего страшного, давай позанимаемся', 'GRAPH_DEFAULT'],
+      ['Ничего страшного, давай приступим к занятию.', 'GRAPH_DEFAULT'],
       ['Ветренно...', 'DAY_11_8']
     ]
   },
   DAY_11_8: {
     type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
     text: 'Ну, у нас это нормально для этого времени года...',
-    choices: [['Да и вообще, столько всего навалилось', 'DAY_11_9']]
+    choices: [['Да и вообще, столько всего навалилось.', 'DAY_11_9']]
   },
   DAY_11_9: {
     type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
-    text: 'Понимаю тебя, бывает трудно',
+    text: 'Понимаю тебя, бывает трудно.',
     choices: [
       ['Куда тебе, у тебя всегда всё отлично!', 'DAY_11_THIS_IS_SO_SAD'],
-      ['Но, похоже, ты справляешься довольно хорошо', 'DAY_11_10']
+      ['Но ты, похоже, справляешься довольно хорошо.', 'DAY_11_10']
     ]
   },
   DAY_11_THIS_IS_SO_SAD: {
@@ -886,13 +909,13 @@ export const SCRIPT = {
   },
   DAY_11_10: {
     type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
-    text: 'Нужно найти способ избавляться от негативной энергии',
+    text: 'Нужно найти способ избавляться от негативной энергии.',
     choices: [['И каков же твой, если не секрет?', 'DAY_11_11']]
   },
   DAY_11_11: {
     type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
-    text: 'Да нет, не секрет, просто никто особо не интересовался. Я люблю плавать',
-    choices: [['Вау... П-плавать?..', 'DAY_11_FANSERVICE']]
+    text: 'Да нет, не секрет, просто никто особо не интересовался... Я люблю плавать.',
+    choices: [['Ох-х... П-плавать?..', 'DAY_11_FANSERVICE']]
   },
   DAY_11_FANSERVICE: {
     type: SCRIPT_CUTSCENE, next: 'DAY_11_12', sprite: SPRITE_HOT,
@@ -900,25 +923,25 @@ export const SCRIPT = {
   },
   DAY_11_12: {
     type: SCRIPT_DIALOGUE, sprite: SPRITE_ANGRY,
-    text: 'Идиот, о чём ты там замечтался!?',
+    text: 'Идиот, о чём ты там замечтался?!',
     choices: [['П-прости, я тут...', 'DAY_11_13']]
   },
   DAY_11_13: {
     type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
     text: 'Ладно, заниматься сегодня ты все равно не готов. Может, выпьем чаю?',
     choices: [
-      ['Ну уж нет, у нас много дел', 'DAY_11_PRESS_F'],
-      ['Конечно, ставлю чайник', 'DAY_11_14']
+      ['Ну уж нет, у нас много дел.', 'DAY_11_PRESS_F'],
+      ['Конечно, ставлю чайник.', 'DAY_11_14']
     ]
   },
   DAY_11_PRESS_F: {
-    type: SCRIPT_DIALOGUE, sprite: SPRITE_SAD,
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_BLUSHING,
     text: 'Да, ты прав...',
-    choices: [['Тогда не будем терять времени', 'GRAPH_DEFAULT']]
+    choices: [['Не будем терять времени.', 'GRAPH_DEFAULT']]
   },
   DAY_11_14: {
     type: SCRIPT_CUTSCENE, next: 'DAY_11_15',
-    text: 'Никогда бы не подумал, что такое ужасное утро может вести к такому прекрасному дню'
+    text: 'Никогда бы не подумал, что такое ужасное утро может вести к такому прекрасному дню.'
   },
   DAY_11_15: {
     type: SCRIPT_CUTSCENE, next: SCRIPT_RELATIONSHIP_UP_END_DAY,
@@ -937,14 +960,14 @@ export const SCRIPT = {
     type: SCRIPT_DIALOGUE, sprite: SPRITE_SLEEPY,
     text: '*зевает*',
     choices: [
-      ['Бодрого утра! Доставай граф, я готов', 'DAY_12_A'],
+      ['Бодрого утра! Доставай граф, я готов.', 'DAY_12_A'],
       ['Засиделась с уроками?', 'DAY_12_B']
     ]
   },
   /* Layer 12. Branch A */
   DAY_12_A: {
     type: SCRIPT_DIALOGUE, sprite: SPRITE_SLEEPY,
-    text: 'Я рада твоему энтузиазму *медленно протягивает листок, потягивается*',
+    text: 'Я рада твоему энтузиазму... *медленно протягивает листок, потягивается*',
     choices: [
       ['Ох, ща нарешаю!', 'DAY_12_3'],
       ['Так-так, что тут у нас?', 'DAY_12_3']
@@ -1067,20 +1090,20 @@ export const SCRIPT = {
     choices: [['Тик-так', 'DAY_14_NEUTRAL_4']]
   },
   DAY_14_NEUTRAL_4: {
-    type: SCRIPT_CUTSCENE, next: DAY_14_NEUTRAL_5,
+    type: SCRIPT_CUTSCENE, next: 'DAY_14_NEUTRAL_5',
     text: 'Бал уже подходит к концу, а ее все нет...'
   },
   DAY_14_NEUTRAL_5: {
-    type: SCRIPT_CUTSCENE, next: DAY_14_NEUTRAL_6,
+    type: SCRIPT_CUTSCENE, next: 'DAY_14_NEUTRAL_6',
     text: 'Видимо, она уже не придет...'
   },
   DAY_14_NEUTRAL_6: {
     type: SCRIPT_CUTSCENE,
     text: 'По крайней мере, мы теперь учимся вместе - возможно у меня еще будет шанс...'
-  }
+  },
 
   DAY_14_BAD: {
-    type: SCRIPT_CUTSCENE, next: DAY_14_BAD_1,
+    type: SCRIPT_CUTSCENE, next: 'DAY_14_BAD_1',
     text: 'О нет! Тест не пройден!'
   },
   DAY_14_BAD_1: {
