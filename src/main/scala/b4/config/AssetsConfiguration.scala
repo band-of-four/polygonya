@@ -14,5 +14,5 @@ class AssetsConfiguration extends WebMvcConfigurer {
     registry.addViewController("/").setViewName("index")
 
   override def addResourceHandlers(registry: ResourceHandlerRegistry): Unit =
-    registry.addResourceHandler("/assets/**").addResourceLocations("file:client/dist/")
+    registry.addResourceHandler("/assets/**").addResourceLocations("classpath:assets/")
 }
