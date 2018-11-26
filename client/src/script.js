@@ -996,117 +996,199 @@ export const SCRIPT = {
     text: 'Тик-так, тик-так, тик-так',
     choices: [['Тик-так', SCRIPT_RELATIONSHIP_UP_END_DAY]]
   },
-
   /* Layer 13 */
   DAY_13: {
     type: SCRIPT_CUTSCENE, next: 'DAY_13_1',
-    text: 'Солнце светит, в наушниках приятная музыка, что может быть лучше?'
+    text: 'У меня никак не выходит из головы...'
   },
   DAY_13_1: {
-    type: SCRIPT_CUTSCENE, next: 'DAY_13_2',
-    text: 'Сегодня последний день занятий, мне так не терпится увидеть ее! Столько всего хочется сказать, а возможности может уже не выпасть...'
+    type: SCRIPT_CUTSCENE, sprite: SPRITE_SLEEPING,
+    text: '...',
+    choices: [['Надо быть серьезнее', 'DAY_13_2']]
   },
   DAY_13_2: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'Ты сегодня задумчивый. Что-то случилось?',
+    choices: [
+      ['А, не обращай внимания', 'GRAPH_DEFAULT'],
+      ['Знаешь, мы уже две недели занимаемся...', 'DAY_13_3']
+    ]
+  },
+  DAY_13_3: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
+    text: 'Почти две',
+    choices: [['Да, почти две. И я ни разу не сказал тебе спасибо', 'DAY_13_4']]
+  },
+  DAY_13_4: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_BLUSHING,
+    text: 'Да за что тебе меня благодарить?... Это же моя обязанность...',
+    choices: [['Но ты могла не нянчиться так со мной...', 'DAY_13_5']]
+  },
+  DAY_13_5: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_BLUSHING,
+    text: 'На самом деле, я тоже должна отметить, что ты не такой бесполезный, каким кажешься на первый взгляд...',
+    choices: [['..!?', 'DAY_13_6']]
+  },
+  DAY_13_6: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_BLUSHING,
+    text: 'Ты п-правда многому научился, мне кажется, ты очень способный...',
+    choices: [
+      ['Так, кто бы ты не был - верни Ахиру-сан!', 'DAY_13_WAT'],
+      ['Я... Ну... Спасибо, Ахиру-сан!', 'DAY_13_7']
+    ]
+  },
+  DAY_13_WAT: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_ANGRY,
+    text: 'Я вообще-то серьезно!..',
+    choices: [['*я все испортил*', SCRIPT_RELATIONSHIP_DOWN_END_DAY]]
+  },
+  DAY_13_7: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_BLUSHING,
+    text: 'Можешь называть меня Каики',
+    choices: [['Спасибо, К-Каики...', 'DAY_13_8']]
+  },
+  DAY_13_8: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_BLUSHING,
+    text: 'И тебе спасибо...',
+    choices: [['Мне!?', 'DAY_13_9']]
+  },
+  DAY_13_9: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_BLUSHING,
+    text: 'Ну-у, до тебя никто не стремился узнать меня ближе, и я...',
+    choices: [['...', 'DAY_13_10']]
+  },
+  DAY_13_10: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_BLUSHING,
+    text: 'Я привыкла думать, что это не важно.',
+    choices: [['Это очень важно! Не надо так думать!', 'DAY_13_11']]
+  },
+  DAY_13_11: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_BLUSHING,
+    text: '... Встретимся завтра, мне пора.',
+    choices: [['...', 'DAY_13_12']]
+  },
+  DAY_13_12: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_13_13',
+    text: 'Фу-у-х, это было... Неловко. И приятно.'
+  },
+  DAY_13_13: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_13_14',
+    text: 'Завтра.'
+  },
+  DAY_13_14: {
+    type: SCRIPT_CUTSCENE, next: SCRIPT_RELATIONSHIP_UP_END_DAY,
+    text: 'Завтра я скажу ей.'
+  },
+  /* Layer 14. */
+  DAY_14: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_14_1',
+    text: 'Солнце светит, в наушниках приятная музыка, что может быть лучше?'
+  },
+  DAY_14_1: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_14_2',
+    text: 'Сегодня последний день занятий, мне так не терпится увидеть ее! Столько всего хочется сказать, а возможности может уже не выпасть...'
+  },
+  DAY_14_2: {
     type: SCRIPT_CUTSCENE,
     text: 'Странно, что дверь кабинета не приоткрыта… И ручка не поворачивается. Тут что, закрыто?',
     choices: [
-      ['Подожду у окна: Каики никогда не опаздывает.', 'DAY_13_A'],
-      ['Позанимаюсь сам: думаю, Каики приятно удивится.', 'DAY_13_B'],
+      ['Подожду у окна: Каики никогда не опаздывает.', 'DAY_14_A'],
+      ['Позанимаюсь сам: думаю, Каики приятно удивится.', 'DAY_14_B'],
     ]
   },
-  DAY_13_A: {
+  DAY_14_A: {
     type: SCRIPT_CUTSCENE,
     text: '...Каждый оборот секундной стрелки кажется мне вечностью. Долго я не прожду.',
-    choices: [['Мне кажется, Каики была у меня в друзьях: напишу ей?', 'DAY_13_3']]
+    choices: [['Мне кажется, Каики была у меня в друзьях: напишу ей?', 'DAY_14_3']]
   },
-  DAY_13_B: {
+  DAY_14_B: {
     type: SCRIPT_CUTSCENE,
     text: 'Так, 3 + 5 равно... пятнадцать? Ой, грифель у карандаша сломался...',
-    choices: [['Мне кажется, Каики была у меня в друзьях: напишу ей?', 'DAY_13_3']]
+    choices: [['Мне кажется, Каики была у меня в друзьях: напишу ей?', 'DAY_14_3']]
   },
-  DAY_13_3: {
+  DAY_14_3: {
     type: SCRIPT_CUTSCENE,
     text: 'Хмм, она была в сети сегодня ночью. Не поздновато ли для нее?',
     choices: [
-      ['Скину фотку с котиком.', 'DAY_13_ARDUINO_PLAY_DESPACITO'],
-      ['Спрошу, все ли в порядке.', 'DAY_13_4']
+      ['Скину фотку с котиком.', 'DAY_14_ARDUINO_PLAY_DESPACITO'],
+      ['Спрошу, все ли в порядке.', 'DAY_14_4']
     ]
   },
-  DAY_13_ARDUINO_PLAY_DESPACITO: {
+  DAY_14_ARDUINO_PLAY_DESPACITO: {
     type: SCRIPT_CUTSCENE,
     text: 'Что-то она долго не отвечает.',
     choices: [['Видимо, пойду домой.', SCRIPT_RELATIONSHIP_NONE_END_DAY]]
   },
-  DAY_13_4: {
-    type: SCRIPT_CUTSCENE, next: 'DAY_13_5',
+  DAY_14_4: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_14_5',
     text: 'Сообщение прочитала, но уже несколько минут не отвечает. Обидел ли я тебя чем-то, Каики?'
-    /* TODO: finish layer 13 */
+    /* TODO: finish layer 14 */
   },
-
-  DAY_14: { type: SCRIPT_EPILOGUE, good: 'DAY_14_GOOD', neutral: 'DAY_14_NEUTRAL', fail: 'DAY_14_FAIL' },
-  DAY_14_GOOD: {
-    type: SCRIPT_CUTSCENE, next: 'DAY_14_GOOD_1',
+  /* Layer 15. */
+  DAY_15: { type: SCRIPT_EPILOGUE, good: 'DAY_15_GOOD', neutral: 'DAY_15_NEUTRAL', fail: 'DAY_15_FAIL' },
+  DAY_15_GOOD: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_15_GOOD_1',
     text: 'Я сдал! Не может быть!'
   },
-  DAY_14_GOOD_1: {
-    type: SCRIPT_CUTSCENE, next: 'DAY_14_GOOD_2',
+  DAY_15_GOOD_1: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_15_GOOD_2',
     text: 'Надо поблагодарить Каики - это целиком её заслуга'
   },
-  DAY_14_GOOD_2: {
-    type: SCRIPT_CUTSCENE, next: 'DAY_14_GOOD_3',
+  DAY_15_GOOD_2: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_15_GOOD_3',
     text: 'Если она, конечно, придет...'
   },
-  DAY_14_GOOD_3: {
+  DAY_15_GOOD_3: {
     type: SCRIPT_CUTSCENE,
     text: 'Тик-так, тик-так, тик-так',
-    choices: [['Тик-так', 'DAY_14_GOOD_4']]
+    choices: [['Тик-так', 'DAY_15_GOOD_4']]
   },
-  DAY_14_GOOD_4: {
+  DAY_15_GOOD_4: {
     type: SCRIPT_CUTSCENE, sprite: SPRITE_DRESS,
     next: 'DAY_15_GOOD_5',
     text: 'Она пришла!..'
   },
-  DAY_14_GOOD_5: {
+  DAY_15_GOOD_5: {
     type: SCRIPT_CUTSCENE, sprite: SPRITE_DRESS,
     text: 'И учились они долго и счастливо!'
   },
 
 
-  DAY_14_NEUTRAL: {
-    type: SCRIPT_CUTSCENE, next: 'DAY_14_NEUTRAL_1',
+  DAY_15_NEUTRAL: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_15_NEUTRAL_1',
     text: 'Я сдал! Не может быть!'
   },
-  DAY_14_NEUTRAL_1: {
-    type: SCRIPT_CUTSCENE, next: 'DAY_14_NEUTRAL_2',
+  DAY_15_NEUTRAL_1: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_15_NEUTRAL_2',
     text: 'Надо поблагодарить Каики - это целиком её заслуга'
   },
-  DAY_14_NEUTRAL_2: {
-    type: SCRIPT_CUTSCENE, next: 'DAY_14_NEUTRAL_3',
+  DAY_15_NEUTRAL_2: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_15_NEUTRAL_3',
     text: 'Если она, конечно, придет...'
   },
-  DAY_14_NEUTRAL_3: {
+  DAY_15_NEUTRAL_3: {
     type: SCRIPT_CUTSCENE,
     text: 'Тик-так, тик-так, тик-так',
-    choices: [['Тик-так', 'DAY_14_NEUTRAL_4']]
+    choices: [['Тик-так', 'DAY_15_NEUTRAL_4']]
   },
-  DAY_14_NEUTRAL_4: {
-    type: SCRIPT_CUTSCENE, next: 'DAY_14_NEUTRAL_5',
+  DAY_15_NEUTRAL_4: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_15_NEUTRAL_5',
     text: 'Бал уже подходит к концу, а ее все нет...'
   },
-  DAY_14_NEUTRAL_5: {
-    type: SCRIPT_CUTSCENE, next: 'DAY_14_NEUTRAL_6',
+  DAY_15_NEUTRAL_5: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_15_NEUTRAL_6',
     text: 'Видимо, она уже не придет...'
   },
-  DAY_14_NEUTRAL_6: {
+  DAY_15_NEUTRAL_6: {
     type: SCRIPT_CUTSCENE,
     text: 'По крайней мере, мы теперь учимся вместе - возможно у меня еще будет шанс...'
   },
 
-  DAY_14_BAD: {
-    type: SCRIPT_CUTSCENE, next: 'DAY_14_BAD_1',
+  DAY_15_BAD: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_15_BAD_1',
     text: 'О нет! Тест не пройден!'
   },
-  DAY_14_BAD_1: {
+  DAY_15_BAD_1: {
     type: SCRIPT_CUTSCENE,
     text: 'Ни о каком бале не может идти и речи... Я больше не смогу посмотреть в лицо Каики! Время менять личность...'
   }
