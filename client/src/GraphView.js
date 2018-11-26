@@ -38,7 +38,8 @@ class Graph extends Component {
   }
 
   updateFieldState = ({ target: { name, value } }) =>
-    this.props.dispatchSetField(name, value);
+    this.props.dispatchSetField(name, value).then((res) =>
+      res === 'finished' && this.props.onTestFinish());
 
   submitFields = (e) => {
     e.preventDefault();

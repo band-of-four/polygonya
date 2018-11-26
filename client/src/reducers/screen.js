@@ -18,6 +18,8 @@ export default function screen(state = defaultState, action) {
       if (screen.type === SCRIPT_GRAPH)
         return graphPick('neutral', action.to);
       return screen;
+    case SCREEN_GRAPH:
+      return graphPick('neutral', state.graphId);
     case SCREEN_GRAPH_AWAIT:
       return graphPick('loading', state.graphId);
     case SCREEN_GRAPH_INSIDE:

@@ -1,4 +1,5 @@
 export const GRAPH_ADD_POINT = "GRAPH_ADD_POINT";
+export const GRAPH_SET_POINTS = "GRAPH_SET_POINTS";
 export const GRAPH_SET_FIELD = "GRAPH_SET_FIELD";
 export const GRAPH_RESET = "GRAPH_RESET";
 
@@ -21,6 +22,8 @@ export default function graph(state = defaultState, action) {
       return { ...state, points: state.points.concat(action.result) };
     case GRAPH_SET_FIELD:
       return { ...state, [action.field]: action.value }; 
+    case GRAPH_SET_POINTS:
+      return { ...state, points: action.points };
     case GRAPH_RESET:
       return defaultState;
     default:
