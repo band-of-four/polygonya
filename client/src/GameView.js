@@ -111,16 +111,16 @@ class Game extends Component {
       setTimeout(() => {
         this.setState({ fadeOut: true });
         setTimeout(() => {
-          this.props.dispatchNextScreen(scriptId);
-          this.setState({ popOutControls: false, fadeOut: false });
+          this.props.dispatchNextScreen(scriptId).then(() =>
+            this.setState({ popOutControls: false, fadeOut: false }));
         }, 600);
       }, 600);
     }
     else if (currentType === SCRIPT_DIALOGUE || currentType === SCRIPT_CUTSCENE) {
       this.setState({ popInControls: false, popOutControls: true });
       setTimeout(() => {
-        this.props.dispatchNextScreen(scriptId);
-        this.setState({ popOutControls: false });
+        this.props.dispatchNextScreen(scriptId).then(() =>
+          this.setState({ popOutControls: false }));
       }, 600);
     }
     else this.props.dispatchNextScreen(scriptId);

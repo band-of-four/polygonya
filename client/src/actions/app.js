@@ -56,6 +56,8 @@ export const pushAndAdvanceDay = () => async (dispatch, getState) => {
   const testsDone = getState().player.testsDone;
   dispatch(resetGraph());
 
+  await withDelay(2500, Promise.resolve('delay-between-days'));
+
   try {
     sendUpdate(name, newDay, relationshipDelta, history, lastR);
     dispatch(setPlayerState(name, newDay, relationship, relationshipDelta, testsDone));

@@ -265,7 +265,7 @@ export const SCRIPT = {
   },
   /* Layer 03. Branch B -> branch A. */
   DAY_3_B4_A: {
-    type: SCRIPT_DIALOGUE, next: 'DAY_3_B4_A1',
+    type: SCRIPT_CUTSCENE, next: 'DAY_3_B4_A1',
     text: 'Что я только что сказал?..',
   },
   DAY_3_B4_A1: {
@@ -1187,11 +1187,11 @@ export const SCRIPT = {
     text: 'По крайней мере, мы теперь учимся вместе — надеюсь, у меня еще будет шанс...'
   },
 
-  DAY_15_BAD: {
-    type: SCRIPT_CUTSCENE, next: 'DAY_15_BAD_1',
+  DAY_15_FAIL: {
+    type: SCRIPT_CUTSCENE, next: 'DAY_15_FAIL_1',
     text: 'Я медленно отошел от стола учителя, опустив глаза на пол. Это... позор, даже для меня.'
   },
-  DAY_15_BAD_1: {
+  DAY_15_FAIL_1: {
     type: SCRIPT_CUTSCENE,
     text: 'Какой уж тут бал, я не смогу Каики даже в лицо посмотреть! Время сменить личность...'
   }
