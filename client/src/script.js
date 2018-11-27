@@ -587,7 +587,7 @@ export const SCRIPT = {
     text: 'Пожалуй...',
     choices: [['*улыбнуться*', SCRIPT_RELATIONSHIP_UP_END_DAY]]
   },
-  DAY_6_A: {
+  DAY_6_B: {
     type: SCRIPT_DIALOGUE, sprite: SPRITE_BLUSHING,
     text: 'Нет, сейчас все хорошо...',
     choices: [['*улыбнуться*', SCRIPT_RELATIONSHIP_UP_END_DAY]]
@@ -601,7 +601,7 @@ export const SCRIPT = {
     type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
     text: 'На что ты там уставился?',
     choices: [
-      ['*протянуть листовку*', 'DAY_7_А'],
+      ['*протянуть листовку*', 'DAY_7_A'],
       ['Что ЭТО такое???', 'DAY_7_B'],
       ['А почему день 15?', 'DAY_7_C']
     ]
@@ -628,7 +628,7 @@ export const SCRIPT = {
     type: SCRIPT_DIALOGUE, sprite: SPRITE_IDLE,
     text: '...Ты безнадежен.',
     choices: [
-      ['*протянуть листовку*', 'DAY_7_А'],
+      ['*протянуть листовку*', 'DAY_7_A'],
       ['Что ЭТО такое???', 'DAY_7_B']
     ]
   },

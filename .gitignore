@@ -9,8 +9,7 @@ src/main/resources/application.properties
 client/dist/*
 !client/dist/*.png
 !client/dist/*.svg
-!client/dist/app.css
-!client/dist/app.js
+!client/dist/app.prod*
 node_modules/
 
 gradlew*

@@ -3,6 +3,7 @@ import replace from 'rollup-plugin-replace';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import { terser } from 'rollup-plugin-terser';
+import hash from 'rollup-plugin-hash';
 
 const production = process.env.NODE_ENV === "production",
       development = !production;
@@ -41,6 +42,10 @@ export default {
       'dist/': production ? 'client/dist/' : 'dist/'
     })
   ].concat(production ? [
-    terser()
+    terser(),
+    hash({
+      dest: 'dist/app.prod.[hash:6].js',
+      manifest: 'dist/manifest-js.json'
+    })
   ] : [])
 };

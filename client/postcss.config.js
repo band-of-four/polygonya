@@ -19,6 +19,12 @@ module.exports = {
       preset: ['default', {
         discardComments: { removeAll: true }
       }]
+    },
+
+    'postcss-hash': production && {
+      algorithm: 'sha1',
+      trim: 6,
+      manifest: 'dist/manifest-css.json'
     }
   }
 }
