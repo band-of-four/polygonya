@@ -7,31 +7,33 @@
     "rollup": "rollup -c",
     "postcss": "postcss css/app.css -c --verbose -o dist/app.css",
     "watch": "concurrently --kill-others \"npm run rollup -- -w\" \"npm run postcss -- -w --poll\"",
-    "build": "NODE_ENV=production npm run rollup && NODE_ENV=production npm run postcss"
+    "build": "NODE_ENV=production npm run rollup && NODE_ENV=production npm run postcss",
+    "serve": "serve",
+    "dev": "concurrently --kill-others \"npm run rollup -- -w\" \"npm run postcss -- -w --poll\" \"npm run serve\""
   },
   "devDependencies": {
-    "rollup": "^0.66.6",
+    "rollup": "^0.67.3",
     "rollup-plugin-terser": "^3.0.0",
     "rollup-plugin-commonjs": "^9.2.0",
-    "rollup-plugin-jsx": "^1.0.3",
     "rollup-plugin-node-resolve": "^3.4.0",
     "rollup-plugin-replace": "^2.1.0",
     "rollup-plugin-babel": "^4.0.3",
-    "@babel/core": "^7.1.2",
+    "@babel/core": "^7.1.6",
     "@babel/preset-react": "^7.0.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
     "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/plugin-transform-classes": "^7.1.0",
-    "concurrently": "^4.0.1",
+    "concurrently": "^4.1.0",
     "postcss-cli": "^6.0.1",
     "postcss-import": "^12.0.1",
-    "postcss-preset-env": "^6.3.0",
-    "cssnano": "^4.1.7"
+    "postcss-preset-env": "^6.4.0",
+    "cssnano": "^4.1.7",
+    "serve": "^10.1.1"
   },
   "dependencies": {
-    "react": "^16.6.0",
-    "react-dom": "^16.6.0",
-    "react-redux": "^5.1.0",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-redux": "^5.1.1",
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.5",
     "redux-thunk": "^2.3.0"
