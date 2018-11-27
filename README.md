@@ -4,40 +4,25 @@ _The cutest IAD lab work you'll ever find_
 
 ## Past releases
 
-* [lab2](https://github.com/band-of-four/polygonya/releases/tag/lab2):
+* [lab2](https://github.com/band-of-four/polygonya/tree/lab2):
 Vue.js on the frontend, Java EE Servlets (Scala) on the backend.
-* [lab3](https://github.com/band-of-four/polygonya/releases/tag/lab3):
+* [lab3](https://github.com/band-of-four/polygonya/tree/lab3):
 JavaServer Faces, Scala, Oracle Database
+* [lab4](https://github.com/band-of-four/polygonya/tree/lab4):
+React + Redux, Spring Boot, Scala, Oracle Database
 
 ## master branch version
 
-Frontend: React + Redux, ES6, JSX
-Backend: Spring Boot, Scala, Oracle Database
+React + Redux without a back-end,
+available [here](https://band-of-four.github.io/polygonya/).
 
-### Prerequisites
+### Development
 
-* sbt
-* Maven
-* Oracle JDBC driver, [ojdbc6.jar](https://www.oracle.com/technetwork/apps-tech/jdbc-112010-090769.html)
+The following commands start up a local server on port `5000` and
+recompile scripts and stylesheets on file change.
 
-### Setup
-
-#### Local dependencies
-
-Add `ojdbc6` to the local repository:
 ```
-mvn install:install-file -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0.3 \
-  -Dpackaging=jar -DgeneratePom=true -Dfile=ojdbc6.jar
-```
-
-Create `src/main/resources/application.properties`:
-```
-spring.datasource.url=jdbc:oracle:thin:@localhost:1521:your_sid
-spring.datasource.username=your_username
-spring.datasource.password=your_pswrd
-spring.datasource.platform=oracle
-spring.datasource.driver-class-name=oracle.jdbc.OracleDriver
-spring.datasource.initialization-mode=always
-spring.jpa.database-platform=org.hibernate.dialect.Oracle10gDialect
-spring.jpa.generate-ddl=true
+cd client
+npm i
+npm run dev
 ```
