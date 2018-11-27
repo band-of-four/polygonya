@@ -8,11 +8,13 @@ import ReduxThunk from 'redux-thunk';
 import stateRoot from './reducers';
 import { nextScreen } from './actions/game.js';
 import { history, loadPlayerState, erasePlayerState } from './actions/app.js';
-import { APP_UI_AWAIT, APP_UI_AUTH, APP_UI_FETCH_ERROR, APP_UI_GAME, APP_UI_HISTORY } from './reducers/app.js';
+import { APP_UI_AWAIT, APP_UI_AUTH, APP_UI_FETCH_ERROR,
+  APP_UI_GAME, APP_UI_HISTORY, APP_UI_CREDITS } from './reducers/app.js';
 
 import AuthView from './AuthView.js';
 import GameView from './GameView.js';
 import HistoryView from './HistoryView.js';
+import Credits from './Credits.js';
 
 let store;
 
@@ -58,6 +60,8 @@ class App extends Component {
             <p>Проверь свое подключение к Интернету и обнови страницу.</p>
           </section>
         );
+      case APP_UI_CREDITS:
+        return <Credits onResetPlayer={() => this.props.dispatchErasePlayer()} />;
     }
   }
 }

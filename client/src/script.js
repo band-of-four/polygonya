@@ -6,6 +6,7 @@ export const SCRIPT_RELATIONSHIP_UP_END_DAY = 'SCRIPT_RELATIONSHIP_UP_END_DAY';
 export const SCRIPT_RELATIONSHIP_DOWN_END_DAY = 'SCRIPT_RELATIONSHIP_DOWN_END_DAY';
 export const SCRIPT_RELATIONSHIP_NONE_END_DAY = 'SCRIPT_RELATIONSHIP_NONE_END_DAY';
 export const SCRIPT_TEST_END_DAY = 'SCRIPT_TEST_END_DAY';
+export const SCRIPT_END = 'SCRIPT_END';
 
 const SPRITE_IDLE = 'dist/kaiki-chan-idle.png';
 const SPRITE_ANGRY = 'dist/kaiki-chan-angry.png';
@@ -1150,8 +1151,8 @@ export const SCRIPT = {
     text: 'Она пришла!..'
   },
   DAY_15_GOOD_5: {
-    type: SCRIPT_CUTSCENE, sprite: SPRITE_DRESS,
-    text: 'И учились они долго и счастливо!'
+    type: SCRIPT_CUTSCENE, sprite: SPRITE_DRESS, next: SCRIPT_END,
+    text: 'И учились они долго и счастливо...'
   },
 
   DAY_15_NEUTRAL: {
@@ -1180,7 +1181,7 @@ export const SCRIPT = {
     text: 'Видимо, встретится сегодня нам не суждено...'
   },
   DAY_15_NEUTRAL_6: {
-    type: SCRIPT_CUTSCENE,
+    type: SCRIPT_CUTSCENE, next: SCRIPT_END,
     text: 'По крайней мере, мы теперь учимся вместе — надеюсь, у меня еще будет шанс...'
   },
 
@@ -1189,7 +1190,7 @@ export const SCRIPT = {
     text: 'Я медленно отошел от стола учителя, опустив глаза на пол. Это... позор, даже для меня.'
   },
   DAY_15_FAIL_1: {
-    type: SCRIPT_CUTSCENE,
+    type: SCRIPT_CUTSCENE, next: SCRIPT_END,
     text: 'Какой уж тут бал, я не смогу Каики даже в лицо посмотреть! Время сменить личность...'
   }
 };

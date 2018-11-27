@@ -64,6 +64,42 @@ body {
   }
 }
 
+.credits {
+  font-size: 20px;
+  min-height: min-content;
+  padding: 4vh 0;
+}
+
+.credits-title {
+  margin: 0;
+  font-size: 42px;
+}
+
+.credits-img {
+  max-height: 40vh;
+  max-width: calc(100% - 4vw);
+  margin: 4vh 0;
+
+  border: 2px solid #6d6d6d;
+  border-radius: 200px 12px 200px 10px/5px 260px 5px 260px;
+}
+
+.credits-h { font-size: 26px; }
+
+.credits-p { margin: 2vh 4vw; }
+
+.credits-emph {
+  margin: 6vh 0;
+}
+
+.credits-a {
+  font-weight: bold;
+  color: black;
+  text-decoration: none;
+
+  &:hover { text-decoration: underline; }
+}
+
 .fade-in { animation: fade-in 700ms ease-out forwards; }
 
 .fade-out { animation: fade-out 700ms ease-out forwards; }
