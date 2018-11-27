@@ -1,65 +1,37 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { APP_AUTH_INVALID_CREDS, APP_AUTH_NAME_TAKEN } from './reducers/app.js';
-import { resetAuthScreen, login, signUp } from './actions/app.js';
+import { createPlayer } from './actions/app.js';
 
 class Auth extends Component {
   constructor(props) {
     super(props);
-    this.state = { form: 'sign-in' };
+    this.state = { name: '' };
   }
 
-  signIn = (e) => {
+  createPlayer = (e) => {
     e.preventDefault();
-    const { username, password } = this.refs;
-    this.props.dispatchLogin(username.value, password.value);
-  }
-
-  signUp = (e) => {
-    e.preventDefault();
-    const { username, password } = this.refs;
-    this.props.dispatchSignUp(username.value, password.value);
-  }
-
-  showSignInForm = (e) => { this.setState({ form: 'sign-in' }); this.props.dispatchResetErrors(); }
-
-  showSignUpForm = (e) => { this.setState({ form: 'sign-up' }); this.props.dispatchResetErrors(); }
-
-  renderForm(action, actionText, altText, altAction, altActionText) {
-    if (this.props.authError === APP_AUTH_INVALID_CREDS)
-      altText = "Имя или пароль неверны, попробуй еще раз. Или, может, мы с тобой незнакомы?..";
-    else if (this.props.authError === APP_AUTH_NAME_TAKEN)
-      altText = "Такое имя я уже знаю... Ты уверен, что мы не знакомы?";
-
-    return (
-      <form className="form form--full-screen neutral-bg" onSubmit={action}>
-        <input type="text" className="field" placeholder="Твое имя" ref="username" />
-        <input type="password" className="field" placeholder="Пароль" ref="password" />
-        <button type="submit" className="button">{actionText}</button>
-        <p>{altText}</p>
-        <button type="button" className="button" onClick={altAction}>{altActionText}</button>
-      </form>
-    );
+    this.state.name !== '' && this.props.dispatchCreatePlayer(this.state.name);
   }
 
   render() {
-    if (this.state.form === 'sign-in')
-      return this.renderForm(this.signIn, "Представиться",
-        "Или мы еще не знакомы?..", this.showSignUpForm, "Познакомиться");
-    if (this.state.form === 'sign-up')
-      return this.renderForm(this.signUp, "Познакомиться",
-        "Или мы уже знакомы?..", this.showSignInForm, "Представиться");
+    return (
+      <form className="info-page form form--full-screen neutral-bg" onSubmit={this.createPlayer}>
+        <input type="text" className="field" placeholder="Твое имя"
+          value={this.state.name} onChange={(e) => this.setState({ name: e.target.value })} />
+        <button type="submit" className="button">Познакомиться</button>
+        <p className="form__narrow-p">
+          Твой игровой прогресс будет сохранен на этом устройстве.
+        </p>
+      </form>
+    );
   }
 }
 
-const mapStateToProps = ({ app: { authError }}) => ({ authError });
 const mapDispatchToProps = (dispatch) => ({
-  dispatchLogin: (username, password) => dispatch(login(username, password)),
-  dispatchSignUp: (username, password) => dispatch(signUp(username, password)),
-  dispatchResetErrors: () => dispatch(resetAuthScreen())
+  dispatchCreatePlayer: (name) => dispatch(createPlayer(name))
 });
 
-const AuthView = connect(mapStateToProps, mapDispatchToProps)(Auth)
+const AuthView = connect(() => ({}), mapDispatchToProps)(Auth)
 
 export default AuthView;

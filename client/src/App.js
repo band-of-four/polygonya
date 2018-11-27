@@ -31,6 +31,10 @@ else {
 }
 
 class App extends Component {
+  logout = () =>
+    confirm('Ты точно хочешь выйти из игры? Это безвозвратно удалит весь твой прогресс.') &&
+      this.props.dispatchErasePlayer();
+
   render() {
     switch (this.props.screen) {
       case APP_UI_AUTH:
@@ -38,7 +42,7 @@ class App extends Component {
       case APP_UI_HISTORY:
         return <HistoryView />;
       case APP_UI_GAME:
-        return <GameView onLogout={() => this.props.dispatchLogout()} onHistory={() => this.props.dispatchHistory()} />;
+        return <GameView onLogout={this.logout} onHistory={() => this.props.dispatchHistory()} />;
       case APP_UI_AWAIT:
         return (
           <section className="info-page neutral-bg">
@@ -60,7 +64,7 @@ class App extends Component {
 
 const mapStateToProps = ({ app: { ui }}) => ({ screen: ui });
 const mapDispatchToProps = (dispatch) => ({
-  dispatchLogout: () => dispatch(logout()),
+  dispatchErasePlayer: () => dispatch(erasePlayerState()),
   dispatchHistory: () => dispatch(history())
 });
 

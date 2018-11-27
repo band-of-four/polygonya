@@ -23,3 +23,8 @@
   font: 16px var(--main-font);
   letter-spacing: 0.04em;
 }
+
+.form__narrow-p {
+  max-width: 300px;
+  line-height: 1.5;
+}
