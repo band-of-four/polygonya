@@ -7,7 +7,7 @@ import ReduxThunk from 'redux-thunk';
 
 import stateRoot from './reducers';
 import { nextScreen } from './actions/game.js';
-import { logout, history, tryPull } from './actions/app.js';
+import { history, loadPlayerState, erasePlayerState } from './actions/app.js';
 import { APP_UI_AWAIT, APP_UI_AUTH, APP_UI_FETCH_ERROR, APP_UI_GAME, APP_UI_HISTORY } from './reducers/app.js';
 
 import AuthView from './AuthView.js';
@@ -20,11 +20,11 @@ screen && screen.orientation && screen.orientation.lock("portrait-primary");
 
 if (process.env.NODE_ENV === "production") {
   store = createStore(stateRoot, applyMiddleware(ReduxThunk));
-  store.dispatch(tryPull());
+  store.dispatch(loadPlayerState());
 }
 else {
   store = createStore(stateRoot, composeWithDevTools(applyMiddleware(ReduxThunk)));
-  store.dispatch(tryPull()).then(() => {
+  store.dispatch(loadPlayerState()).then(() => {
     const devUrlScreen = new URL(window.location.href).searchParams.get('screen');
     devUrlScreen && store.dispatch(nextScreen(devUrlScreen));
   });

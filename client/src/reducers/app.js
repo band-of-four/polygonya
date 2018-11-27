@@ -4,9 +4,6 @@ export const APP_UI_AUTH = 'APP_UI_AUTH';
 export const APP_UI_FETCH_ERROR = 'APP_FETCH_ERROR';
 export const APP_UI_HISTORY = 'APP_UI_HISTORY';
 
-export const APP_AUTH_NAME_TAKEN = 'APP_AUTH_NAME_TAKEN';
-export const APP_AUTH_INVALID_CREDS = 'APP_AUTH_INVALID_CREDS';
-
 const defaultState = {
   ui: APP_UI_AWAIT
 };
@@ -23,10 +20,6 @@ export default function app(state = defaultState, action) {
       return { ui: APP_UI_AWAIT };
     case APP_UI_FETCH_ERROR:
       return { ui: APP_UI_FETCH_ERROR };
-    case APP_AUTH_NAME_TAKEN:
-      return { ui: APP_UI_AUTH, authError: APP_AUTH_NAME_TAKEN };
-    case APP_AUTH_INVALID_CREDS:
-      return { ui: APP_UI_AUTH, authError: APP_AUTH_INVALID_CREDS };
     default:
       return state;
   }
