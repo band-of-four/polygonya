@@ -38,7 +38,7 @@ body {
 }
 
 .neutral-bg {
-  background: url(/assets/neutralbg.svg);
+  background: url(neutralbg.svg);
 }
 
 @media(max-width: 600px) {

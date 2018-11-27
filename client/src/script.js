@@ -7,21 +7,21 @@ export const SCRIPT_RELATIONSHIP_DOWN_END_DAY = 'SCRIPT_RELATIONSHIP_DOWN_END_DA
 export const SCRIPT_RELATIONSHIP_NONE_END_DAY = 'SCRIPT_RELATIONSHIP_NONE_END_DAY';
 export const SCRIPT_TEST_END_DAY = 'SCRIPT_TEST_END_DAY';
 
-const SPRITE_IDLE = '/assets/kaiki-chan-idle.png';
-const SPRITE_ANGRY = '/assets/kaiki-chan-angry.png';
-const SPRITE_THINKING = '/assets/kaiki-chan-thinking.png';
-const SPRITE_BLUSHING = '/assets/kaiki-chan-blushing.png';
-const SPRITE_SLEEPY = '/assets/kaiki-chan-sleepy.png';
-const SPRITE_SLEEPING = '/assets/kaiki-chan-sleeping.png';
-const SPRITE_SLEEPING_ZZZ = '/assets/kaiki-chan-sleeping-zzz.png';
-const SPRITE_SAD = '/assets/kaiki-chan-sad.png';
-const SPRITE_HOT = '/assets/kaiki-chan-hot.png';
-const SPRITE_DRESS = '/assets/kaiki-chan-prom.png';
-const SPRITE_ZZZ = '/assets/zzz.png';
-const SPRITE_PROM_INV = '/assets/prom-invitation.png';
-const SPRITE_EMPTY_GRAPH = '/assets/empty-graph.svg';
-const SPRITE_GRAPH_INSIDE = '/assets/graph-inside.svg';
-const SPRITE_GRAPH_INSIDE_OUTSIDE = '/assets/graph-outside.svg';
+const SPRITE_IDLE = 'dist/kaiki-chan-idle.png';
+const SPRITE_ANGRY = 'dist/kaiki-chan-angry.png';
+const SPRITE_THINKING = 'dist/kaiki-chan-thinking.png';
+const SPRITE_BLUSHING = 'dist/kaiki-chan-blushing.png';
+const SPRITE_SLEEPY = 'dist/kaiki-chan-sleepy.png';
+const SPRITE_SLEEPING = 'dist/kaiki-chan-sleeping.png';
+const SPRITE_SLEEPING_ZZZ = 'dist/kaiki-chan-sleeping-zzz.png';
+const SPRITE_SAD = 'dist/kaiki-chan-sad.png';
+const SPRITE_HOT = 'dist/kaiki-chan-hot.png';
+const SPRITE_DRESS = 'dist/kaiki-chan-prom.png';
+const SPRITE_ZZZ = 'dist/zzz.png';
+const SPRITE_PROM_INV = 'dist/prom-invitation.png';
+const SPRITE_EMPTY_GRAPH = 'dist/empty-graph.svg';
+const SPRITE_GRAPH_INSIDE = 'dist/graph-inside.svg';
+const SPRITE_GRAPH_INSIDE_OUTSIDE = 'dist/graph-outside.svg';
 
 export const scriptIdForDay = (day) => `DAY_${day}`;
 
@@ -75,7 +75,7 @@ export const SCRIPT = {
   },
   DAY_1_1: {
     type: SCRIPT_CUTSCENE, next: 'DAY_1_2',
-    text: 'А еще две недели нужно написать этот тест по математике, а я за всю жизнь ни одной задачи сам не решил.'
+    text: 'А еще через две недели нужно написать этот тест по математике, а я за всю жизнь ни одной задачи сам не решил.'
   },
   DAY_1_2: {
     type: SCRIPT_CUTSCENE, next: 'DAY_1_3',
