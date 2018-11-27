@@ -5,7 +5,7 @@ import { APP_UI_GAME } from './reducers/app.js';
 import GraphSVG from './GraphSVG.js';
 
 class History extends Component {
-  renderHistoryForDay = ([ day, { r, history } ]) => (
+  renderHistoryForDay = ([ day, history ]) => (
     <section>
       <p>День #{day}</p>
       <table className="history-table">
@@ -13,7 +13,7 @@ class History extends Component {
           <tr><th>R</th><th>X</th><th>Y</th><th>Результат</th></tr>
         </thead>
         <tbody>
-          {history.map(({ x, y, inside }) => (
+          {history.map(({ r, x, y, inside }) => (
             <tr>
               <td>{r}</td><td>{x}</td><td>{y}</td><td>{inside ? 'внутри' : 'снаружи'}</td>
             </tr>

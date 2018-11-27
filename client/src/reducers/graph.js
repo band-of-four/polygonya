@@ -19,7 +19,7 @@ export const GRAPH_FIELD_VALID_RANGES = {
 export default function graph(state = defaultState, action) {
   switch (action.type) {
     case GRAPH_ADD_POINT:
-      return { ...state, points: state.points.concat(action.result) };
+      return { ...state, points: state.points.concat(action.point) };
     case GRAPH_SET_FIELD:
       return { ...state, [action.field]: action.value }; 
     case GRAPH_SET_POINTS:

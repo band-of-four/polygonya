@@ -2,7 +2,6 @@ import { SCRIPT, SCRIPT_GRAPH } from '../script.js';
 
 export const SCREEN_NEXT = 'SCREEN_NEXT';
 export const SCREEN_GRAPH = 'SCREEN_GRAPH';
-export const SCREEN_GRAPH_AWAIT = 'SCREEN_GRAPH_AWAIT';
 export const SCREEN_GRAPH_INSIDE = 'SCREEN_GRAPH_INSIDE';
 export const SCREEN_GRAPH_OUTSIDE = 'SCREEN_GRAPH_OUTSIDE';
 export const SCREEN_GRAPH_ERROR = 'SCREEN_GRAPH_ERROR';
@@ -20,8 +19,6 @@ export default function screen(state = defaultState, action) {
       return screen;
     case SCREEN_GRAPH:
       return graphPick('neutral', state.graphId);
-    case SCREEN_GRAPH_AWAIT:
-      return graphPick('loading', state.graphId);
     case SCREEN_GRAPH_INSIDE:
       return graphPick('inside', state.graphId);
     case SCREEN_GRAPH_OUTSIDE:
