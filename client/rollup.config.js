@@ -37,7 +37,8 @@ export default {
       }
     }),
     replace({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+      'dist/': production ? 'client/dist/' : 'dist/'
     })
   ].concat(production ? [
     terser()
