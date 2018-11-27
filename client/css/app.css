@@ -65,6 +65,9 @@ body {
 }
 
 .credits {
+  height: auto;
+  min-height: 100vh;
+
   font-size: 20px;
   min-height: min-content;
   padding: 4vh 0;

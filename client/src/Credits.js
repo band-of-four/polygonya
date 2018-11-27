@@ -4,7 +4,9 @@ export default function Credits(props) {
   return (
     <div className="credits info-page neutral-bg fade-in">
       <h1 className="credits-title">Полигоня</h1>
-      <img className="credits-img" src="dist/kaiki-chan-sleeping.png" />
+      <div>
+        <img className="credits-img" src="dist/kaiki-chan-sleeping.png" />
+      </div>
       <h1 className="credits-h">Над проектом работали</h1>
       <p className="credits-p">
         <a href="https://vk.com/id113509047" className="credits-a">Виктория Прокофьева</a> — художественное оформление
