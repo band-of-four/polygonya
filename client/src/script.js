@@ -467,19 +467,19 @@ export const SCRIPT = {
   DAY_5_14: {
     type: SCRIPT_DIALOGUE, sprite: SPRITE_SAD,
     text: 'Последнее, что помню — как занижала результаты её тестов, когда помогала учителю их проверять—',
-    choices: [['...', 'DAY_5_14']]
-  },
-  DAY_5_14: {
-    type: SCRIPT_DIALOGUE, sprite: SPRITE_SAD,
-    text: 'Как глупо, глупо, глупо! Стыдно об этом вспоминать...',
     choices: [['...', 'DAY_5_15']]
   },
   DAY_5_15: {
     type: SCRIPT_DIALOGUE, sprite: SPRITE_SAD,
-    text: 'Если ты не против, продолжим занятия завтра.',
-    choices: [['Да, конечно.', 'DAY_5_16']]
+    text: 'Как глупо, глупо, глупо! Стыдно об этом вспоминать...',
+    choices: [['...', 'DAY_5_16']]
   },
   DAY_5_16: {
+    type: SCRIPT_DIALOGUE, sprite: SPRITE_SAD,
+    text: 'Если ты не против, продолжим занятия завтра.',
+    choices: [['Да, конечно.', 'DAY_5_17']]
+  },
+  DAY_5_17: {
     type: SCRIPT_CUTSCENE, next: SCRIPT_RELATIONSHIP_UP_END_DAY,
     text: 'Она выглядела совсем расстроеной... Может, придумать что-нибудь, чтобы поднять ей настроение завтра?'
   },
